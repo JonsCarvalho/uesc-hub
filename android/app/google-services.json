@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "823286927073",
+    "firebase_url": "https://uesc-hub.firebaseio.com",
+    "project_id": "uesc-hub",
+    "storage_bucket": "uesc-hub.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:823286927073:android:a0843a2a309be9d9c631a0",
+        "android_client_info": {
+          "package_name": "br.jonscarvalho.uesc_hub"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "823286927073-vj08essr33pcclgjrhn5nqh21n343onn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "br.jonscarvalho.uesc_hub",
+            "certificate_hash": "18dfccff4cc65f2d09854e05eed7b4d2f8bc70a8"
+          }
+        },
+        {
+          "client_id": "823286927073-v6qtgokmplc0qifhc1g2ufg4061pbs8o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDh8NvprouO-7woDaOL6QBj4eOrdKsrjX8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "823286927073-v6qtgokmplc0qifhc1g2ufg4061pbs8o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

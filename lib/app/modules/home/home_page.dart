@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+
+import 'components/item/item_widget.dart';
 import 'home_controller.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,17 +14,34 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
-  //use 'controller' variable to access controller
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        leading: IconButton(
+            icon: Icon(Icons.highlight_off), onPressed: controller.logoff),
+        title: TextField(
+          controller: controller.textController,
+        ),
+        actions: <Widget>[
+          Observer(builder: (_) {
+            return IconButton(
+              icon: Icon(Icons.add),
+              onPressed: controller.disableAdd ? null : controller.save,
+            );
+          }),
+        ],
       ),
-      body: Column(
-        children: <Widget>[],
-      ),
+      body: Observer(builder: (_) {
+        return ListView.builder(
+          itemCount: controller.list.length,
+          itemBuilder: (_, index) {
+            return ItemWidget(
+              index: index,
+            );
+          },
+        );
+      }),
     );
   }
 }

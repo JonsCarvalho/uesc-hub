@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:uesc_hub/app/shared/auth/repositories/auth_repository_interface.dart';
+
+import 'auth_repository_interface.dart';
 
 class AuthRepository implements IAuthRepository {
   final GoogleSignIn _googleSignIn = GoogleSignIn();
@@ -19,6 +20,12 @@ class AuthRepository implements IAuthRepository {
   }
 
   @override
+  Future<String> getToken() {
+    // TODO: implement getToken
+    throw UnimplementedError();
+  }
+
+  @override
   Future<FirebaseUser> getGoogleLogin() async {
     final GoogleSignInAccount googleUser = await _googleSignIn.signIn();
     final GoogleSignInAuthentication googleAuth =
@@ -31,18 +38,16 @@ class AuthRepository implements IAuthRepository {
 
     final FirebaseUser user =
         (await _auth.signInWithCredential(credential)).user;
-    print("signed in " + user.displayName);
     return user;
   }
 
   @override
-  Future<String> getToken() {
-    // TODO: implement getToken
-    throw UnimplementedError();
+  Future<FirebaseUser> getUser() {
+    return _auth.currentUser();
   }
 
   @override
-  Future<FirebaseUser> getUser() {
-    throw FirebaseAuth.instance.currentUser();
+  Future getLogout() {
+    return _auth.signOut();
   }
 }

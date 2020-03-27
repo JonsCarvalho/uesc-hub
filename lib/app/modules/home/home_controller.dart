@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:uesc_hub/app/shared/auth/auth_controller.dart';
+import 'package:uesc_hub/app/shared/auth/repositories/auth_repository.dart';
 import 'package:uesc_hub/app/shared/repositories/localstorage/local_storage_interface.dart';
 
 part 'home_controller.g.dart';
@@ -49,6 +51,12 @@ abstract class _HomeBase with Store {
   void remove(int index) {
     list.removeAt(index);
     storage.put('list', list);
+  }
+
+  @action
+  FirebaseUser getCurrentUser(){
+    var user = Modular.get<AuthController>().user;
+    return user;
   }
 
   logoff() async {

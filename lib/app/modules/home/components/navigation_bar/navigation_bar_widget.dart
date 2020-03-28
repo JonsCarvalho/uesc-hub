@@ -19,12 +19,31 @@ class NavigationBarWidget extends StatelessWidget {
           3: Colors.redAccent,
         },
         onTap: controller.setPageController,
+        // onTap: (index) {
+        //   switch (index) {
+        //     case 0:
+        //       Modular.to.pushReplacementNamed('/home');
+        //       break;
+        //     case 1:
+        //       Modular.to.pushReplacementNamed('/restaurant');
+        //       break;
+        //     case 2:
+        //       Modular.to.pushReplacementNamed('/news');
+        //       break;
+        //     case 3:
+        //       Modular.to.pushReplacementNamed('/schedule');
+        //       break;
+        //     case 4:
+        //       Modular.to.pushReplacementNamed('/profile');
+        //       break;
+        //     default:
+        //   }
+        // },
         style: TabStyle.flip,
         // curve: Curves.easeInSine,
-
-        activeColor: Colors.white,
+        activeColor: Colors.teal,
         color: Colors.black,
-        backgroundColor: Colors.cyan[900],
+        backgroundColor: Colors.white,
         items: [
           TabItem(
             icon: Icon(Icons.home),
@@ -49,7 +68,7 @@ class NavigationBarWidget extends StatelessWidget {
           TabItem(
             activeIcon: CircleAvatar(
               radius: 13,
-              backgroundColor: Colors.white,
+              backgroundColor: Colors.teal,
               child: Padding(
                 padding: const EdgeInsets.all(1),
                 child: ClipOval(

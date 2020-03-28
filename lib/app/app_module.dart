@@ -8,6 +8,10 @@ import 'app_controller.dart';
 import 'app_widget.dart';
 import 'modules/home/home_module.dart';
 import 'modules/login/login_module.dart';
+import 'modules/news/news_module.dart';
+import 'modules/profile/profile_module.dart';
+import 'modules/restaurant/restaurant_module.dart';
+import 'modules/schedule/schedule_module.dart';
 import 'shared/auth/repositories/auth_repository_interface.dart';
 import 'splash/splash_page.dart';
 
@@ -27,6 +31,10 @@ class AppModule extends MainModule {
         Router('/login',
             module: LoginModule(), transition: TransitionType.noTransition),
         Router('/home', module: HomeModule()),
+        Router('/restaurant', module: RestaurantModule()),
+        Router('/news', module: NewsModule()),
+        Router('/schedule', module: ScheduleModule()),
+        Router('/profile', module: ProfileModule()),
       ];
 
   @override

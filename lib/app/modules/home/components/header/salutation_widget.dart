@@ -16,11 +16,11 @@ class SalutationWidget extends StatelessWidget {
           // getDisplayNameEmail() != null
           // ? "${getSalutation()} ${getDisplayNameEmail().split(" ").first}!"
           // : "${getSalutation()} ${getCurrentUser().displayName.split(" ").first}!",
-          "${getSalutation()} ${controller.getCurrentUser().displayName.split(" ").first}!",
+          "${getSalutation()}, ${controller.getCurrentUser().displayName.split(" ").first}!",
           style: TextStyle(
             // color: Color(0xff827daa).withGreen(200),
-            color: Colors.black,
-            fontSize: 17,
+            color: Colors.white,
+            fontSize: 25,
             // fontWeight: FontWeight.bold,
           ),
         ),
@@ -30,14 +30,14 @@ class SalutationWidget extends StatelessWidget {
             Text(
               getDay(DateTime.now()),
               style: TextStyle(
-                color: Colors.grey,
+                color: Colors.white60,
                 fontSize: 15,
               ),
             ),
             Text(
               ", ${DateTime.now().day.toString()} de ${getMonth(DateTime.now())}",
               style: TextStyle(
-                color: Colors.grey,
+                color: Colors.white60,
                 fontSize: 15,
               ),
             ),

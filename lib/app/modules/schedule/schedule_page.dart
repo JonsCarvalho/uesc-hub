@@ -20,8 +20,8 @@ class _SchedulePageState
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Column(
-        children: <Widget>[],
+      body: Center(
+        child: Text("Agenda"),
       ),
     );
   }

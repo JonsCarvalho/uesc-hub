@@ -19,8 +19,8 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileController> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Column(
-        children: <Widget>[],
+      body: Center(
+        child: Text("Perfil"),
       ),
     );
   }

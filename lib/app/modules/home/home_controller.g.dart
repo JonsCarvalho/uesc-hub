@@ -9,6 +9,23 @@ part of 'home_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomeController on _HomeBase, Store {
+  final _$pageControllerAtom = Atom(name: '_HomeBase.pageController');
+
+  @override
+  PageController get pageController {
+    _$pageControllerAtom.context.enforceReadPolicy(_$pageControllerAtom);
+    _$pageControllerAtom.reportObserved();
+    return super.pageController;
+  }
+
+  @override
+  set pageController(PageController value) {
+    _$pageControllerAtom.context.conditionallyRunInAction(() {
+      super.pageController = value;
+      _$pageControllerAtom.reportChanged();
+    }, _$pageControllerAtom, name: '${_$pageControllerAtom.name}_set');
+  }
+
   final _$disableAddAtom = Atom(name: '_HomeBase.disableAdd');
 
   @override
@@ -53,6 +70,16 @@ mixin _$HomeController on _HomeBase, Store {
   final _$_HomeBaseActionController = ActionController(name: '_HomeBase');
 
   @override
+  dynamic setPageController(dynamic value) {
+    final _$actionInfo = _$_HomeBaseActionController.startAction();
+    try {
+      return super.setPageController(value);
+    } finally {
+      _$_HomeBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void save() {
     final _$actionInfo = _$_HomeBaseActionController.startAction();
     try {
@@ -73,9 +100,19 @@ mixin _$HomeController on _HomeBase, Store {
   }
 
   @override
+  FirebaseUser getCurrentUser() {
+    final _$actionInfo = _$_HomeBaseActionController.startAction();
+    try {
+      return super.getCurrentUser();
+    } finally {
+      _$_HomeBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string =
-        'disableAdd: ${disableAdd.toString()},list: ${list.toString()}';
+        'pageController: ${pageController.toString()},disableAdd: ${disableAdd.toString()},list: ${list.toString()}';
     return '{$string}';
   }
 }

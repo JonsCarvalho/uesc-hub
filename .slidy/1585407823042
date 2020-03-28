@@ -1,0 +1,5 @@
+lib/app/modules/restaurant/restaurant_module.dart
+lib/app/modules/restaurant/restaurant_page.dart
+test/app/modules/restaurant/restaurant_page_test.dart
+lib/app/modules/restaurant/restaurant_controller.dart
+test/app/modules/restaurant/restaurant_controller_test.dart

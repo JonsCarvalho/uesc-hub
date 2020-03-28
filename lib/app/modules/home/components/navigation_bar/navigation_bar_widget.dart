@@ -23,47 +23,45 @@ class NavigationBarWidget extends StatelessWidget {
         // curve: Curves.easeInSine,
 
         activeColor: Colors.white,
-        color: Colors.blue,
+        color: Colors.black,
         backgroundColor: Colors.cyan[900],
         items: [
           TabItem(
             icon: Icon(Icons.home),
-            activeIcon: Icon(
-              Icons.home,
-              color: Colors.white,
-            ),
+            isIconBlend: true,
             title: 'Início',
           ),
           TabItem(
             icon: Icon(Icons.fastfood),
-            activeIcon: Icon(
-              Icons.fastfood,
-              color: Colors.white,
-            ),
+            isIconBlend: true,
             title: 'RU',
           ),
           TabItem(
             icon: Icon(Icons.fiber_new),
-            activeIcon: Icon(
-              Icons.fiber_new,
-              color: Colors.white,
-            ),
+            isIconBlend: true,
             title: 'News',
           ),
           TabItem(
             icon: Icon(Icons.book),
-            activeIcon: Icon(
-              Icons.book,
-              color: Colors.white,
-            ),
-            title: 'Horários',
+            isIconBlend: true,
+            title: 'Agenda',
           ),
           TabItem(
+            activeIcon: CircleAvatar(
+              radius: 13,
+              backgroundColor: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(1),
+                child: ClipOval(
+                  child: Image.network(
+                    controller.getCurrentUser().photoUrl,
+                  ),
+                ),
+              ),
+            ),
             icon: CircleAvatar(
               radius: 13,
-              backgroundColor: controller.pageController.page == 4.0
-                  ? Colors.white
-                  : Colors.black,
+              backgroundColor: Colors.black,
               child: Padding(
                 padding: const EdgeInsets.all(1),
                 child: ClipOval(

@@ -16,6 +16,14 @@ abstract class _HomeBase with Store {
   final textController = TextEditingController();
 
   @observable
+  PageController pageController;
+  
+  @action
+  setPageController(value){
+    pageController.jumpToPage(value);
+  }
+
+  @observable
   bool disableAdd = true;
 
   @observable

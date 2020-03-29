@@ -20,7 +20,7 @@ class SalutationWidget extends StatelessWidget {
           style: TextStyle(
             // color: Color(0xff827daa).withGreen(200),
             color: Colors.white,
-            fontSize: 25,
+            fontSize: 20,
             // fontWeight: FontWeight.bold,
           ),
         ),

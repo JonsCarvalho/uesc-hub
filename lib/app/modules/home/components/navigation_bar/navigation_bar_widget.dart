@@ -2,6 +2,7 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../../home_controller.dart';
 
@@ -15,7 +16,7 @@ class NavigationBarWidget extends StatelessWidget {
         {
           0: Icons.assistant_photo,
           1: Colors.redAccent,
-          2: '99+',
+          // 2: '99+',
           3: Colors.redAccent,
         },
         onTap: controller.setPageController,
@@ -39,7 +40,7 @@ class NavigationBarWidget extends StatelessWidget {
         //     default:
         //   }
         // },
-        style: TabStyle.flip,
+        style: TabStyle.react,
         // curve: Curves.easeInSine,
         activeColor: Colors.teal,
         color: Colors.black,
@@ -51,17 +52,17 @@ class NavigationBarWidget extends StatelessWidget {
             title: 'Início',
           ),
           TabItem(
-            icon: Icon(Icons.fastfood),
+            icon: Icon(FontAwesomeIcons.utensils),
             isIconBlend: true,
             title: 'RU',
           ),
           TabItem(
-            icon: Icon(Icons.fiber_new),
+            icon: Icon(FontAwesomeIcons.newspaper),
             isIconBlend: true,
             title: 'News',
           ),
           TabItem(
-            icon: Icon(Icons.book),
+            icon: Icon(FontAwesomeIcons.book),
             isIconBlend: true,
             title: 'Agenda',
           ),

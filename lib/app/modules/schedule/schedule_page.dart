@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:uesc_hub/app/modules/schedule/components/timers_widget.dart';
 import 'schedule_controller.dart';
 
 class SchedulePage extends StatefulWidget {
@@ -21,7 +22,7 @@ class _SchedulePageState
         title: Text(widget.title),
       ),
       body: Center(
-        child: Text("Agenda"),
+        child: TimersWidget(),
       ),
     );
   }

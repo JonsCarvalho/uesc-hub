@@ -34,7 +34,7 @@ class AppModule extends MainModule {
         Router('/restaurant', module: RestaurantModule()),
         Router('/news', module: NewsModule()),
         Router('/schedule', module: ScheduleModule()),
-        Router('/profile', module: ProfileModule()),
+        Router('/profile', module: ProfileModule()),        
       ];
 
   @override

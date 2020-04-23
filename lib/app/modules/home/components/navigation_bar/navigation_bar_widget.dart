@@ -59,7 +59,7 @@ class NavigationBarWidget extends StatelessWidget {
           TabItem(
             icon: Icon(FontAwesomeIcons.newspaper),
             isIconBlend: true,
-            title: 'News',
+            title: 'Notícias',
           ),
           TabItem(
             icon: Icon(FontAwesomeIcons.book),

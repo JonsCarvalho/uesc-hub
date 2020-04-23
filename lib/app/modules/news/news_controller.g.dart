@@ -9,31 +9,31 @@ part of 'news_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$NewsController on _NewsControllerBase, Store {
-  final _$valueAtom = Atom(name: '_NewsControllerBase.value');
+  final _$newsAtom = Atom(name: '_NewsControllerBase.news');
 
   @override
-  int get value {
-    _$valueAtom.context.enforceReadPolicy(_$valueAtom);
-    _$valueAtom.reportObserved();
-    return super.value;
+  ObservableFuture<List<NewsModel>> get news {
+    _$newsAtom.context.enforceReadPolicy(_$newsAtom);
+    _$newsAtom.reportObserved();
+    return super.news;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.context.conditionallyRunInAction(() {
-      super.value = value;
-      _$valueAtom.reportChanged();
-    }, _$valueAtom, name: '${_$valueAtom.name}_set');
+  set news(ObservableFuture<List<NewsModel>> value) {
+    _$newsAtom.context.conditionallyRunInAction(() {
+      super.news = value;
+      _$newsAtom.reportChanged();
+    }, _$newsAtom, name: '${_$newsAtom.name}_set');
   }
 
   final _$_NewsControllerBaseActionController =
       ActionController(name: '_NewsControllerBase');
 
   @override
-  void increment() {
+  dynamic fetchNews() {
     final _$actionInfo = _$_NewsControllerBaseActionController.startAction();
     try {
-      return super.increment();
+      return super.fetchNews();
     } finally {
       _$_NewsControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -41,7 +41,7 @@ mixin _$NewsController on _NewsControllerBase, Store {
 
   @override
   String toString() {
-    final string = 'value: ${value.toString()}';
+    final string = 'news: ${news.toString()}';
     return '{$string}';
   }
 }

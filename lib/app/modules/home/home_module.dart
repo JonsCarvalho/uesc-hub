@@ -1,5 +1,4 @@
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:uesc_hub/app/modules/restaurant/restaurant_page.dart';
 import 'home_controller.dart';
 import 'home_page.dart';
 

@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:uesc_hub/app/modules/news/models/news_model.dart';
+import 'package:uesc_hub/app/shared/constants.dart';
 
 class NewsRepository {
   final Dio dio;
@@ -7,7 +8,7 @@ class NewsRepository {
   NewsRepository(this.dio);
 
   Future<List<NewsModel>> getAllNews() async {
-    var response = await dio.get('news/');
+    var response = await dio.get(URL_UESC_BASE + '/news/');
     List<NewsModel> list = [];
 
     for (var json in (response.data)) {

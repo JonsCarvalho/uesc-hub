@@ -10,7 +10,7 @@ class NewsModule extends ChildModule {
   List<Bind> get binds => [
         Bind((i) => NewsController(i.get<NewsRepository>())),
         Bind((i) => NewsRepository(i.get<Dio>())),
-        Bind((i) => Dio(BaseOptions(baseUrl: URL_BASE))),
+        Bind((i) => Dio()),
       ];
 
   @override

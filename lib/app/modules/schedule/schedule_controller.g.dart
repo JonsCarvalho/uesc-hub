@@ -9,32 +9,32 @@ part of 'schedule_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ScheduleController on _ScheduleControllerBase, Store {
-  final _$valueAtom = Atom(name: '_ScheduleControllerBase.value');
+  final _$subjectsAtom = Atom(name: '_ScheduleControllerBase.subjects');
 
   @override
-  int get value {
-    _$valueAtom.context.enforceReadPolicy(_$valueAtom);
-    _$valueAtom.reportObserved();
-    return super.value;
+  ObservableFuture<List<SubjectsModel>> get subjects {
+    _$subjectsAtom.context.enforceReadPolicy(_$subjectsAtom);
+    _$subjectsAtom.reportObserved();
+    return super.subjects;
   }
 
   @override
-  set value(int value) {
-    _$valueAtom.context.conditionallyRunInAction(() {
-      super.value = value;
-      _$valueAtom.reportChanged();
-    }, _$valueAtom, name: '${_$valueAtom.name}_set');
+  set subjects(ObservableFuture<List<SubjectsModel>> value) {
+    _$subjectsAtom.context.conditionallyRunInAction(() {
+      super.subjects = value;
+      _$subjectsAtom.reportChanged();
+    }, _$subjectsAtom, name: '${_$subjectsAtom.name}_set');
   }
 
   final _$_ScheduleControllerBaseActionController =
       ActionController(name: '_ScheduleControllerBase');
 
   @override
-  void increment() {
+  dynamic fetchSubjects() {
     final _$actionInfo =
         _$_ScheduleControllerBaseActionController.startAction();
     try {
-      return super.increment();
+      return super.fetchSubjects();
     } finally {
       _$_ScheduleControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -42,7 +42,7 @@ mixin _$ScheduleController on _ScheduleControllerBase, Store {
 
   @override
   String toString() {
-    final string = 'value: ${value.toString()}';
+    final string = 'subjects: ${subjects.toString()}';
     return '{$string}';
   }
 }

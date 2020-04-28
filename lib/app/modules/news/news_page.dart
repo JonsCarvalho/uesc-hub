@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:uesc_hub/app/modules/news/models/news_model.dart';
 import 'news_controller.dart';
 
 class NewsPage extends StatefulWidget {
@@ -35,7 +36,7 @@ class _NewsPageState extends ModularState<NewsPage, NewsController> {
           if (newsController.news.value == null) {
             return LinearProgressIndicator();
           }
-          var list;
+          List<NewsModel> list;
 
           list = newsController.news.value.toList();
 

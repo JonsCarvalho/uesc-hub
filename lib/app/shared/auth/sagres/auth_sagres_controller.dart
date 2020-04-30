@@ -1,15 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:uesc_hub/app/shared/auth/auth_controller.dart';
+import 'package:uesc_hub/app/shared/auth/sagres/repositories/auth_sagres_repository.dart';
 import 'package:uesc_hub/app/shared/repositories/localstorage/local_storage_interface.dart';
+part 'auth_sagres_controller.g.dart';
 
-part 'profile_controller.g.dart';
+class AuthSagresController = _AuthSagresControllerBase with _$AuthSagresController;
 
-class ProfileController = _ProfileControllerBase with _$ProfileController;
-
-abstract class _ProfileControllerBase with Store {
-  final ILocalStorage storage = Modular.get();
+abstract class _AuthSagresControllerBase with Store {
+  final AuthSagresRepository _authRepository = Modular.get();
 
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
@@ -18,7 +18,7 @@ abstract class _ProfileControllerBase with Store {
   @observable
   ObservableList<String> credentials = <String>[].asObservable();
 
-  _ProfileControllerBase() {
+  _AuthControllerBase() {
     init();
   }
 
@@ -36,6 +36,7 @@ abstract class _ProfileControllerBase with Store {
   void save() {
     credentials.insert(0, usernameController.text);
     credentials.insert(1, passwordController.text);
+    _authRepository.
     storage.put('credentials', credentials);
     usernameController.clear();
     passwordController.clear();
@@ -43,12 +44,11 @@ abstract class _ProfileControllerBase with Store {
 
   @action
   void remove() {
-    credentials.clear();
-    storage.put('credentials', credentials);
+    _authRepository.deleteCredentials();
   }
 
-  logoff() async {
-    await Modular.get<AuthController>().logout();
-    Modular.to.pushReplacementNamed('/login');
-  }
+  @observable
+  AuthStatus status = AuthStatus.loading;
 }
+
+enum AuthStatus { loading, login, logoff }

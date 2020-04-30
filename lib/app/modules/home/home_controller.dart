@@ -66,9 +66,4 @@ abstract class _HomeBase with Store {
     var user = Modular.get<AuthController>().user;
     return user;
   }
-
-  logoff() async {
-    await Modular.get<AuthController>().logout();
-    Modular.to.pushReplacementNamed('/login');
-  }
 }

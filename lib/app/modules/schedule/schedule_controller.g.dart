@@ -26,6 +26,23 @@ mixin _$ScheduleController on _ScheduleControllerBase, Store {
     }, _$subjectsAtom, name: '${_$subjectsAtom.name}_set');
   }
 
+  final _$timetableAtom = Atom(name: '_ScheduleControllerBase.timetable');
+
+  @override
+  ObservableFuture<List<TimetableModel>> get timetable {
+    _$timetableAtom.context.enforceReadPolicy(_$timetableAtom);
+    _$timetableAtom.reportObserved();
+    return super.timetable;
+  }
+
+  @override
+  set timetable(ObservableFuture<List<TimetableModel>> value) {
+    _$timetableAtom.context.conditionallyRunInAction(() {
+      super.timetable = value;
+      _$timetableAtom.reportChanged();
+    }, _$timetableAtom, name: '${_$timetableAtom.name}_set');
+  }
+
   final _$_ScheduleControllerBaseActionController =
       ActionController(name: '_ScheduleControllerBase');
 
@@ -41,8 +58,20 @@ mixin _$ScheduleController on _ScheduleControllerBase, Store {
   }
 
   @override
+  dynamic fetchTimetable() {
+    final _$actionInfo =
+        _$_ScheduleControllerBaseActionController.startAction();
+    try {
+      return super.fetchTimetable();
+    } finally {
+      _$_ScheduleControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
-    final string = 'subjects: ${subjects.toString()}';
+    final string =
+        'subjects: ${subjects.toString()},timetable: ${timetable.toString()}';
     return '{$string}';
   }
 }

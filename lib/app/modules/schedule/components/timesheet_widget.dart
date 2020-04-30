@@ -1,10 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:uesc_hub/app/modules/schedule/models/timetable_model.dart';
 
 class TimeSheetWidget extends StatelessWidget {
+  final List<TimetableModel> timetable;
+
+  TimeSheetWidget({this.timetable});
+
   @override
   Widget build(BuildContext context) {
     return Container(
       child: criaTabela(),
+    );
+  }
+
+  listTableRows() {
+    var rows;
+
+    for (int index = 0; index < timetable.length; index++) {
+      if (index == 0) {
+        rows.add(_criarLinhaTableDias("   , SEG,TER,QUA,QUI,SEX"));
+      } else {
+        rows.add(_criarLinhaTable(
+          "${timetable[index].startTime}'\n'${timetable[index].endTime},${timetable[index].seg},${timetable[index].ter},${timetable[index].qua},${timetable[index].qui},${timetable[index].sex}",
+          Colors.teal,
+        ));
+      }
+    }
+
+    return rows;
+  }
+
+  teste() {
+    Table(
+      children: listTableRows(),
     );
   }
 
@@ -26,17 +54,33 @@ class TimeSheetWidget extends StatelessWidget {
       //     // top:
       //     ),
 
-      children: [
-        _criarLinhaTableDias("   , SEG,TER,QUA,QUI,SEX"),
-        _criarLinhaTable("07:30\n08:20,CET48, ,CET432, ,CET66 ", Colors.teal),
-        _criarLinhaTable("08:20\n09:10,CET48, ,CET435, , ", Colors.amber),
-        _criarLinhaTable("09:10\n10:00, , , , ,CET089", Colors.red),
-        _criarLinhaTable("10:00, , ,CET075, , ", Colors.green),
-        _criarLinhaTable("13:30, ,CET075, , , ", Colors.green),
-        _criarLinhaTable("15:10, , , , , ", Colors.green),
-        _criarLinhaTable("17:40, , , , , ", Colors.green),
-      ],
+      children: tes()
+      // [
+
+
+        
+        //     _criarLinhaTableDias("   , SEG,TER,QUA,QUI,SEX"),
+        //     _criarLinhaTable(
+        //         "07:30\n08:20,CET48, ,CET432, ,CET66 ", Colors.teal),
+        
+        // _criarLinhaTable("08:20\n09:10,CET48, ,CET435, , ", Colors.amber),
+        // _criarLinhaTable("09:10\n10:00, , , , ,CET089", Colors.red),
+        // _criarLinhaTable("10:00, , ,CET075, , ", Colors.green),
+        // _criarLinhaTable("13:30, ,CET075, , , ", Colors.green),
+        // _criarLinhaTable("15:10, , , , , ", Colors.green),
+        // _criarLinhaTable("17:40, , , , , ", Colors.green),
+      // ],
     );
+  }
+
+  tes(){
+    List list;
+    var index = 0;
+    while(index != 3){
+      list.insertAll(index,_criarLinhaTableDias("   , SEG,TER,QUA,QUI,SEX"));
+      index++;
+    }
+    return list;
   }
 
   _criarLinhaTable(String listaNomes, Color color) {

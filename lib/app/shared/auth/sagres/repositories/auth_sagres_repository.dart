@@ -14,7 +14,7 @@ class AuthSagresRepository {
   Future<String> loginValidation(List<String> credentials) async {
     var response = await dio.post(
       URL_SAGRES_BASE + "/validation/",
-      data: credentials,  
+      data: {"username": credentials[0], "password": credentials[1]},
     );
 
     String status = '';
@@ -22,15 +22,15 @@ class AuthSagresRepository {
     for (var json in (response.data)) {
       status = json['status'];
     }
-    
+
     return status;
   }
-  
-  getCredentials() async{
+
+  getCredentials() async {
     List<String> credentials = await storage.get('credentials');
     return credentials;
   }
-  
+
   saveCredentials(List<String> credentials) {
     storage.put('credentials', credentials);
   }

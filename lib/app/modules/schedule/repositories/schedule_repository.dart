@@ -1,24 +1,27 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:uesc_hub/app/modules/schedule/models/subjects_model.dart';
 import 'package:uesc_hub/app/modules/schedule/models/timetable_model.dart';
+import 'package:uesc_hub/app/shared/auth/sagres/auth_sagres_controller.dart';
 import 'package:uesc_hub/app/shared/auth/sagres/repositories/auth_sagres_repository.dart';
 import 'package:uesc_hub/app/shared/constants.dart';
 
+import '../schedule_controller.dart';
+
 class ScheduleRepository {
-  final AuthSagresRepository repository;
-
   final Dio dio;
+  final credentials;
 
-  ScheduleRepository(this.dio, this.repository);
+  ScheduleRepository(this.dio, this.credentials);
+
+  final sagresController = Modular.get<AuthSagresController>();
+
 
   Future<List<SubjectsModel>> getSubjects() async {
     var response = await dio.post(
       URL_SAGRES_BASE + "/subjects/",
-      data: {
-        "username": repository.getCredentials()[0],
-        "password": repository.getCredentials()[1]
-      },
+      data: credentials,
     );
 
     List<SubjectsModel> list = [];
@@ -41,10 +44,7 @@ class ScheduleRepository {
   Future<List<TimetableModel>> getTimetable() async {
     var response = await dio.post(
       URL_SAGRES_BASE + "/timetable/",
-      data: {
-        "username": repository.getCredentials()[0],
-        "password": repository.getCredentials()[1]
-      },
+      data: credentials,
     );
 
     List<TimetableModel> list = [];
@@ -70,10 +70,7 @@ class ScheduleRepository {
   Future<List<SubjectsModel>> getAll() async {
     var response = await dio.post(
       URL_SAGRES_BASE + "/all/",
-      data: {
-        "username": repository.getCredentials()[0],
-        "password": repository.getCredentials()[1]
-      },
+      data: credentials,
     );
 
     List<SubjectsModel> list = [];

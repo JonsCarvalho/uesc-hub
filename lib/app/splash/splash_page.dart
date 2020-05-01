@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
-import 'package:uesc_hub/app/shared/auth/auth_controller.dart';
+import 'package:uesc_hub/app/shared/auth/social/auth_controller.dart';
 
 class SplashPage extends StatefulWidget {
   final String title;

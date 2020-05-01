@@ -12,7 +12,7 @@ import 'package:uesc_hub/app/modules/news/news_module.dart';
 import 'package:uesc_hub/app/modules/profile/profile_module.dart';
 import 'package:uesc_hub/app/modules/restaurant/restaurant_module.dart';
 import 'package:uesc_hub/app/modules/schedule/schedule_module.dart';
-import 'package:uesc_hub/app/shared/auth/repositories/auth_repository.dart';
+import 'package:uesc_hub/app/shared/auth/sagres/auth_sagres_controller.dart';
 import 'components/functions.dart';
 import 'components/item/item_widget.dart';
 import 'home_controller.dart';
@@ -26,6 +26,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
+  final sagresController = Modular.get<AuthSagresController>();
+  
   @override
   void initState() {
     controller.pageController = PageController();
@@ -51,7 +53,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
               body(),
               RouterOutlet(module: RestaurantModule()),
               RouterOutlet(module: NewsModule()),
-              RouterOutlet(module: ScheduleModule()),
+              RouterOutlet(module: ScheduleModule(credentials: sagresController.credentials)),
               RouterOutlet(module: ProfileModule()),
             ],
           );

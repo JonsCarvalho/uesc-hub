@@ -9,6 +9,40 @@ part of 'auth_sagres_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$AuthSagresController on _AuthSagresControllerBase, Store {
+  final _$errorAtom = Atom(name: '_AuthSagresControllerBase.error');
+
+  @override
+  bool get error {
+    _$errorAtom.context.enforceReadPolicy(_$errorAtom);
+    _$errorAtom.reportObserved();
+    return super.error;
+  }
+
+  @override
+  set error(bool value) {
+    _$errorAtom.context.conditionallyRunInAction(() {
+      super.error = value;
+      _$errorAtom.reportChanged();
+    }, _$errorAtom, name: '${_$errorAtom.name}_set');
+  }
+
+  final _$errorTextAtom = Atom(name: '_AuthSagresControllerBase.errorText');
+
+  @override
+  String get errorText {
+    _$errorTextAtom.context.enforceReadPolicy(_$errorTextAtom);
+    _$errorTextAtom.reportObserved();
+    return super.errorText;
+  }
+
+  @override
+  set errorText(String value) {
+    _$errorTextAtom.context.conditionallyRunInAction(() {
+      super.errorText = value;
+      _$errorTextAtom.reportChanged();
+    }, _$errorTextAtom, name: '${_$errorTextAtom.name}_set');
+  }
+
   final _$credentialsAtom = Atom(name: '_AuthSagresControllerBase.credentials');
 
   @override
@@ -50,26 +84,40 @@ mixin _$AuthSagresController on _AuthSagresControllerBase, Store {
     return _$initAsyncAction.run(() => super.init());
   }
 
+  final _$saveAsyncAction = AsyncAction('save');
+
+  @override
+  Future<dynamic> save() {
+    return _$saveAsyncAction.run(() => super.save());
+  }
+
+  final _$removeAsyncAction = AsyncAction('remove');
+
+  @override
+  Future<dynamic> remove() {
+    return _$removeAsyncAction.run(() => super.remove());
+  }
+
   final _$_AuthSagresControllerBaseActionController =
       ActionController(name: '_AuthSagresControllerBase');
 
   @override
-  void save() {
+  dynamic setError(bool value) {
     final _$actionInfo =
         _$_AuthSagresControllerBaseActionController.startAction();
     try {
-      return super.save();
+      return super.setError(value);
     } finally {
       _$_AuthSagresControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  void remove() {
+  dynamic setErrorText(String value) {
     final _$actionInfo =
         _$_AuthSagresControllerBaseActionController.startAction();
     try {
-      return super.remove();
+      return super.setErrorText(value);
     } finally {
       _$_AuthSagresControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -78,7 +126,7 @@ mixin _$AuthSagresController on _AuthSagresControllerBase, Store {
   @override
   String toString() {
     final string =
-        'credentials: ${credentials.toString()},status: ${status.toString()}';
+        'error: ${error.toString()},errorText: ${errorText.toString()},credentials: ${credentials.toString()},status: ${status.toString()}';
     return '{$string}';
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:uesc_hub/app/modules/schedule/components/timesheet_widget.dart';
 import 'package:uesc_hub/app/modules/schedule/models/subjects_model.dart';
 import 'package:uesc_hub/app/modules/schedule/models/timetable_model.dart';
+import 'package:uesc_hub/app/shared/auth/sagres/auth_sagres_controller.dart';
 import 'schedule_controller.dart';
 
 class SchedulePage extends StatefulWidget {
@@ -17,6 +18,12 @@ class SchedulePage extends StatefulWidget {
 class _SchedulePageState
     extends ModularState<SchedulePage, ScheduleController> {
   final scheduleController = Modular.get<ScheduleController>();
+  final sagresController = Modular.get<AuthSagresController>();
+
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

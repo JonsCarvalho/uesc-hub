@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:uesc_hub/app/modules/home/components/functions.dart';
+import 'package:uesc_hub/app/shared/functions/generation_date.dart';
 
 DateTime _date = DateTime.now();
 
@@ -13,19 +13,19 @@ renderDays() {
           child: ListView(
             scrollDirection: Axis.horizontal,
             children: <Widget>[
-              getData(_date, getDay(_date)),
+              getData(_date, GenerationDate(dateTime: _date).getDay()),
               getData(_date.add(Duration(days: 1)),
-                  getDay(_date.add(Duration(days: 1)))),
+                  GenerationDate(dateTime: _date.add(Duration(days: 1))).getDay()),
               getData(_date.add(Duration(days: 2)),
-                  getDay(_date.add(Duration(days: 2)))),
+                  GenerationDate(dateTime: _date.add(Duration(days: 2))).getDay()),
               getData(_date.add(Duration(days: 3)),
-                  getDay(_date.add(Duration(days: 3)))),
+                  GenerationDate(dateTime:_date.add(Duration(days: 3))).getDay()),
               getData(_date.add(Duration(days: 4)),
-                  getDay(_date.add(Duration(days: 4)))),
+                  GenerationDate(dateTime: _date.add(Duration(days: 4))).getDay()),
               getData(_date.add(Duration(days: 5)),
-                  getDay(_date.add(Duration(days: 5)))),
+                  GenerationDate(dateTime: _date.add(Duration(days: 5))).getDay()),
               getData(_date.add(Duration(days: 6)),
-                  getDay(_date.add(Duration(days: 6)))),
+                  GenerationDate(dateTime: _date.add(Duration(days: 6))).getDay()),
               SizedBox(
                 width: 15,
               ),

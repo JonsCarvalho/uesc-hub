@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:uesc_hub/app/modules/home/components/functions.dart';
 import 'package:uesc_hub/app/modules/restaurant/components/days_widget.dart';
 import 'restaurant_controller.dart';
 

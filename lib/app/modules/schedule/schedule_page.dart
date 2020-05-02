@@ -5,6 +5,7 @@ import 'package:uesc_hub/app/modules/schedule/components/timesheet_widget.dart';
 import 'package:uesc_hub/app/modules/schedule/models/subjects_model.dart';
 import 'package:uesc_hub/app/modules/schedule/models/timetable_model.dart';
 import 'package:uesc_hub/app/shared/auth/sagres/auth_sagres_controller.dart';
+import 'package:uesc_hub/app/shared/functions/generation_color.dart';
 import 'schedule_controller.dart';
 
 class SchedulePage extends StatefulWidget {
@@ -130,7 +131,7 @@ class _SchedulePageState
     );
   }
 
-  _subjectWidget(String subject, Color color) {
+  _subjectWidget(String subject) {
     return subject == ""
         ? SizedBox()
         : subject.length == 3
@@ -164,8 +165,8 @@ class _SchedulePageState
                   //   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: color),
-                    color: color.withOpacity(.2),
+                    border: Border.all(color: GenerationColor(seed: subject).colorSubject() ),
+                    color: GenerationColor(seed: subject).colorSubject().withOpacity(.2),
                   ),
                   child: Column(
                     children: <Widget>[
@@ -221,23 +222,23 @@ class _SchedulePageState
               ),
               Expanded(
                 flex: 5,
-                child: _subjectWidget(timetable.seg, Colors.teal),
+                child: _subjectWidget(timetable.seg),
               ),
               Expanded(
                 flex: 5,
-                child: _subjectWidget(timetable.ter, Colors.teal),
+                child: _subjectWidget(timetable.ter),
               ),
               Expanded(
                 flex: 5,
-                child: _subjectWidget(timetable.qua, Colors.teal),
+                child: _subjectWidget(timetable.qua),
               ),
               Expanded(
                 flex: 5,
-                child: _subjectWidget(timetable.qui, Colors.teal),
+                child: _subjectWidget(timetable.qui),
               ),
               Expanded(
                 flex: 5,
-                child: _subjectWidget(timetable.sex, Colors.teal),
+                child: _subjectWidget(timetable.sex),
               ),
             ],
           )

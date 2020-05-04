@@ -9,5 +9,33 @@ class TimetableModel {
   final String sab;
   final String dom;
 
-  TimetableModel({this.startTime, this.endTime, this.seg, this.ter, this.qua, this.qui, this.sex, this.sab, this.dom});
+  TimetableModel(
+      {this.startTime,
+      this.endTime,
+      this.seg,
+      this.ter,
+      this.qua,
+      this.qui,
+      this.sex,
+      this.sab,
+      this.dom});
+
+  Map<String, dynamic> toMap() {
+    return {
+      'startTime': startTime,
+      'endTime': endTime,
+      'seg': seg,
+      'ter': ter,
+      'qua': qua,
+      'qui': qui,
+      'sex': sex,
+      'sab': sab,
+      'dom': dom,
+    };
+  }
+
+  @override
+  String toString() {
+    return 'TimetableModel{startTime: $startTime,endTime: $endTime,seg: $seg,ter: $ter,qua: $qua,qui: $qui,sex: $sex,sab: $sab,dom: $dom}';
+  }
 }

@@ -31,7 +31,7 @@ class GenerationColor {
     Colors.yellowAccent,
     Colors.lightBlue,
     Colors.orangeAccent,
-    Colors.deepPurple,
+    Colors.red[200],
     Colors.pinkAccent,
     Colors.blueAccent,
     Colors.limeAccent,

@@ -1,170 +1,158 @@
 import 'package:flutter/material.dart';
 import 'package:uesc_hub/app/modules/schedule/models/timetable_model.dart';
+import 'package:uesc_hub/app/shared/functions/generation_color.dart';
 
 class TimeSheetWidget extends StatelessWidget {
-  final List<TimetableModel> timetable;
+  final List list;
 
-  TimeSheetWidget({this.timetable});
+  TimeSheetWidget({Key key, @required this.list}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: criaTabela(),
-    );
-  }
-
-  listTableRows() {
-    var rows;
-
-    for (int index = 0; index < timetable.length; index++) {
-      if (index == 0) {
-        rows.add(_criarLinhaTableDias("   , SEG,TER,QUA,QUI,SEX"));
-      } else {
-        rows.add(_criarLinhaTable(
-          "${timetable[index].startTime}'\n'${timetable[index].endTime},${timetable[index].seg},${timetable[index].ter},${timetable[index].qua},${timetable[index].qui},${timetable[index].sex}",
-          Colors.teal,
-        ));
-      }
-    }
-
-    return rows;
-  }
-
-  teste() {
-    Table(
-      children: listTableRows(),
-    );
-  }
-
-  criaTabela() {
-    return Table(
-      // border: TableBorder(
-      //     bottom: BorderSide.none,
-      //     horizontalInside: BorderSide(
-      //       color: Colors.white,
-      //       style: BorderStyle.none,
-      //       width: 0.0,
-
-      //     ),
-      //     // verticalInside: BorderSide(
-      //     //   color: Colors.black,
-      //     //   style: BorderStyle.solid,
-      //     //   width: 0,
-      //     // ),
-      //     // top:
-      //     ),
-
-      children: tes()
-      // [
-
-
-        
-        //     _criarLinhaTableDias("   , SEG,TER,QUA,QUI,SEX"),
-        //     _criarLinhaTable(
-        //         "07:30\n08:20,CET48, ,CET432, ,CET66 ", Colors.teal),
-        
-        // _criarLinhaTable("08:20\n09:10,CET48, ,CET435, , ", Colors.amber),
-        // _criarLinhaTable("09:10\n10:00, , , , ,CET089", Colors.red),
-        // _criarLinhaTable("10:00, , ,CET075, , ", Colors.green),
-        // _criarLinhaTable("13:30, ,CET075, , , ", Colors.green),
-        // _criarLinhaTable("15:10, , , , , ", Colors.green),
-        // _criarLinhaTable("17:40, , , , , ", Colors.green),
-      // ],
-    );
-  }
-
-  tes(){
-    List list;
-    var index = 0;
-    while(index != 3){
-      list.insertAll(index,_criarLinhaTableDias("   , SEG,TER,QUA,QUI,SEX"));
-      index++;
-    }
-    return list;
-  }
-
-  _criarLinhaTable(String listaNomes, Color color) {
-    return TableRow(
-      // decoration: BoxDecoration(color: Colors.white),
-      children: listaNomes.split(',').map((name) {
-        if (name.contains(':')) {
-          return Container(
-            padding: EdgeInsets.all(8.0),
-            alignment: Alignment.center,
-            child: Column(
-              children: <Widget>[
-                Text(
-                  name.split('\n').first,
-                  style: TextStyle(fontSize: 12.0, color: Colors.black),
-                ),
-                SizedBox(
-                  width: 20,
-                  child: Divider(
-                    color: Colors.black,
-                    thickness: .5,
-                    height: 1,
+    return ListView.builder(
+      physics: BouncingScrollPhysics(),
+      itemCount: list.length,
+      itemBuilder: (_, int index) {
+        if (index == 0) {
+          return Column(
+            children: [
+              Table(children: [
+                _criarLinhaTable(
+                  TimetableModel(
+                    startTime: '',
+                    endTime: '',
+                    seg: 'SEG',
+                    ter: 'TER',
+                    qua: 'QUA',
+                    qui: 'QUI',
+                    sex: 'SEX',
                   ),
                 ),
-                Text(
-                  name.split('\n').last,
-                  style: TextStyle(fontSize: 12.0, color: Colors.black),
-                ),
-              ],
-            ),
+              ]),
+              Table(children: [_criarLinhaTable(list[index])]),
+            ],
           );
-        } else if (name == " ") {
-          return SizedBox();
         } else {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 0),
-            child: Container(
-              // onPressed: () {},
-              // borderSide: BorderSide(
-              //   color: color,
-              // ),
-              // shape: RoundedRectangleBorder(
-              // ),
-              //   side: BorderSide(
-              //     color: color,
-              //   ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: color),
-                color: color.withOpacity(.2),
-              ),
-              child: Column(
-                children: <Widget>[
-                  Text(
-                    name,
+          return Table(children: [_criarLinhaTable(list[index])]);
+        }
+      },
+    );
+  }
+
+  _subjectWidget(String subject) {
+    return subject == ""
+        ? SizedBox()
+        : subject.length == 3
+            ? Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 0),
+                child: Container(
+                  // decoration: BoxDecoration(
+                  //   borderRadius: BorderRadius.circular(10),
+                  //   border: Border.all(color: color),
+                  //   color: color.withOpacity(.2),
+                  // ),
+                  child: Text(
+                    subject,
+                    textAlign: TextAlign.center,
                     style: TextStyle(fontSize: 12.0, color: Colors.black),
                   ),
-                  Text(
-                    name,
-                    style: TextStyle(fontSize: 10.0, color: Colors.black),
+                  padding: EdgeInsets.all(5.0),
+                ),
+              )
+            : Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 0),
+                child: Container(
+                  // onPressed: () {},
+                  // borderSide: BorderSide(
+                  //   color: color,
+                  // ),
+                  // shape: RoundedRectangleBorder(
+                  // ),
+                  //   side: BorderSide(
+                  //     color: color,
+                  //   ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(
+                        color: GenerationColor(seed: subject).colorSubject()),
+                    color: GenerationColor(seed: subject)
+                        .colorSubject()
+                        .withOpacity(.2),
                   ),
-                ],
-              ),
-              padding: EdgeInsets.all(5.0),
-            ),
-          );
-        }
-      }).toList(),
-    );
+                  child: Column(
+                    children: <Widget>[
+                      Text(
+                        subject.split('-')[0],
+                        style: TextStyle(fontSize: 12.0, color: Colors.black),
+                      ),
+                      Text(
+                        subject.split('-')[1],
+                        style: TextStyle(fontSize: 10.0, color: Colors.black),
+                      ),
+                    ],
+                  ),
+                  padding: EdgeInsets.all(5.0),
+                ),
+              );
   }
 
-  _criarLinhaTableDias(String listaNomes) {
+  _criarLinhaTable(TimetableModel timetable) {
     return TableRow(
-      // decoration: BoxDecoration(color: Colors.white),
-      children: listaNomes.split(',').map((name) {
-        return Container(
-          padding: EdgeInsets.all(8.0),
-          alignment: Alignment.center,
-          child: Text(
-            name,
-            style: TextStyle(fontSize: 12.0, color: Colors.black),
-          ),
-        );
-      }).toList(),
+      children: [
+        Row(
+          children: [
+            Expanded(
+              flex: 3,
+              child: Container(
+                padding: EdgeInsets.symmetric(vertical: 7),
+                alignment: Alignment.centerLeft,
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      timetable.startTime,
+                      style: TextStyle(fontSize: 12.0, color: Colors.black),
+                    ),
+                    timetable.startTime == ""
+                        ? SizedBox()
+                        : SizedBox(
+                            width: 20,
+                            child: Divider(
+                              color: Colors.black,
+                              thickness: .5,
+                              height: 1,
+                            ),
+                          ),
+                    Text(
+                      timetable.endTime,
+                      style: TextStyle(fontSize: 12.0, color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Expanded(
+              flex: 5,
+              child: _subjectWidget(timetable.seg),
+            ),
+            Expanded(
+              flex: 5,
+              child: _subjectWidget(timetable.ter),
+            ),
+            Expanded(
+              flex: 5,
+              child: _subjectWidget(timetable.qua),
+            ),
+            Expanded(
+              flex: 5,
+              child: _subjectWidget(timetable.qui),
+            ),
+            Expanded(
+              flex: 5,
+              child: _subjectWidget(timetable.sex),
+            ),
+          ],
+        )
+      ],
     );
   }
 }

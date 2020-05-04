@@ -27,7 +27,7 @@ class AuthSagresRepository {
   }
 
   getCredentials() async {
-    List<String> credentials = await storage.get('credentials');
+    List credentials = await storage.get('credentials');
     return credentials;
   }
 
@@ -36,6 +36,6 @@ class AuthSagresRepository {
   }
 
   deleteCredentials() {
-    storage.put('credentials', null);
+    storage.delete('credentials');
   }
 }

@@ -38,4 +38,8 @@ class TimetableModel {
   String toString() {
     return 'TimetableModel{startTime: $startTime,endTime: $endTime,seg: $seg,ter: $ter,qua: $qua,qui: $qui,sex: $sex,sab: $sab,dom: $dom}';
   }
+
+  List toList() {
+    return [startTime, endTime, seg, ter, qua, qui, sex, sab, dom];
+  }
 }

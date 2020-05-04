@@ -6,8 +6,10 @@ import 'package:uesc_hub/app/shared/auth/sagres/repositories/auth_sagres_reposit
 import 'package:uesc_hub/app/shared/auth/social/auth_controller.dart';
 import 'package:uesc_hub/app/shared/auth/social/repositories/auth_repository.dart';
 import 'package:uesc_hub/app/shared/auth/social/repositories/auth_repository_interface.dart';
+import 'package:uesc_hub/app/shared/repositories/localstorage/local_storage_hive.dart';
 import 'package:uesc_hub/app/shared/repositories/localstorage/local_storage_interface.dart';
 import 'package:uesc_hub/app/shared/repositories/localstorage/local_storage_share.dart';
+import 'package:uesc_hub/app/shared/repositories/localstorage/local_storage_sqflite.dart';
 import 'app_controller.dart';
 import 'app_widget.dart';
 import 'modules/home/home_module.dart';
@@ -22,7 +24,8 @@ class AppModule extends MainModule {
   @override
   List<Bind> get binds => [
         Bind((i) => AppController()),
-        //  Bind((i) => LocalStorageHive()),
+        // Bind<ILocalStorage>((i) => LocalStorageSqflite()),
+        // Bind<ILocalStorage>((i) => LocalStorageHive()),
         Bind<ILocalStorage>((i) => LocalStorageShared()),
         Bind<IAuthRepository>((i) => AuthRepository()),
         Bind((i) => AuthController()),

@@ -45,7 +45,7 @@ class _SchedulePageState
               child: RaisedButton(
                 child: Text("Tente novamente!"),
                 onPressed: () {
-                  scheduleController.fetchTimetable();
+                  scheduleController.getTimetable();
                 },
               ),
             );
@@ -165,8 +165,11 @@ class _SchedulePageState
                   //   ),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    border: Border.all(color: GenerationColor(seed: subject).colorSubject() ),
-                    color: GenerationColor(seed: subject).colorSubject().withOpacity(.2),
+                    border: Border.all(
+                        color: GenerationColor(seed: subject).colorSubject()),
+                    color: GenerationColor(seed: subject)
+                        .colorSubject()
+                        .withOpacity(.2),
                   ),
                   child: Column(
                     children: <Widget>[

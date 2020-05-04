@@ -20,8 +20,9 @@ abstract class _ScheduleControllerBase with Store {
   ObservableFuture<List<TimetableModel>> timetable;
 
   _ScheduleControllerBase(this.repository) {
-    fetchSubjects();
-    fetchTimetable();
+    // fetchSubjects();
+    // fetchTimetable();
+    getTimetable();
   }
 
   @action
@@ -29,8 +30,20 @@ abstract class _ScheduleControllerBase with Store {
     subjects = repository.getSubjects().asObservable();
   }
 
+  // @action
+  // fetchTimetable() {
+  //   timetable = repository.getTimetable().asObservable();
+  // }
   @action
   fetchTimetable() {
-    timetable = repository.getTimetable().asObservable();
+    repository.setPersistenceTimetable();
+  }
+
+  @action
+  getTimetable() {
+    timetable = repository.getPersistenceTimetable().asObservable();
+    if (timetable.value == []) {
+      fetchTimetable();
+    }
   }
 }

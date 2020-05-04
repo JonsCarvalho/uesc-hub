@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:uesc_hub/app/modules/profile/components/sagres_login_widget.dart';
 import 'package:uesc_hub/app/modules/schedule/components/timesheet_widget.dart';
 import 'package:uesc_hub/app/modules/schedule/models/subjects_model.dart';
 import 'package:uesc_hub/app/modules/schedule/models/timetable_model.dart';
@@ -40,54 +41,85 @@ class _SchedulePageState
           // ),
           Observer(
         builder: (_) {
-          if (scheduleController.timetable.error != null) {
-            return Center(
-              child: RaisedButton(
-                child: Text("Tente novamente!"),
-                onPressed: () {
-                  scheduleController.getTimetable();
+          if (sagresController.credentials.isEmpty) {
+            return Container(
+              padding: EdgeInsets.all(8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Text(
+                    'Entre com o seu login do Sagres para ter acesso ao quadro de horários.',
+                    textAlign: TextAlign.justify,
+                  ),
+                  SizedBox(height: 8),
+                  FlatButton(
+                    color: Colors.teal,
+                    onPressed: () {
+                      showDialog(
+                        context: _,
+                        builder: (_) {
+                          return SagresLoginWidget();
+                        },
+                      );
+                    },
+                    child: Text(
+                      'Login Sagres',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          } else {
+            if (scheduleController.timetable.error != null) {
+              return Center(
+                child: RaisedButton(
+                  child: Text("Tente novamente!"),
+                  onPressed: () {
+                    scheduleController.getTimetable();
+                  },
+                ),
+              );
+            }
+            if (scheduleController.timetable.value == null) {
+              return LinearProgressIndicator();
+            }
+            List<TimetableModel> list;
+
+            list = scheduleController.timetable.value.toList();
+
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListView.builder(
+                physics: BouncingScrollPhysics(),
+                itemCount: list.length,
+                itemBuilder: (_, int index) {
+                  if (index == 0) {
+                    return Column(
+                      children: [
+                        Table(children: [
+                          _criarLinhaTable(
+                            TimetableModel(
+                              startTime: '',
+                              endTime: '',
+                              seg: 'SEG',
+                              ter: 'TER',
+                              qua: 'QUA',
+                              qui: 'QUI',
+                              sex: 'SEX',
+                            ),
+                          ),
+                        ]),
+                        Table(children: [_criarLinhaTable(list[index])]),
+                      ],
+                    );
+                  } else {
+                    return Table(children: [_criarLinhaTable(list[index])]);
+                  }
                 },
               ),
             );
           }
-          if (scheduleController.timetable.value == null) {
-            return LinearProgressIndicator();
-          }
-          List<TimetableModel> list;
-
-          list = scheduleController.timetable.value.toList();
-
-          return Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ListView.builder(
-              physics: BouncingScrollPhysics(),
-              itemCount: list.length,
-              itemBuilder: (_, int index) {
-                if (index == 0) {
-                  return Column(
-                    children: [
-                      Table(children: [
-                        _criarLinhaTable(
-                          TimetableModel(
-                            startTime: '',
-                            endTime: '',
-                            seg: 'SEG',
-                            ter: 'TER',
-                            qua: 'QUA',
-                            qui: 'QUI',
-                            sex: 'SEX',
-                          ),
-                        ),
-                      ]),
-                      Table(children: [_criarLinhaTable(list[index])]),
-                    ],
-                  );
-                } else {
-                  return Table(children: [_criarLinhaTable(list[index])]);
-                }
-              },
-            ),
-          );
         },
       ),
       //     Observer(

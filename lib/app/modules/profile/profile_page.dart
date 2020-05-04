@@ -50,9 +50,7 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileController> {
                     showDialog(
                       context: _,
                       builder: (_) {
-                        return SagresLoginWidget(
-                          sagresController: sagresController,
-                        );
+                        return SagresLoginWidget();
                       },
                     );
                   },

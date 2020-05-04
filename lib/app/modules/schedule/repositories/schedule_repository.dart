@@ -107,7 +107,7 @@ class ScheduleRepository {
   Future<List<TimetableModel>> getPersistenceTimetable() async {
     List<String> stringList = await storage.get('timetable');
     if (stringList == null) {
-      return [];
+      return null;
     } else {
       List<TimetableModel> list = List();
       var index = 0;

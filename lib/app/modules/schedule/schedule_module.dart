@@ -16,8 +16,10 @@ class ScheduleModule extends ChildModule {
   @override
   List<Bind> get binds => [
         Bind((i) => ScheduleController(i.get<ScheduleRepository>())),
-        Bind((i) => ScheduleRepository(i.get<Dio>(),
-            {"username": credentials[0], "password": credentials[1]})),
+        Bind((i) => ScheduleRepository(i.get<Dio>(), {
+              "username": credentials.isEmpty ? "" : credentials[0],
+              "password": credentials.isEmpty ? "" : credentials[1]
+            })),
         // Bind((i) => AuthSagresController()),
         // Bind((i) => AuthSagresRepository(i.get<Dio>())),
         // Bind((i) => Dio()),

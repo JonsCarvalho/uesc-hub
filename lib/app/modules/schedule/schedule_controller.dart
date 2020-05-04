@@ -42,7 +42,7 @@ abstract class _ScheduleControllerBase with Store {
   @action
   getTimetable() {
     timetable = repository.getPersistenceTimetable().asObservable();
-    if (timetable.value == []) {
+    if (timetable.value == null) {
       fetchTimetable();
     }
   }

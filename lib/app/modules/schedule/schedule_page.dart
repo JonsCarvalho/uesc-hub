@@ -76,7 +76,7 @@ class _SchedulePageState
                 child: RaisedButton(
                   child: Text("Tente novamente!"),
                   onPressed: () {
-                    scheduleController.getTimetable();
+                    scheduleController.getTimetableAndSubjects();
                   },
                 ),
               );
@@ -84,13 +84,48 @@ class _SchedulePageState
             if (scheduleController.timetable.value == null) {
               return LinearProgressIndicator();
             }
-            List<TimetableModel> list;
+            List<TimetableModel> listTimetable;
+            List<SubjectsModel> listSubjects;
+            listTimetable = scheduleController.timetable.value.toList();
+            listSubjects = scheduleController.subjects.value.toList();
 
-            list = scheduleController.timetable.value.toList();
-
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TimeSheetWidget(list: list),
+            return Column(
+              children: [
+                Container(
+                  height: listTimetable.length == 1
+                      ? 90
+                      : (listTimetable.length * 50.0) + 32,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: TimeSheetWidget(list: listTimetable),
+                  ),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    physics: BouncingScrollPhysics(),
+                    itemCount: listSubjects.length,
+                    itemBuilder: (_, int index) {
+                      return Column(
+                        children: <Widget>[
+                          ListTile(
+                            title: Text(listSubjects[index].subject),
+                            leading: Text(listSubjects[index].id),
+                            subtitle: Text(
+                                listSubjects[index].classTheoreticalLocation +
+                                    '\n' +
+                                    listSubjects[index].classPracticeLocation),
+                            trailing: Text(
+                                listSubjects[index].classTheoretical +
+                                    '\n' +
+                                    listSubjects[index].classPractice),
+                          ),
+                          Divider(),
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              ],
             );
           }
         },

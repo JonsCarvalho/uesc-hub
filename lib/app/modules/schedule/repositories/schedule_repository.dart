@@ -68,15 +68,34 @@ class ScheduleRepository {
     return list;
   }
 
-  Future<List<SubjectsModel>> getAll() async {
+  Future<List> getAll() async {
     var response = await dio.post(
       URL_SAGRES_BASE + "/all/",
       data: credentials,
     );
 
-    List<SubjectsModel> list = [];
+    var data = response.data;
 
-    for (var json in (response.data)) {
+    List<TimetableModel> listTimetable = [];
+
+    for (var json in (data[0]['timetable'])) {
+      TimetableModel model = TimetableModel(
+        startTime: json['start-time'],
+        endTime: json['end-time'],
+        seg: json['seg'],
+        ter: json['ter'],
+        qua: json['qua'],
+        qui: json['qui'],
+        sex: json['sex'],
+        sab: json['sab'],
+        dom: json['dom'],
+      );
+      listTimetable.add(model);
+    }
+
+    List<SubjectsModel> listSubjects = [];
+
+    for (var json in (data[0]['subjects'])) {
       SubjectsModel model = SubjectsModel(
         classPractice: json['class-practice'],
         classPracticeLocation: json['class-practice-location'],
@@ -85,24 +104,40 @@ class ScheduleRepository {
         id: json['id'],
         subject: json['subject'],
       );
-      list.add(model);
+      listSubjects.add(model);
     }
 
-    return list;
+    return [listTimetable, listSubjects];
   }
 
-  // getPersistenceSubjects() async {
-  //   List<SubjectsModel> persistenceSubjects = await storage.get('subjects');
-  //   return persistenceSubjects;
-  // }
+  setPersistenceTimetableAndSubjects() async {
+    List list = await getAll();
 
-  // setPersistenceSubjects(List<SubjectsModel> persistenceSubjects) {
-  //   storage.put('subjects', persistenceSubjects);
-  // }
+    List<String> strListTimetable = [];
+    for (final instance in list[0]) {
+      strListTimetable.add(instance.startTime);
+      strListTimetable.add(instance.endTime);
+      strListTimetable.add(instance.seg);
+      strListTimetable.add(instance.ter);
+      strListTimetable.add(instance.qua);
+      strListTimetable.add(instance.qui);
+      strListTimetable.add(instance.sex);
+      strListTimetable.add(instance.sab);
+      strListTimetable.add(instance.dom);
+    }
+    storage.put('timetable', strListTimetable);
 
-  // deletePersistenceSubjects() {
-  //   storage.put('subjects', null);
-  // }
+    List<String> strListSubjects = [];
+    for (final instance in list[1]) {
+      strListSubjects.add(instance.classPractice);
+      strListSubjects.add(instance.classPracticeLocation);
+      strListSubjects.add(instance.classTheoretical);
+      strListSubjects.add(instance.classTheoreticalLocation);
+      strListSubjects.add(instance.id);
+      strListSubjects.add(instance.subject);
+    }
+    storage.put('subjects', strListSubjects);
+  }
 
   Future<List<TimetableModel>> getPersistenceTimetable() async {
     List<String> stringList = await storage.get('timetable');
@@ -149,5 +184,32 @@ class ScheduleRepository {
 
   deletePersistenceTimetable() {
     storage.put('timetable', null);
+  }
+
+  Future<List<SubjectsModel>> getPersistenceSubjects() async {
+    List<String> stringList = await storage.get('subjects');
+    if (stringList == null) {
+      return null;
+    } else {
+      List<SubjectsModel> list = List();
+      var index = 0;
+      while (index < stringList.length) {
+        SubjectsModel instance = SubjectsModel(
+          classPractice: stringList[index],
+          classPracticeLocation: stringList[index + 1],
+          classTheoretical: stringList[index + 2],
+          classTheoreticalLocation: stringList[index + 3],
+          id: stringList[index + 4],
+          subject: stringList[index + 5],
+        );
+        index += 6;
+        list.add(instance);
+      }
+      return list;
+    }
+  }
+
+  deletePersistenceSubjects() {
+    storage.put('subjects', null);
   }
 }

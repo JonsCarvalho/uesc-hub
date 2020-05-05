@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:uesc_hub/app/modules/profile/components/sagres_login_widget.dart';
+import 'package:uesc_hub/app/modules/schedule/components/subjects_list_widget.dart';
 import 'package:uesc_hub/app/modules/schedule/components/timesheet_widget.dart';
 import 'package:uesc_hub/app/modules/schedule/models/subjects_model.dart';
 import 'package:uesc_hub/app/modules/schedule/models/timetable_model.dart';
@@ -101,29 +102,7 @@ class _SchedulePageState
                   ),
                 ),
                 Expanded(
-                  child: ListView.builder(
-                    physics: BouncingScrollPhysics(),
-                    itemCount: listSubjects.length,
-                    itemBuilder: (_, int index) {
-                      return Column(
-                        children: <Widget>[
-                          ListTile(
-                            title: Text(listSubjects[index].subject),
-                            leading: Text(listSubjects[index].id),
-                            subtitle: Text(
-                                listSubjects[index].classTheoreticalLocation +
-                                    '\n' +
-                                    listSubjects[index].classPracticeLocation),
-                            trailing: Text(
-                                listSubjects[index].classTheoretical +
-                                    '\n' +
-                                    listSubjects[index].classPractice),
-                          ),
-                          Divider(),
-                        ],
-                      );
-                    },
-                  ),
+                  child: SubjectsListWidget(list: listSubjects),
                 ),
               ],
             );

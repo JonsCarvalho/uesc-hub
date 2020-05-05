@@ -12,8 +12,10 @@ class SagresLoginWidget extends StatelessWidget {
       builder: (_) {
         return AlertDialog(
           title: Text('Login SAGRES'),
-          actions: sagresController.status != AuthStatus.loading
-              ? [
+          actions: sagresController.status == AuthStatus.loading ||
+                  sagresController.status == AuthStatus.login
+              ? []
+              : [
                   MaterialButton(
                     color: Theme.of(context).primaryColor,
                     onPressed: () async {
@@ -38,8 +40,7 @@ class SagresLoginWidget extends StatelessWidget {
                       // style: TextStyle(color: Colors.teal),
                     ),
                   )
-                ]
-              : [],
+                ],
           scrollable: true,
           content: Observer(
             builder: (_) {

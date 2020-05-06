@@ -30,53 +30,62 @@ class ClassWidget extends StatelessWidget {
       width: 170,
       child: Column(
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(child: Text(start)),
-              // SizedBox(width: 15,),
-              Container(child: Text(end)),
-            ],
-          ),
+          // Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //   children: [
+          //     Container(child: Text(start)),
+          //     // SizedBox(width: 15,),
+          //     Container(child: Text(end)),
+          //   ],
+          // ),
           Expanded(
             child: Card(
-              child: Container(
-                // width: 170,
-                // height: 50,
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 5,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: GenerationColor(seed: id).colorSubject(),
-                        ),
+              child: Row(
+                children: [
+                  SizedBox(
+                    width: 5,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: GenerationColor(seed: id).colorSubject(),
                       ),
                     ),
-                    Expanded(
-                      child: ListTile(
-                        // title: Text(controller.list[index]),
-                        title: Text(
-                          subject,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 14,
+                  ),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Container(child: Text(start)),
+                            Icon(Icons.access_time),
+                            Container(child: Text(end)),
+                          ],
+                        ),
+                        ListTile(
+                            // title: Text(controller.list[index]),
+                            title: Text(
+                              subject,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                              ),
+                            ),
+                            subtitle: Text(classRoom),
+                            // trailing: Text(id),
+                            // leading: Text(id),
+                            // trailing: IconButton(
+                            //   icon: Icon(Icons.cancel, color: Colors.red),
+                            //   onPressed: () {
+                            //     controller.remove(index);
+                            //   },
+                            // ),
                           ),
-                        ),
-                        subtitle: Text(classRoom),
-
-                        // leading: Text(id),
-                        // trailing: IconButton(
-                        //   icon: Icon(Icons.cancel, color: Colors.red),
-                        //   onPressed: () {
-                        //     controller.remove(index);
-                        //   },
-                        // ),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

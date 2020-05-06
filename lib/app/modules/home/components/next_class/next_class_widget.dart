@@ -17,7 +17,7 @@ class NextClassWidget extends StatelessWidget {
         // borderRadius: BorderRadius.circular(10),
         color: Colors.amber.withOpacity(.1),
       ),
-      height: 150,
+      height: 200,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 10),
         child: Column(
@@ -49,20 +49,21 @@ class NextClassWidget extends StatelessWidget {
                           ? Padding(
                               padding: const EdgeInsets.only(left: 15),
                               child: ClassWidget(
-                                index: index,
                                 id: controller.nextClass[index].id,
                                 classRoom:
                                     controller.nextClass[index].classLocation,
+                                classType:
+                                    controller.nextClass[index].classType,
                                 subject: controller.nextClass[index].subject,
                                 end: controller.nextClass[index].endTime,
                                 start: controller.nextClass[index].startTime,
                               ),
                             )
                           : ClassWidget(
-                              index: index,
                               id: controller.nextClass[index].id,
                               classRoom:
                                   controller.nextClass[index].classLocation,
+                              classType: controller.nextClass[index].classType,
                               subject: controller.nextClass[index].subject,
                               end: controller.nextClass[index].endTime,
                               start: controller.nextClass[index].startTime,

@@ -15,7 +15,7 @@ class SubjectsListWidget extends StatelessWidget {
         return Column(
           children: <Widget>[
             ListTile(
-              title: Expanded(child: Text(list[index].subject)),
+              title: Text(list[index].subject),
               leading: Container(
                 width: 60,
                 child: Row(
@@ -30,11 +30,9 @@ class SubjectsListWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              subtitle: Expanded(
-                child: Text(list[index].classTheoreticalLocation +
-                    '\n' +
-                    list[index].classPracticeLocation),
-              ),
+              subtitle: Text(list[index].classTheoreticalLocation +
+                  '\n' +
+                  list[index].classPracticeLocation),
               trailing: Text(list[index].classTheoretical +
                   '\n' +
                   list[index].classPractice),

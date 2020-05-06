@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:uesc_hub/app/shared/functions/generation_date.dart';
 
 import '../../home_controller.dart';
 import 'class_widget.dart';
@@ -36,32 +37,38 @@ class NextClassWidget extends StatelessWidget {
             ),
             Expanded(
               flex: 3,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                physics: BouncingScrollPhysics(),
-                // itemCount: controller.list.length,
-                itemCount: 3,
-                itemBuilder: (_, index) {
-                  return index == 0
-                      ? Padding(
-                          padding: const EdgeInsets.only(left: 15),
-                          child: ClassWidget(
-                            index: index,
-                            id: "CET32",
-                            classRoom: "17B",
-                            subject: "Linguagem de Programação I",
-                            end: "gg",
-                            start: "gg",
-                          ),
-                        )
-                      : ClassWidget(
-                          index: index,
-                          id: "CET32",
-                          classRoom: "17B",
-                          subject: "Linguagem de Programação I",
-                          end: "gg",
-                          start: "gg",
-                        );
+              child: Observer(
+                builder: (_) {
+                  return ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    physics: BouncingScrollPhysics(),
+                    // itemCount: controller.list.length,
+                    itemCount: controller.nextClass.length,
+                    itemBuilder: (_, index) {
+                      return index == 0
+                          ? Padding(
+                              padding: const EdgeInsets.only(left: 15),
+                              child: ClassWidget(
+                                index: index,
+                                id: controller.nextClass[index].id,
+                                classRoom:
+                                    controller.nextClass[index].classLocation,
+                                subject: controller.nextClass[index].subject,
+                                end: controller.nextClass[index].endTime,
+                                start: controller.nextClass[index].startTime,
+                              ),
+                            )
+                          : ClassWidget(
+                              index: index,
+                              id: controller.nextClass[index].id,
+                              classRoom:
+                                  controller.nextClass[index].classLocation,
+                              subject: controller.nextClass[index].subject,
+                              end: controller.nextClass[index].endTime,
+                              start: controller.nextClass[index].startTime,
+                            );
+                    },
+                  );
                 },
               ),
             ),

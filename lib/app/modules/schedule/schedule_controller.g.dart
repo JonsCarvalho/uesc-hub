@@ -69,6 +69,50 @@ mixin _$ScheduleController on _ScheduleControllerBase, Store {
   }
 
   @override
+  dynamic fetchTimetableAndSubjects() {
+    final _$actionInfo =
+        _$_ScheduleControllerBaseActionController.startAction();
+    try {
+      return super.fetchTimetableAndSubjects();
+    } finally {
+      _$_ScheduleControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic getTimetableAndSubjects() {
+    final _$actionInfo =
+        _$_ScheduleControllerBaseActionController.startAction();
+    try {
+      return super.getTimetableAndSubjects();
+    } finally {
+      _$_ScheduleControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic getTimetable() {
+    final _$actionInfo =
+        _$_ScheduleControllerBaseActionController.startAction();
+    try {
+      return super.getTimetable();
+    } finally {
+      _$_ScheduleControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic getSubjects() {
+    final _$actionInfo =
+        _$_ScheduleControllerBaseActionController.startAction();
+    try {
+      return super.getSubjects();
+    } finally {
+      _$_ScheduleControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string =
         'subjects: ${subjects.toString()},timetable: ${timetable.toString()}';

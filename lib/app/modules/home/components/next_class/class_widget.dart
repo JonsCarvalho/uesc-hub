@@ -64,24 +64,27 @@ class ClassWidget extends StatelessWidget {
                           ],
                         ),
                         ListTile(
-                            // title: Text(controller.list[index]),
-                            title: Text(
-                              subject,
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 14,
-                              ),
+                          // title: Text(controller.list[index]),
+                          title: Text(
+                            subject,
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 14,
                             ),
-                            subtitle: Text(classRoom),
-                            // trailing: Text(id),
-                            // leading: Text(id),
-                            // trailing: IconButton(
-                            //   icon: Icon(Icons.cancel, color: Colors.red),
-                            //   onPressed: () {
-                            //     controller.remove(index);
-                            //   },
-                            // ),
                           ),
+                          subtitle: Text(
+                            classRoom,
+                            style: TextStyle(fontSize: 12),
+                          ),
+                          // trailing: Text(id),
+                          // leading: Text(id),
+                          // trailing: IconButton(
+                          //   icon: Icon(Icons.cancel, color: Colors.red),
+                          //   onPressed: () {
+                          //     controller.remove(index);
+                          //   },
+                          // ),
+                        ),
                       ],
                     ),
                   ),

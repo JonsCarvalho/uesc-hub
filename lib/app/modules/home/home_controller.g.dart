@@ -53,8 +53,8 @@ mixin _$HomeController on _HomeBase, Store {
   final _$getNextClassAsyncAction = AsyncAction('getNextClass');
 
   @override
-  Future getNextClass() {
-    return _$getNextClassAsyncAction.run(() => super.getNextClass());
+  Future getNextClass([DateTime dateTime]) {
+    return _$getNextClassAsyncAction.run(() => super.getNextClass(dateTime));
   }
 
   final _$_HomeBaseActionController = ActionController(name: '_HomeBase');

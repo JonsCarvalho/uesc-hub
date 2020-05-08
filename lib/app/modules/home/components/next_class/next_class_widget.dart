@@ -23,17 +23,27 @@ class NextClassWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Expanded(
-              flex: 1,
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
-                  "Próximas aulas".toUpperCase(),
-                  style: TextStyle(
-                    color: Colors.black,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    "Próximas aulas".toUpperCase(),
+                    style: TextStyle(
+                      color: Colors.black,
+                    ),
                   ),
                 ),
-              ),
+                FlatButton(
+                  color: Colors.grey,
+                  child: Text("Amanhã"),
+                  onPressed: () {
+                    controller
+                        .getNextClass(DateTime.now().add(Duration(days: 1)));
+                  },
+                ),
+              ],
             ),
             Expanded(
               flex: 3,

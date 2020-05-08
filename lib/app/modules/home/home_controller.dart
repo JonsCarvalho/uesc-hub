@@ -48,7 +48,9 @@ abstract class _HomeBase with Store {
   }
 
   @action
-  getNextClass() async {
+  getNextClass([DateTime dateTime]) async {
+    if (dateTime == null) dateTime = DateTime.now();
+
     List<String> stringListTimetable = await storage.get('timetable');
     List<TimetableModel> listTimetable = List();
     if (stringListTimetable == null) {
@@ -91,7 +93,7 @@ abstract class _HomeBase with Store {
       }
     }
 
-    String day = GenerationDate(dateTime: DateTime.now())
+    String day = GenerationDate(dateTime: dateTime)
         .getDay()
         .toString()
         .toLowerCase()

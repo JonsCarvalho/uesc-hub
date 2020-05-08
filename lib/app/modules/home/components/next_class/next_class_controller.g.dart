@@ -26,23 +26,54 @@ mixin _$NextClassController on _NextClassBase, Store {
     }, _$nextClassAtom, name: '${_$nextClassAtom.name}_set');
   }
 
+  final _$daySelectedAtom = Atom(name: '_NextClassBase.daySelected');
+
+  @override
+  String get daySelected {
+    _$daySelectedAtom.context.enforceReadPolicy(_$daySelectedAtom);
+    _$daySelectedAtom.reportObserved();
+    return super.daySelected;
+  }
+
+  @override
+  set daySelected(String value) {
+    _$daySelectedAtom.context.conditionallyRunInAction(() {
+      super.daySelected = value;
+      _$daySelectedAtom.reportChanged();
+    }, _$daySelectedAtom, name: '${_$daySelectedAtom.name}_set');
+  }
+
   final _$initAsyncAction = AsyncAction('init');
 
   @override
-  Future init([DateTime dateTime]) {
-    return _$initAsyncAction.run(() => super.init(dateTime));
+  Future init() {
+    return _$initAsyncAction.run(() => super.init());
   }
 
   final _$getNextClassAsyncAction = AsyncAction('getNextClass');
 
   @override
-  Future getNextClass([DateTime dateTime]) {
-    return _$getNextClassAsyncAction.run(() => super.getNextClass(dateTime));
+  Future getNextClass() {
+    return _$getNextClassAsyncAction.run(() => super.getNextClass());
+  }
+
+  final _$_NextClassBaseActionController =
+      ActionController(name: '_NextClassBase');
+
+  @override
+  dynamic setDaySelected(String value) {
+    final _$actionInfo = _$_NextClassBaseActionController.startAction();
+    try {
+      return super.setDaySelected(value);
+    } finally {
+      _$_NextClassBaseActionController.endAction(_$actionInfo);
+    }
   }
 
   @override
   String toString() {
-    final string = 'nextClass: ${nextClass.toString()}';
+    final string =
+        'nextClass: ${nextClass.toString()},daySelected: ${daySelected.toString()}';
     return '{$string}';
   }
 }

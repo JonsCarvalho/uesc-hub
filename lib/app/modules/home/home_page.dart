@@ -25,7 +25,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends ModularState<HomePage, HomeController> {
   final sagresController = Modular.get<AuthSagresController>();
-  
+
   @override
   void initState() {
     controller.pageController = PageController();
@@ -51,7 +51,9 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
               body(),
               RouterOutlet(module: RestaurantModule()),
               RouterOutlet(module: NewsModule()),
-              RouterOutlet(module: ScheduleModule(credentials: sagresController.credentials)),
+              RouterOutlet(
+                  module: ScheduleModule(
+                      credentials: sagresController.credentials)),
               RouterOutlet(module: ProfileModule()),
             ],
           );

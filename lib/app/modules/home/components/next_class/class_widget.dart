@@ -25,72 +25,68 @@ class ClassWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 170,
-      child: Column(
-        children: [
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //   children: [
-          //     Container(child: Text(start)),
-          //     // SizedBox(width: 15,),
-          //     Container(child: Text(end)),
-          //   ],
-          // ),
-          Expanded(
-            child: Card(
-              child: Row(
-                children: [
-                  SizedBox(
-                    width: 5,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: GenerationColor(seed: id).colorSubject(),
-                      ),
-                    ),
+      padding: const EdgeInsets.only(top: 4, bottom: 8, right: 15),
+      width: 210,
+      child: Expanded(
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withAlpha(100),
+                blurRadius: 6.0,
+                spreadRadius: 0.0,
+                offset: Offset(
+                  0.0,
+                  3.0,
+                ),
+              )
+            ],
+          ),
+          child: Row(
+            children: [
+              SizedBox(
+                width: 5,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: GenerationColor(seed: id).colorSubject(),
                   ),
-                  Expanded(
-                    child: Column(
+                ),
+              ),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Container(child: Text(start)),
-                            Icon(Icons.access_time),
-                            Container(child: Text(end)),
-                          ],
-                        ),
-                        ListTile(
-                          // title: Text(controller.list[index]),
-                          title: Text(
-                            subject,
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 14,
-                            ),
-                          ),
-                          subtitle: Text(
-                            classRoom,
-                            style: TextStyle(fontSize: 12),
-                          ),
-                          // trailing: Text(id),
-                          // leading: Text(id),
-                          // trailing: IconButton(
-                          //   icon: Icon(Icons.cancel, color: Colors.red),
-                          //   onPressed: () {
-                          //     controller.remove(index);
-                          //   },
-                          // ),
-                        ),
+                        Container(child: Text(start)),
+                        Icon(Icons.access_time),
+                        Container(child: Text(end)),
                       ],
                     ),
-                  ),
-                ],
+                    ListTile(
+                      title: Text(
+                        subject,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 14,
+                        ),
+                      ),
+                      subtitle: Text(
+                        classRoom,
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      
+                    ),
+                  ],
+                ),
               ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

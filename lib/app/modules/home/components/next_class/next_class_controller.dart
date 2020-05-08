@@ -16,14 +16,16 @@ abstract class _NextClassBase with Store {
   @observable
   ObservableList<NextClassModel> nextClass = <NextClassModel>[].asObservable();
 
+  @observable
+  String daySelected = 'Hoje';
+
   _NextClassBase() {
     init();
   }
 
   @action
-  init([DateTime dateTime]) async {
-    List<NextClassModel> listLocal =
-        await getNextClass(dateTime ?? DateTime.now());
+  init() async {
+    List<NextClassModel> listLocal = await getNextClass();
     if (listLocal == null) {
       nextClass = <NextClassModel>[].asObservable();
     } else {
@@ -32,7 +34,16 @@ abstract class _NextClassBase with Store {
   }
 
   @action
-  getNextClass([DateTime dateTime]) async {
+  setDaySelected(String value) {
+    daySelected = value;
+  }
+
+  @action
+  getNextClass() async {
+    DateTime dateTime = daySelected == 'Hoje'
+        ? DateTime.now()
+        : DateTime.now().add(Duration(days: 1));
+
     List<String> stringListTimetable = await storage.get('timetable');
     List<TimetableModel> listTimetable = List();
     if (stringListTimetable == null) {

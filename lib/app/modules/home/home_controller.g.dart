@@ -46,8 +46,8 @@ mixin _$HomeController on _HomeBase, Store {
   final _$initAsyncAction = AsyncAction('init');
 
   @override
-  Future init() {
-    return _$initAsyncAction.run(() => super.init());
+  Future init([DateTime dateTime]) {
+    return _$initAsyncAction.run(() => super.init(dateTime));
   }
 
   final _$getNextClassAsyncAction = AsyncAction('getNextClass');

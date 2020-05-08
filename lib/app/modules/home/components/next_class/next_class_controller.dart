@@ -1,33 +1,22 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:uesc_hub/app/modules/home/models/next_class_model.dart';
 import 'package:uesc_hub/app/modules/schedule/models/subjects_model.dart';
 import 'package:uesc_hub/app/modules/schedule/models/timetable_model.dart';
-import 'package:uesc_hub/app/shared/auth/social/auth_controller.dart';
 import 'package:uesc_hub/app/shared/functions/generation_date.dart';
 import 'package:uesc_hub/app/shared/repositories/localstorage/local_storage_interface.dart';
 
-part 'home_controller.g.dart';
+part 'next_class_controller.g.dart';
 
-class HomeController = _HomeBase with _$HomeController;
+class NextClassController = _NextClassBase with _$NextClassController;
 
-abstract class _HomeBase with Store {
+abstract class _NextClassBase with Store {
   final ILocalStorage storage = Modular.get();
-
-  @observable
-  PageController pageController;
-
-  @action
-  setPageController(value) {
-    pageController.jumpToPage(value);
-  }
 
   @observable
   ObservableList<NextClassModel> nextClass = <NextClassModel>[].asObservable();
 
-  _HomeBase() {
+  _NextClassBase() {
     init();
   }
 
@@ -40,12 +29,6 @@ abstract class _HomeBase with Store {
     } else {
       nextClass = listLocal.asObservable();
     }
-  }
-
-  @action
-  FirebaseUser getCurrentUser() {
-    var user = Modular.get<AuthController>().user;
-    return user;
   }
 
   @action

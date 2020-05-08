@@ -12,8 +12,6 @@ class ClassWidget extends StatelessWidget {
   final String start;
   final String end;
 
-  final HomeController controller = Modular.get();
-
   ClassWidget({
     Key key,
     this.id,

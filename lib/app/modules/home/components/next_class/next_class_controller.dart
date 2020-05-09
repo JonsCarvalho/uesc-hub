@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:uesc_hub/app/modules/home/models/next_class_model.dart';
@@ -19,6 +20,12 @@ abstract class _NextClassBase with Store {
   @observable
   String daySelected = 'Hoje';
 
+  @observable
+  String cardSelected;
+
+  @observable
+  bool buttonClick = false;
+
   _NextClassBase() {
     init();
   }
@@ -36,6 +43,16 @@ abstract class _NextClassBase with Store {
   @action
   setDaySelected(String value) {
     daySelected = value;
+  }
+
+  @action
+  setCardSelected(String value) {
+    cardSelected = value;
+  }
+
+  @action
+  setButtonClick(bool value) {
+    buttonClick = value;
   }
 
   @action

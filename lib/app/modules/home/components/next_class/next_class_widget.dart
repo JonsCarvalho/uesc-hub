@@ -40,7 +40,7 @@ class NextClassWidget extends StatelessWidget {
                             horizontal: 15.0, vertical: 8),
                         child: Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
+                            borderRadius: BorderRadius.circular(5),
                             border: Border.all(),
                           ),
                           child: Column(
@@ -107,6 +107,8 @@ class NextClassWidget extends StatelessWidget {
       builder: (_) {
         return GestureDetector(
           onTap: () {
+            controller.setButtonClick(!controller.buttonClick);
+            controller.setCardSelected(null);
             controller.setDaySelected(value);
             controller.init();
           },
@@ -120,7 +122,7 @@ class NextClassWidget extends StatelessWidget {
               border: controller.daySelected == value
                   ? null
                   : Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(5),
               color: controller.daySelected == value
                   ? Theme.of(_).primaryColor
                   : Color.fromRGBO(236, 240, 243, 0),

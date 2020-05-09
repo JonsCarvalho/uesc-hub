@@ -73,7 +73,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
             flexibleSpace: FlexibleSpaceBar(
               background: FlexibleAppBarWidget(),
             ),
-            backgroundColor: Colors.teal,
+            backgroundColor: Colors.transparent,
           ),
           SliverList(
             delegate: SliverChildListDelegate(

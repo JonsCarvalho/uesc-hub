@@ -12,24 +12,40 @@ class FlexibleAppBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final double statusBarHeight = MediaQuery.of(context).padding.top;
 
-    return new Container(
-      padding: new EdgeInsets.only(
-        top: statusBarHeight,
-        left: 15,
-        right: 15,
-        bottom: 15,
-      ),
-      decoration: new BoxDecoration(
-        color: Colors.teal,
-      ),
-      height: statusBarHeight + appBarHeight,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: <Widget>[
-          SalutationWidget(),
-          SizedBox(height: 15),
-          LuckWidget(),
-        ],
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8.0),
+      child: new Container(
+        height: statusBarHeight + appBarHeight,
+        child: Container(
+          padding: new EdgeInsets.only(
+            top: statusBarHeight,
+            left: 15,
+            right: 15,
+            bottom: 15,
+          ),
+          decoration: new BoxDecoration(
+            color: Theme.of(context).primaryColor,
+            boxShadow: [
+              BoxShadow(
+                color: Theme.of(context).primaryColor.withAlpha(100),
+                blurRadius: 6.0,
+                spreadRadius: 0.5,
+                offset: Offset(
+                  0.0,
+                  3.0,
+                ),
+              )
+            ],
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              SalutationWidget(),
+              SizedBox(height: 15),
+              LuckWidget(),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -19,17 +19,51 @@ class NextClassWidget extends StatelessWidget {
               ),
           height: 180,
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
                 height: 50,
-                padding: const EdgeInsets.only(left: 15.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15.0, vertical: 7.5),
+                child: Stack(
+                  // mainAxisAlignment: MainAxisAlignment.start,
+                  fit: StackFit.expand,
                   children: [
-                    buttonWidget('Hoje'),
-                    SizedBox(width: 15),
-                    buttonWidget('Amanhã'),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: AnimatedPadding(
+                        padding: controller.daySelected == 'Amanhã'
+                            ? EdgeInsets.only(
+                                left: 0,
+                              )
+                            : EdgeInsets.only(
+                                left: 80,
+                              ),
+                        curve: Curves.easeInOut,
+                        duration: Duration(milliseconds: 200),
+                        child: buttonWidget(
+                          controller.daySelected == 'Amanhã'
+                              ? 'Hoje'
+                              : 'Amanhã',
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: AnimatedPadding(
+                        padding: controller.daySelected == 'Hoje'
+                            ? EdgeInsets.only(
+                                left: 0,
+                              )
+                            : EdgeInsets.only(
+                                left: 80,
+                              ),
+                        curve: Curves.easeInOut,
+                        duration: Duration(milliseconds: 200),
+                        child: buttonWidget(controller.daySelected == 'Hoje'
+                            ? 'Hoje'
+                            : 'Amanhã'),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -113,16 +147,26 @@ class NextClassWidget extends StatelessWidget {
             controller.init();
           },
           child: AnimatedContainer(
-            duration: Duration(milliseconds: 500),
+            duration: Duration(milliseconds: 200),
             curve: Curves.easeInOut,
             padding: controller.daySelected == value
                 ? EdgeInsets.symmetric(vertical: 8, horizontal: 35)
-                : EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+                : EdgeInsets.symmetric(vertical: 7, horizontal: 35),
             decoration: BoxDecoration(
               border: controller.daySelected == value
                   ? null
                   : Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(5),
+              borderRadius: controller.daySelected == value
+                  ? BorderRadius.circular(30)
+                  : controller.daySelected == 'Hoje'
+                      ? BorderRadius.only(
+                          topRight: Radius.circular(30),
+                          bottomRight: Radius.circular(30),
+                        )
+                      : BorderRadius.only(
+                          topLeft: Radius.circular(30),
+                          bottomLeft: Radius.circular(30),
+                        ),
               color: controller.daySelected == value
                   ? Theme.of(_).primaryColor
                   : Color.fromRGBO(236, 240, 243, 0),

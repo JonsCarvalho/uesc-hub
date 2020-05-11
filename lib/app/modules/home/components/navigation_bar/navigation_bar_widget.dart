@@ -67,31 +67,9 @@ class NavigationBarWidget extends StatelessWidget {
             title: 'Agenda',
           ),
           TabItem(
-            activeIcon: CircleAvatar(
-              radius: 13,
-              backgroundColor: Colors.teal,
-              child: Padding(
-                padding: const EdgeInsets.all(1),
-                child: ClipOval(
-                  child: Image.network(
-                    controller.getCurrentUser().photoUrl,
-                  ),
-                ),
-              ),
-            ),
-            icon: CircleAvatar(
-              radius: 13,
-              backgroundColor: Colors.black,
-              child: Padding(
-                padding: const EdgeInsets.all(1),
-                child: ClipOval(
-                  child: Image.network(
-                    controller.getCurrentUser().photoUrl,
-                  ),
-                ),
-              ),
-            ),
-            title: 'Perfil',
+            icon: Icon(FontAwesomeIcons.map),
+            isIconBlend: true,
+            title: 'Nav',
           ),
         ],
       );

@@ -43,6 +43,40 @@ mixin _$NextClassController on _NextClassBase, Store {
     }, _$daySelectedAtom, name: '${_$daySelectedAtom.name}_set');
   }
 
+  final _$cardSelectedAtom = Atom(name: '_NextClassBase.cardSelected');
+
+  @override
+  String get cardSelected {
+    _$cardSelectedAtom.context.enforceReadPolicy(_$cardSelectedAtom);
+    _$cardSelectedAtom.reportObserved();
+    return super.cardSelected;
+  }
+
+  @override
+  set cardSelected(String value) {
+    _$cardSelectedAtom.context.conditionallyRunInAction(() {
+      super.cardSelected = value;
+      _$cardSelectedAtom.reportChanged();
+    }, _$cardSelectedAtom, name: '${_$cardSelectedAtom.name}_set');
+  }
+
+  final _$buttonClickAtom = Atom(name: '_NextClassBase.buttonClick');
+
+  @override
+  bool get buttonClick {
+    _$buttonClickAtom.context.enforceReadPolicy(_$buttonClickAtom);
+    _$buttonClickAtom.reportObserved();
+    return super.buttonClick;
+  }
+
+  @override
+  set buttonClick(bool value) {
+    _$buttonClickAtom.context.conditionallyRunInAction(() {
+      super.buttonClick = value;
+      _$buttonClickAtom.reportChanged();
+    }, _$buttonClickAtom, name: '${_$buttonClickAtom.name}_set');
+  }
+
   final _$initAsyncAction = AsyncAction('init');
 
   @override
@@ -71,9 +105,29 @@ mixin _$NextClassController on _NextClassBase, Store {
   }
 
   @override
+  dynamic setCardSelected(String value) {
+    final _$actionInfo = _$_NextClassBaseActionController.startAction();
+    try {
+      return super.setCardSelected(value);
+    } finally {
+      _$_NextClassBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setButtonClick(bool value) {
+    final _$actionInfo = _$_NextClassBaseActionController.startAction();
+    try {
+      return super.setButtonClick(value);
+    } finally {
+      _$_NextClassBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string =
-        'nextClass: ${nextClass.toString()},daySelected: ${daySelected.toString()}';
+        'nextClass: ${nextClass.toString()},daySelected: ${daySelected.toString()},cardSelected: ${cardSelected.toString()},buttonClick: ${buttonClick.toString()}';
     return '{$string}';
   }
 }

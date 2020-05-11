@@ -12,6 +12,7 @@ import 'package:uesc_hub/app/modules/news/news_module.dart';
 import 'package:uesc_hub/app/modules/profile/profile_module.dart';
 import 'package:uesc_hub/app/modules/restaurant/restaurant_module.dart';
 import 'package:uesc_hub/app/modules/schedule/schedule_module.dart';
+import 'package:uesc_hub/app/navigation/navigation_module.dart';
 import 'package:uesc_hub/app/shared/auth/sagres/auth_sagres_controller.dart';
 import 'home_controller.dart';
 
@@ -54,7 +55,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
               RouterOutlet(
                   module: ScheduleModule(
                       credentials: sagresController.credentials)),
-              RouterOutlet(module: ProfileModule()),
+              RouterOutlet(module: NavigationModule()),
             ],
           );
         },

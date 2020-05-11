@@ -6,7 +6,7 @@ class AppBarController = _AppBarBase with _$AppBarController;
 
 abstract class _AppBarBase with Store {
   @observable
-  double sizeProfileWidget = 35;
+  double sizeProfileWidget = 40;
 
   _AppBarBase() {
     init();

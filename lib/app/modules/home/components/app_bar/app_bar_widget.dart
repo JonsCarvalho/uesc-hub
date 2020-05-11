@@ -40,13 +40,14 @@ class AppBarWidget extends StatelessWidget {
               GestureDetector(
                 onTap: () async {
                   appBarController.updateSizeProfileWidget();
-                  await Future.delayed(Duration(milliseconds: 500));
-                  Modular.to.pushNamed('/profile');
+                  await Future.delayed(Duration(milliseconds: 350));
                   appBarController.updateSizeProfileWidget();
+                  await Future.delayed(Duration(milliseconds: 350));
+                  Modular.to.pushNamed('/profile');
                 },
                 onLongPress: () async {
                   appBarController.updateSizeProfileWidget();
-                  await Future.delayed(Duration(milliseconds: 500));
+                  await Future.delayed(Duration(milliseconds: 350));
                   appBarController.updateSizeProfileWidget();
                 },
 
@@ -56,19 +57,19 @@ class AppBarWidget extends StatelessWidget {
                         children: [
                           AnimatedContainer(
 
-                            duration: Duration(milliseconds: 300),
+                            duration: Duration(milliseconds: 200),
                             curve: Curves.easeIn,
                             height: appBarController.sizeProfileWidget + 3,
                             width: appBarController.sizeProfileWidget + 3,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: appBarController.sizeProfileWidget == 40
+                              color: appBarController.sizeProfileWidget == 35
                                   ? Colors.white
                                   : Colors.greenAccent,
                             ),
                           ),
                           AnimatedContainer(
-                            duration: Duration(milliseconds: 500),
+                            duration: Duration(milliseconds: 300),
                             curve: Curves.elasticIn,
                             height: appBarController.sizeProfileWidget,
                             width: appBarController.sizeProfileWidget,
@@ -87,19 +88,19 @@ class AppBarWidget extends StatelessWidget {
                         alignment: Alignment.center,
                         children: [
                           AnimatedContainer(
-                            duration: Duration(milliseconds: 300),
+                            duration: Duration(milliseconds: 200),
                             curve: Curves.easeIn,
                             height: appBarController.sizeProfileWidget + 3,
                             width: appBarController.sizeProfileWidget + 3,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              color: appBarController.sizeProfileWidget == 40
+                              color: appBarController.sizeProfileWidget == 35
                                   ? Colors.white
                                   : Colors.teal,
                             ),
                           ),
                           AnimatedContainer(
-                            duration: Duration(milliseconds: 500),
+                            duration: Duration(milliseconds: 300),
                             curve: Curves.elasticIn,
                             height: appBarController.sizeProfileWidget,
                             width: appBarController.sizeProfileWidget,

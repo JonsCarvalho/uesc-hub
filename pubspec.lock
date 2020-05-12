@@ -134,13 +134,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
-  convex_bottom_bar:
-    dependency: "direct main"
-    description:
-      name: convex_bottom_bar
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.1.1"
   crypto:
     dependency: transitive
     description:
@@ -698,13 +691,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.3.20"
-  weekly_timetable:
-    dependency: "direct main"
-    description:
-      name: weekly_timetable
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.2"
   yaml:
     dependency: transitive
     description:

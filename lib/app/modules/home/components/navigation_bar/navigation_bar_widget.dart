@@ -41,7 +41,11 @@ class NavigationBarWidget extends StatelessWidget {
         //   }
         // },
         style: TabStyle.react,
-        // curve: Curves.easeInSine,
+        curveSize: 110,
+        
+        // height: 10,
+
+        // curve: Curves.easeInOutCirc,
         activeColor: Colors.teal,
         color: Colors.black,
         backgroundColor: Colors.white,
@@ -67,9 +71,9 @@ class NavigationBarWidget extends StatelessWidget {
             title: 'Agenda',
           ),
           TabItem(
-            icon: Icon(FontAwesomeIcons.map),
+            icon: Icon(FontAwesomeIcons.mapSigns),
             isIconBlend: true,
-            title: 'Nav',
+            title: 'Mapa',
           ),
         ],
       );

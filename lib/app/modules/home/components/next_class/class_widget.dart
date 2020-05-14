@@ -97,102 +97,8 @@ class ClassWidget extends StatelessWidget {
                         ),
                   Expanded(
                     child: controller.cardSelected == id
-                        ? Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                Text(
-                                  subject,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                                Text(
-                                  id + ' - ' + classType,
-                                  style: TextStyle(
-                                    fontSize: 12,
-                                    color: GenerationColor(seed: id)
-                                        .colorSubject(),
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                                Text(
-                                  classRoom,
-                                  style: TextStyle(fontSize: 12),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ],
-                            ),
-                          )
-                        : Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 8),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                            color: Colors.greenAccent),
-                                        color: Colors.greenAccent.withAlpha(20),
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                      padding: EdgeInsets.all(2),
-                                      child: Text(
-                                        start,
-                                        style: TextStyle(
-                                            color: Colors.greenAccent),
-                                      ),
-                                    ),
-                                    Icon(Icons.access_time),
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        border:
-                                            Border.all(color: Colors.redAccent),
-                                        color: Colors.redAccent.withAlpha(20),
-                                        borderRadius: BorderRadius.circular(5),
-                                      ),
-                                      padding: EdgeInsets.all(2),
-                                      child: Text(
-                                        end,
-                                        style:
-                                            TextStyle(color: Colors.redAccent),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                alignment: Alignment.centerLeft,
-                                padding: EdgeInsets.all(12),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      subject,
-                                      // textAlign: TextAlign.left,
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 14,
-                                      ),
-                                    ),
-                                    Text(
-                                      id,
-                                      // textAlign: TextAlign.left,
-                                      style: TextStyle(fontSize: 12),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
+                        ? classCardSecondary()
+                        : classCardPrimary(),
                   ),
                 ],
               ),
@@ -200,6 +106,102 @@ class ClassWidget extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  classCardPrimary() {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.greenAccent),
+                  color: Colors.greenAccent.withAlpha(20),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                padding: EdgeInsets.all(2),
+                child: Text(
+                  start,
+                  style: TextStyle(color: Colors.greenAccent),
+                ),
+              ),
+              Icon(Icons.access_time),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.redAccent),
+                  color: Colors.redAccent.withAlpha(20),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                padding: EdgeInsets.all(2),
+                child: Text(
+                  end,
+                  style: TextStyle(color: Colors.redAccent),
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(
+          alignment: Alignment.centerLeft,
+          padding: EdgeInsets.all(12),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                subject,
+                // textAlign: TextAlign.left,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 14,
+                ),
+              ),
+              Text(
+                id,
+                // textAlign: TextAlign.left,
+                style: TextStyle(fontSize: 12),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  classCardSecondary() {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            subject,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          Text(
+            id + ' - ' + classType,
+            style: TextStyle(
+              fontSize: 12,
+              color: GenerationColor(seed: id).colorSubject(),
+            ),
+            textAlign: TextAlign.center,
+          ),
+          Text(
+            classRoom,
+            style: TextStyle(fontSize: 12),
+            textAlign: TextAlign.center,
+          ),
+        ],
+      ),
     );
   }
 }

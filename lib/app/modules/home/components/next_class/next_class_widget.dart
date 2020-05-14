@@ -13,10 +13,6 @@ class NextClassWidget extends StatelessWidget {
     return Observer(
       builder: (_) {
         return Container(
-          decoration: BoxDecoration(
-              // borderRadius: BorderRadius.circular(10),
-              // color: Colors.amber.withOpacity(.1),
-              ),
           height: 180,
           child: Column(
             children: <Widget>[
@@ -102,7 +98,12 @@ class NextClassWidget extends StatelessWidget {
                         itemBuilder: (_, index) {
                           return index == 0
                               ? Padding(
-                                  padding: const EdgeInsets.only(left: 15),
+                                  padding: const EdgeInsets.only(
+                                    left: 15,
+                                    top: 4,
+                                    bottom: 9,
+                                    right: 15,
+                                  ),
                                   child: ClassWidget(
                                     id: controller.nextClass[index].id,
                                     classRoom: controller
@@ -116,15 +117,21 @@ class NextClassWidget extends StatelessWidget {
                                         controller.nextClass[index].startTime,
                                   ),
                                 )
-                              : ClassWidget(
-                                  id: controller.nextClass[index].id,
-                                  classRoom:
-                                      controller.nextClass[index].classLocation,
-                                  classType:
-                                      controller.nextClass[index].classType,
-                                  subject: controller.nextClass[index].subject,
-                                  end: controller.nextClass[index].endTime,
-                                  start: controller.nextClass[index].startTime,
+                              : Padding(
+                                  padding: const EdgeInsets.only(
+                                      top: 4, bottom: 9, right: 15),
+                                  child: ClassWidget(
+                                    id: controller.nextClass[index].id,
+                                    classRoom: controller
+                                        .nextClass[index].classLocation,
+                                    classType:
+                                        controller.nextClass[index].classType,
+                                    subject:
+                                        controller.nextClass[index].subject,
+                                    end: controller.nextClass[index].endTime,
+                                    start:
+                                        controller.nextClass[index].startTime,
+                                  ),
                                 );
                         },
                       ),

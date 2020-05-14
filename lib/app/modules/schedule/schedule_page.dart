@@ -72,17 +72,24 @@ class _SchedulePageState
               ),
             );
           } else {
-            if (scheduleController.timetable.error != null) {
-              return Center(
-                child: RaisedButton(
-                  child: Text("Tente novamente!"),
-                  onPressed: () {
-                    scheduleController.getTimetableAndSubjects();
-                  },
-                ),
-              );
-            }
+            // if (scheduleController.timetable.value == null &&
+            //     sagresController.credentials.isNotEmpty) {
+            //   return Center(
+            //     child: RaisedButton(
+            //       child: Text("Tente novamente!"),
+            //       onPressed: () {
+            //         scheduleController.fetchTimetableAndSubjects(
+            //           {
+            //             "username": sagresController.credentials[0],
+            //             "password": sagresController.credentials[1]
+            //           },
+            //         );
+            //       },
+            //     ),
+            //   );
+            // }
             if (scheduleController.timetable.value == null) {
+              scheduleController.getTimetableAndSubjects();
               return LinearProgressIndicator();
             }
             List<TimetableModel> listTimetable;

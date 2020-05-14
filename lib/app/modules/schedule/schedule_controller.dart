@@ -26,42 +26,39 @@ abstract class _ScheduleControllerBase with Store {
   }
 
   @action
-  fetchSubjects() {
-    subjects = repository.getSubjects().asObservable();
+  fetchSubjects(credentials) {
+    subjects = repository.getSubjects(credentials).asObservable();
   }
 
   @action
-  fetchTimetable() {
-    repository.setPersistenceTimetable();
+  fetchTimetable(credentials) {
+    repository.setPersistenceTimetable(credentials);
   }
 
   @action
-  fetchTimetableAndSubjects() {
-    repository.setPersistenceTimetableAndSubjects();
+  fetchTimetableAndSubjects(credentials) {
+    repository.setPersistenceTimetableAndSubjects(credentials);
   }
 
   @action
   getTimetableAndSubjects() {
     timetable = repository.getPersistenceTimetable().asObservable();
     subjects = repository.getPersistenceSubjects().asObservable();
-    if (timetable.value == null || subjects.value == null) {
-      fetchTimetableAndSubjects();
-    }
   }
 
   @action
-  getTimetable() {
+  getTimetable(credentials) {
     timetable = repository.getPersistenceTimetable().asObservable();
     if (timetable.value == null) {
-      fetchTimetable();
+      fetchTimetable(credentials);
     }
   }
 
   @action
-  getSubjects() {
+  getSubjects(credentials) {
     subjects = repository.getPersistenceSubjects().asObservable();
     if (subjects.value == null) {
-      fetchSubjects();
+      fetchSubjects(credentials);
     }
   }
 }

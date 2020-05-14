@@ -12,14 +12,13 @@ import '../schedule_controller.dart';
 
 class ScheduleRepository {
   final Dio dio;
-  final credentials;
 
-  ScheduleRepository(this.dio, this.credentials);
+  ScheduleRepository(this.dio);
 
   final ILocalStorage storage = Modular.get();
   final sagresController = Modular.get<AuthSagresController>();
 
-  Future<List<SubjectsModel>> getSubjects() async {
+  Future<List<SubjectsModel>> getSubjects(credentials) async {
     var response = await dio.post(
       URL_SAGRES_BASE + "/subjects/",
       data: credentials,
@@ -42,7 +41,7 @@ class ScheduleRepository {
     return list;
   }
 
-  Future<List<TimetableModel>> getTimetable() async {
+  Future<List<TimetableModel>> getTimetable(credentials) async {
     var response = await dio.post(
       URL_SAGRES_BASE + "/timetable/",
       data: credentials,
@@ -68,7 +67,7 @@ class ScheduleRepository {
     return list;
   }
 
-  Future<List> getAll() async {
+  Future<List> getAll(credentials) async {
     var response = await dio.post(
       URL_SAGRES_BASE + "/all/",
       data: credentials,
@@ -110,8 +109,8 @@ class ScheduleRepository {
     return [listTimetable, listSubjects];
   }
 
-  setPersistenceTimetableAndSubjects() async {
-    List list = await getAll();
+  setPersistenceTimetableAndSubjects(credentials) async {
+    List list = await getAll(credentials);
 
     List<String> strListTimetable = [];
     for (final instance in list[0]) {
@@ -165,8 +164,8 @@ class ScheduleRepository {
     }
   }
 
-  setPersistenceTimetable() async {
-    List<TimetableModel> list = await getTimetable();
+  setPersistenceTimetable(credentials) async {
+    List<TimetableModel> list = await getTimetable(credentials);
     List<String> stringList = [];
     for (final instance in list) {
       stringList.add(instance.startTime);

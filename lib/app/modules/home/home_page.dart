@@ -52,9 +52,7 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
               body(),
               RouterOutlet(module: RestaurantModule()),
               RouterOutlet(module: NewsModule()),
-              RouterOutlet(
-                  module: ScheduleModule(
-                      credentials: sagresController.credentials)),
+              RouterOutlet(module: ScheduleModule()),
               RouterOutlet(module: NavigationModule()),
             ],
           );

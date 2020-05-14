@@ -47,33 +47,33 @@ mixin _$ScheduleController on _ScheduleControllerBase, Store {
       ActionController(name: '_ScheduleControllerBase');
 
   @override
-  dynamic fetchSubjects() {
+  dynamic fetchSubjects(dynamic credentials) {
     final _$actionInfo =
         _$_ScheduleControllerBaseActionController.startAction();
     try {
-      return super.fetchSubjects();
+      return super.fetchSubjects(credentials);
     } finally {
       _$_ScheduleControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic fetchTimetable() {
+  dynamic fetchTimetable(dynamic credentials) {
     final _$actionInfo =
         _$_ScheduleControllerBaseActionController.startAction();
     try {
-      return super.fetchTimetable();
+      return super.fetchTimetable(credentials);
     } finally {
       _$_ScheduleControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic fetchTimetableAndSubjects() {
+  dynamic fetchTimetableAndSubjects(dynamic credentials) {
     final _$actionInfo =
         _$_ScheduleControllerBaseActionController.startAction();
     try {
-      return super.fetchTimetableAndSubjects();
+      return super.fetchTimetableAndSubjects(credentials);
     } finally {
       _$_ScheduleControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -91,22 +91,22 @@ mixin _$ScheduleController on _ScheduleControllerBase, Store {
   }
 
   @override
-  dynamic getTimetable() {
+  dynamic getTimetable(dynamic credentials) {
     final _$actionInfo =
         _$_ScheduleControllerBaseActionController.startAction();
     try {
-      return super.getTimetable();
+      return super.getTimetable(credentials);
     } finally {
       _$_ScheduleControllerBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
-  dynamic getSubjects() {
+  dynamic getSubjects(dynamic credentials) {
     final _$actionInfo =
         _$_ScheduleControllerBaseActionController.startAction();
     try {
-      return super.getSubjects();
+      return super.getSubjects(credentials);
     } finally {
       _$_ScheduleControllerBaseActionController.endAction(_$actionInfo);
     }

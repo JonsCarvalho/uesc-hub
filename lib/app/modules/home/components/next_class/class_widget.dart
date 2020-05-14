@@ -129,58 +129,67 @@ class ClassWidget extends StatelessWidget {
                             ),
                           )
                         : Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      border:
-                                          Border.all(color: Colors.greenAccent),
-                                      color: Colors.greenAccent.withAlpha(20),
-                                      borderRadius: BorderRadius.circular(5),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 8),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.greenAccent),
+                                        color: Colors.greenAccent.withAlpha(20),
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      padding: EdgeInsets.all(2),
+                                      child: Text(
+                                        start,
+                                        style: TextStyle(
+                                            color: Colors.greenAccent),
+                                      ),
                                     ),
-                                    padding: EdgeInsets.all(2),
-                                    child: Text(
-                                      start,
-                                      style:
-                                          TextStyle(color: Colors.greenAccent),
+                                    Icon(Icons.access_time),
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        border:
+                                            Border.all(color: Colors.redAccent),
+                                        color: Colors.redAccent.withAlpha(20),
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      padding: EdgeInsets.all(2),
+                                      child: Text(
+                                        end,
+                                        style:
+                                            TextStyle(color: Colors.redAccent),
+                                      ),
                                     ),
-                                  ),
-                                  Icon(Icons.access_time),
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      border:
-                                          Border.all(color: Colors.redAccent),
-                                      color: Colors.redAccent.withAlpha(20),
-                                      borderRadius: BorderRadius.circular(5),
-                                    ),
-                                    padding: EdgeInsets.all(2),
-                                    child: Text(
-                                      end,
-                                      style: TextStyle(color: Colors.redAccent),
-                                    ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                              ListTile(
-                                title: Text(
-                                  subject,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 14,
-                                  ),
+                              Container(
+                                alignment: Alignment.centerLeft,
+                                padding: EdgeInsets.all(12),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      subject,
+                                      // textAlign: TextAlign.left,
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                    Text(
+                                      id,
+                                      // textAlign: TextAlign.left,
+                                      style: TextStyle(fontSize: 12),
+                                    ),
+                                  ],
                                 ),
-                                subtitle: Text(
-                                  id,
-                                  style: TextStyle(fontSize: 12),
-                                ),
-                                // subtitle: Text(
-                                //   classRoom,
-                                //   style: TextStyle(fontSize: 12),
-                                // ),
                               ),
                             ],
                           ),

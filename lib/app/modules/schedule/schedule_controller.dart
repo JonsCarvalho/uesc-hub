@@ -19,6 +19,9 @@ abstract class _ScheduleControllerBase with Store {
   @observable
   ObservableFuture<List<TimetableModel>> timetable;
 
+  @observable
+  DataStatus status = DataStatus.loading;
+
   _ScheduleControllerBase(this.repository) {
     // fetchSubjects();
     // fetchTimetable();
@@ -37,13 +40,18 @@ abstract class _ScheduleControllerBase with Store {
 
   @action
   fetchTimetableAndSubjects(credentials) {
+    status = DataStatus.loading;
     repository.setPersistenceTimetableAndSubjects(credentials);
+    status = DataStatus.none;
   }
 
   @action
   getTimetableAndSubjects() {
+    status = DataStatus.loading;
     timetable = repository.getPersistenceTimetable().asObservable();
     subjects = repository.getPersistenceSubjects().asObservable();
+
+    status = DataStatus.none;
   }
 
   @action
@@ -61,4 +69,18 @@ abstract class _ScheduleControllerBase with Store {
       fetchSubjects(credentials);
     }
   }
+
+  @action
+  deleteAll() {
+    status = DataStatus.loading;
+
+    // subjects.value.clear();
+    // timetable.value.clear();
+    repository.deletePersistenceSubjects();
+    repository.deletePersistenceTimetable();
+
+    status = DataStatus.none;
+  }
 }
+
+enum DataStatus { loading, none }

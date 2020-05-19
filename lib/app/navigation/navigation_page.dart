@@ -18,8 +18,8 @@ class _NavigationPageState
   Completer<GoogleMapController> _controller = Completer();
 
   final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
+    target: LatLng(-14.797483, -39.172245),
+    zoom: 17.00,
   );
 
   final CameraPosition _kLake = CameraPosition(
@@ -43,12 +43,10 @@ class _NavigationPageState
               zoomControlsEnabled: false,
               myLocationButtonEnabled: true,
               myLocationEnabled: true,
-              buildingsEnabled: true,
               initialCameraPosition: _kGooglePlex,
               onMapCreated: (GoogleMapController controller) {
                 controller.setMapStyle(mapStyle());
                 _controller.complete(controller);
-                
               },
             ),
           ],

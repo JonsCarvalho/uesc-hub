@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'components/mapStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -46,7 +46,9 @@ class _NavigationPageState
               buildingsEnabled: true,
               initialCameraPosition: _kGooglePlex,
               onMapCreated: (GoogleMapController controller) {
+                controller.setMapStyle(mapStyle());
                 _controller.complete(controller);
+                
               },
             ),
           ],

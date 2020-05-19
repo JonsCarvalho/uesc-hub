@@ -7,8 +7,10 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="uesc_hub"
+        android:label="UESC Hub"
         android:icon="@mipmap/ic_launcher">
+        <meta-data android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyABE3MZ8rf6_S13NgitingjK9i8OrH30e8"/>
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

@@ -15,41 +15,6 @@ class NavigationPage extends StatefulWidget {
 
 class _NavigationPageState
     extends ModularState<NavigationPage, NavigationController> {
-  Completer<GoogleMapController> _mapsController = Completer();
-
-  final CameraPosition _kUESC = CameraPosition(
-    target: LatLng(-14.797483, -39.172245),
-    zoom: 17.00,
-    bearing: 45,
-    tilt: 45,
-  );
-
-  List<Marker> allMarkers = [];
-
-  PageController _pageController;
-
-  int prevPage;
-
-  @override
-  void initState() {
-    super.initState();
-    pavilionList.forEach(
-      (element) {
-        allMarkers.add(
-          Marker(
-            markerId: MarkerId(element.name),
-            draggable: false,
-            infoWindow:
-                InfoWindow(title: element.name, snippet: element.address),
-            position: element.locationCoords,
-          ),
-        );
-      },
-    );
-    _pageController = PageController(initialPage: 0, viewportFraction: 0.8)
-      ..addListener(_onScroll);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,10 +33,14 @@ class _NavigationPageState
                 tilt: controller.cameraTilt,
                 zoom: controller.cameraZoom,
               ),
-              markers: Set.from(allMarkers),
-              onMapCreated: (GoogleMapController mapsController){
-                mapsController.setMapStyle(controller.mapStyle);
-                _mapsController.complete(mapsController);
+              markers: Set.from(controller.allMarkers),
+              zoomControlsEnabled: false,
+              minMaxZoomPreference: MinMaxZoomPreference(15, 30),
+              myLocationButtonEnabled: true,
+              myLocationEnabled: true,
+              onMapCreated: (GoogleMapController instanceMapsController) {
+                instanceMapsController.setMapStyle(controller.mapStyle);
+                controller.mapsController.complete(instanceMapsController);
               },
             ),
           ),
@@ -81,7 +50,7 @@ class _NavigationPageState
               height: 130.0,
               width: MediaQuery.of(context).size.width,
               child: PageView.builder(
-                controller: _pageController,
+                controller: controller.pageController,
                 itemCount: pavilionList.length,
                 itemBuilder: (BuildContext context, int index) {
                   return _pavilionList(index);
@@ -94,20 +63,13 @@ class _NavigationPageState
     );
   }
 
-  void _onScroll() {
-    if (_pageController.page.toInt() != prevPage) {
-      prevPage = _pageController.page.toInt();
-      moveCamera();
-    }
-  }
-
   _pavilionList(index) {
     return AnimatedBuilder(
-      animation: _pageController,
+      animation: controller.pageController,
       builder: (BuildContext context, Widget widget) {
         double value = 1;
-        if (_pageController.position.haveDimensions) {
-          value = _pageController.page - index;
+        if (controller.pageController.position.haveDimensions) {
+          value = controller.pageController.page - index;
           value = (1 - (value.abs() * 0.3) + 0.06).clamp(0.0, 1.0);
         }
         return Center(
@@ -133,35 +95,37 @@ class _NavigationPageState
                 height: 125.0,
                 width: 275.0,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.0),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black54,
-                        offset: Offset(0.0, 4.0),
-                        blurRadius: 10.0,
-                      ),
-                    ]),
-                child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.0),
-                      color: Colors.white),
-                  child: Row(
-                    children: [
-                      Container(
-                          height: 90.0,
-                          width: 90.0,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(10.0),
-                                  topLeft: Radius.circular(10.0)),
-                              image: DecorationImage(
-                                  image: NetworkImage(
-                                      pavilionList[index].thumbNail),
-                                  fit: BoxFit.cover))),
-                      SizedBox(width: 5.0),
-                      Expanded(
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black54,
+                      offset: Offset(0.0, 4.0),
+                      blurRadius: 10.0,
+                    ),
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                        height: 90.0,
+                        width: 90.0,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(10.0),
+                                topLeft: Radius.circular(10.0)),
+                            image: DecorationImage(
+                                image:
+                                    NetworkImage(pavilionList[index].thumbNail),
+                                fit: BoxFit.cover))),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 5.0,
+                          horizontal: 5.0,
+                        ),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
@@ -169,43 +133,25 @@ class _NavigationPageState
                               style: TextStyle(
                                   fontSize: 12.5, fontWeight: FontWeight.bold),
                             ),
+                            // Text(
+                            //   pavilionList[index].address,
+                            //   style: TextStyle(
+                            //       fontSize: 12.0, fontWeight: FontWeight.w600),
+                            // ),
                             Text(
-                              pavilionList[index].address,
+                              pavilionList[index].description,
                               style: TextStyle(
-                                  fontSize: 12.0, fontWeight: FontWeight.w600),
-                            ),
-                            Container(
-                              width: 170.0,
-                              child: Text(
-                                pavilionList[index].description,
-                                style: TextStyle(
-                                    fontSize: 11.0,
-                                    fontWeight: FontWeight.w300),
-                              ),
+                                  fontSize: 11.0, fontWeight: FontWeight.w300),
                             ),
                           ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
           ],
-        ),
-      ),
-    );
-  }
-
-  moveCamera() async {
-    final GoogleMapController controller = await _mapsController.future;
-    controller.animateCamera(
-      CameraUpdate.newCameraPosition(
-        CameraPosition(
-          target: pavilionList[_pageController.page.toInt()].locationCoords,
-          zoom: 18.0,
-          bearing: 45.0,
-          tilt: 45.0,
         ),
       ),
     );

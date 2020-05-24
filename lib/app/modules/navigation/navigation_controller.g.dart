@@ -132,6 +132,58 @@ mixin _$NavigationController on _NavigationControllerBase, Store {
     }, _$mapStyleAtom, name: '${_$mapStyleAtom.name}_set');
   }
 
+  final _$allMarkersAtom = Atom(name: '_NavigationControllerBase.allMarkers');
+
+  @override
+  ObservableList<Marker> get allMarkers {
+    _$allMarkersAtom.context.enforceReadPolicy(_$allMarkersAtom);
+    _$allMarkersAtom.reportObserved();
+    return super.allMarkers;
+  }
+
+  @override
+  set allMarkers(ObservableList<Marker> value) {
+    _$allMarkersAtom.context.conditionallyRunInAction(() {
+      super.allMarkers = value;
+      _$allMarkersAtom.reportChanged();
+    }, _$allMarkersAtom, name: '${_$allMarkersAtom.name}_set');
+  }
+
+  final _$pageControllerAtom =
+      Atom(name: '_NavigationControllerBase.pageController');
+
+  @override
+  PageController get pageController {
+    _$pageControllerAtom.context.enforceReadPolicy(_$pageControllerAtom);
+    _$pageControllerAtom.reportObserved();
+    return super.pageController;
+  }
+
+  @override
+  set pageController(PageController value) {
+    _$pageControllerAtom.context.conditionallyRunInAction(() {
+      super.pageController = value;
+      _$pageControllerAtom.reportChanged();
+    }, _$pageControllerAtom, name: '${_$pageControllerAtom.name}_set');
+  }
+
+  final _$prevPageAtom = Atom(name: '_NavigationControllerBase.prevPage');
+
+  @override
+  int get prevPage {
+    _$prevPageAtom.context.enforceReadPolicy(_$prevPageAtom);
+    _$prevPageAtom.reportObserved();
+    return super.prevPage;
+  }
+
+  @override
+  set prevPage(int value) {
+    _$prevPageAtom.context.conditionallyRunInAction(() {
+      super.prevPage = value;
+      _$prevPageAtom.reportChanged();
+    }, _$prevPageAtom, name: '${_$prevPageAtom.name}_set');
+  }
+
   final _$initAsyncAction = AsyncAction('init');
 
   @override
@@ -150,6 +202,17 @@ mixin _$NavigationController on _NavigationControllerBase, Store {
       ActionController(name: '_NavigationControllerBase');
 
   @override
+  dynamic onScroll() {
+    final _$actionInfo =
+        _$_NavigationControllerBaseActionController.startAction();
+    try {
+      return super.onScroll();
+    } finally {
+      _$_NavigationControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   dynamic selectMapStyle(String style) {
     final _$actionInfo =
         _$_NavigationControllerBaseActionController.startAction();
@@ -163,7 +226,7 @@ mixin _$NavigationController on _NavigationControllerBase, Store {
   @override
   String toString() {
     final string =
-        'cameraZoom: ${cameraZoom.toString()},cameraTilt: ${cameraTilt.toString()},cameraBearing: ${cameraBearing.toString()},sourceLocation: ${sourceLocation.toString()},destLocation: ${destLocation.toString()},mapStyleSelected: ${mapStyleSelected.toString()},mapStyle: ${mapStyle.toString()}';
+        'cameraZoom: ${cameraZoom.toString()},cameraTilt: ${cameraTilt.toString()},cameraBearing: ${cameraBearing.toString()},sourceLocation: ${sourceLocation.toString()},destLocation: ${destLocation.toString()},mapStyleSelected: ${mapStyleSelected.toString()},mapStyle: ${mapStyle.toString()},allMarkers: ${allMarkers.toString()},pageController: ${pageController.toString()},prevPage: ${prevPage.toString()}';
     return '{$string}';
   }
 }

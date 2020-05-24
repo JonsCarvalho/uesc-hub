@@ -1,6 +1,9 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:mobx/mobx.dart';
+import 'dart:async';
+import 'models/pavilion_model.dart';
 
 part 'navigation_controller.g.dart';
 
@@ -8,6 +11,8 @@ class NavigationController = _NavigationControllerBase
     with _$NavigationController;
 
 abstract class _NavigationControllerBase with Store {
+  Completer<GoogleMapController> mapsController = Completer();
+  
   @observable
   double cameraZoom;
 
@@ -29,18 +34,65 @@ abstract class _NavigationControllerBase with Store {
   @observable
   String mapStyle;
 
+  @observable
+  ObservableList<Marker> allMarkers = <Marker>[].asObservable();
+
+  @observable
+  PageController pageController;
+
+  @observable
+  int prevPage;
+
   _NavigationControllerBase() {
     init();
   }
 
   @action
   init() async {
+    pavilionList.forEach(
+      (element) {
+        allMarkers.add(
+          Marker(
+            markerId: MarkerId(element.name),
+            draggable: false,
+            infoWindow:
+                InfoWindow(title: element.name, snippet: element.address),
+            position: element.locationCoords,
+          ),
+        );
+      },
+    );
+    pageController = PageController(initialPage: 0, viewportFraction: 0.8)
+      ..addListener(onScroll);
+
     cameraZoom = 17;
-    cameraTilt = 45;
-    cameraBearing = 45;
+    cameraTilt = 30;
+    cameraBearing = 0;
     sourceLocation = LatLng(-14.797483, -39.172245);
     mapStyleSelected = 'light';
     await setMapStyle();
+  }
+
+  @action
+  onScroll() {
+    if (pageController.page.toInt() != prevPage) {
+      prevPage = pageController.page.toInt();
+      moveCamera();
+    }
+  }
+
+  moveCamera() async {
+    final GoogleMapController controller = await mapsController.future;
+    controller.animateCamera(
+      CameraUpdate.newCameraPosition(
+        CameraPosition(
+          target: pavilionList[pageController.page.toInt()].locationCoords,
+          zoom: 18.0,
+          bearing: 45.0,
+          tilt: 45.0,
+        ),
+      ),
+    );
   }
 
   @action

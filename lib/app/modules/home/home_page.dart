@@ -8,11 +8,11 @@ import 'package:uesc_hub/app/modules/home/components/header/profile_widget.dart'
 import 'package:uesc_hub/app/modules/home/components/header/salutation_widget.dart';
 import 'package:uesc_hub/app/modules/home/components/navigation_bar/navigation_bar_widget.dart';
 import 'package:uesc_hub/app/modules/home/components/next_class/next_class_widget.dart';
+import 'package:uesc_hub/app/modules/navigation/navigation_module.dart';
 import 'package:uesc_hub/app/modules/news/news_module.dart';
 import 'package:uesc_hub/app/modules/profile/profile_module.dart';
 import 'package:uesc_hub/app/modules/restaurant/restaurant_module.dart';
 import 'package:uesc_hub/app/modules/schedule/schedule_module.dart';
-import 'package:uesc_hub/app/navigation/navigation_module.dart';
 import 'package:uesc_hub/app/shared/auth/sagres/auth_sagres_controller.dart';
 import 'home_controller.dart';
 

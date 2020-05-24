@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'components/mapStyle.dart';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -16,18 +16,14 @@ class NavigationPage extends StatefulWidget {
 
 class _NavigationPageState
     extends ModularState<NavigationPage, NavigationController> {
-  Completer<GoogleMapController> _controller = Completer();
+  Completer<GoogleMapController> _mapsController = Completer();
 
   final CameraPosition _kUESC = CameraPosition(
     target: LatLng(-14.797483, -39.172245),
     zoom: 17.00,
+    bearing: 45,
+    tilt: 45,
   );
-
-  // final CameraPosition _kLake = CameraPosition(
-  //     bearing: 192.8334901395799,
-  //     target: LatLng(37.43296265331129, -122.08832357078792),
-  //     tilt: 59.440717697143555,
-  //     zoom: 19.151926040649414);
 
   List<Marker> allMarkers = [];
 
@@ -64,21 +60,26 @@ class _NavigationPageState
       body: Stack(
         children: <Widget>[
           Container(
-            height: MediaQuery.of(context).size.height - 50.0,
+            height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             child: GoogleMap(
-              initialCameraPosition: _kUESC,
+              initialCameraPosition: CameraPosition(
+                target: controller.sourceLocation,
+                bearing: controller.cameraBearing,
+                tilt: controller.cameraTilt,
+                zoom: controller.cameraZoom,
+              ),
               markers: Set.from(allMarkers),
-              onMapCreated: (GoogleMapController controller) {
-                controller.setMapStyle(mapStyle());
-                _controller.complete(controller);
+              onMapCreated: (GoogleMapController mapsController){
+                mapsController.setMapStyle(controller.mapStyle);
+                _mapsController.complete(mapsController);
               },
             ),
           ),
           Positioned(
-            bottom: 20.0,
+            bottom: 50.0,
             child: Container(
-              height: 200.0,
+              height: 130.0,
               width: MediaQuery.of(context).size.width,
               child: PageView.builder(
                 controller: _pageController,
@@ -197,18 +198,13 @@ class _NavigationPageState
     );
   }
 
-  // Future<void> _goToTheLake() async {
-  //   final GoogleMapController controller = await _controller.future;
-  //   controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
-  // }
-
   moveCamera() async {
-    final GoogleMapController controller = await _controller.future;
+    final GoogleMapController controller = await _mapsController.future;
     controller.animateCamera(
       CameraUpdate.newCameraPosition(
         CameraPosition(
           target: pavilionList[_pageController.page.toInt()].locationCoords,
-          zoom: 17.0,
+          zoom: 18.0,
           bearing: 45.0,
           tilt: 45.0,
         ),

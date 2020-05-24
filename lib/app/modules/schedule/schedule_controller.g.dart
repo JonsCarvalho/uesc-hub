@@ -43,6 +43,23 @@ mixin _$ScheduleController on _ScheduleControllerBase, Store {
     }, _$timetableAtom, name: '${_$timetableAtom.name}_set');
   }
 
+  final _$statusAtom = Atom(name: '_ScheduleControllerBase.status');
+
+  @override
+  DataStatus get status {
+    _$statusAtom.context.enforceReadPolicy(_$statusAtom);
+    _$statusAtom.reportObserved();
+    return super.status;
+  }
+
+  @override
+  set status(DataStatus value) {
+    _$statusAtom.context.conditionallyRunInAction(() {
+      super.status = value;
+      _$statusAtom.reportChanged();
+    }, _$statusAtom, name: '${_$statusAtom.name}_set');
+  }
+
   final _$_ScheduleControllerBaseActionController =
       ActionController(name: '_ScheduleControllerBase');
 
@@ -113,9 +130,20 @@ mixin _$ScheduleController on _ScheduleControllerBase, Store {
   }
 
   @override
+  dynamic deleteAll() {
+    final _$actionInfo =
+        _$_ScheduleControllerBaseActionController.startAction();
+    try {
+      return super.deleteAll();
+    } finally {
+      _$_ScheduleControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string =
-        'subjects: ${subjects.toString()},timetable: ${timetable.toString()}';
+        'subjects: ${subjects.toString()},timetable: ${timetable.toString()},status: ${status.toString()}';
     return '{$string}';
   }
 }

@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter/material.dart';
-import 'package:uesc_hub/app/navigation/navigation_module.dart';
 import 'package:uesc_hub/app/shared/auth/sagres/auth_sagres_controller.dart';
 import 'package:uesc_hub/app/shared/auth/sagres/repositories/auth_sagres_repository.dart';
 import 'package:uesc_hub/app/shared/auth/social/auth_controller.dart';
@@ -15,6 +14,7 @@ import 'app_controller.dart';
 import 'app_widget.dart';
 import 'modules/home/home_module.dart';
 import 'modules/login/login_module.dart';
+import 'modules/navigation/navigation_module.dart';
 import 'modules/news/news_module.dart';
 import 'modules/profile/profile_module.dart';
 import 'modules/restaurant/restaurant_module.dart';

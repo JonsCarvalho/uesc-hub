@@ -30,6 +30,7 @@ dependencies:
   flutter_modular: ^1.0.0
   font_awesome_flutter:
   google_maps_flutter: ^0.5.27+3
+  location: ^3.0.0
   flutter_localizations:
     sdk: flutter
   flutter_cupertino_localizations: ^1.0.1
@@ -61,6 +62,12 @@ flutter:
     - family: SeptemberFive
       fonts:
         - asset: fonts/SeptemberFive.ttf
+
+  assets:
+    - assets/maps/styles/light.json
+    - assets/maps/styles/dark.json
+    # - assets/symbols/2.0x/custom-icon.png
+    # - assets/symbols/3.0x/custom-icon.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in

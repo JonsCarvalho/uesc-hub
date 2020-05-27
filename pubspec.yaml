@@ -16,6 +16,9 @@ version: 1.0.0+1
 environment:
   sdk: ">=2.7.0 <3.0.0"
 
+module:
+  androidX: true
+
 dependencies:
   firebase_auth: ^0.15.4
   google_sign_in: ^4.1.1
@@ -66,7 +69,12 @@ flutter:
   assets:
     - assets/maps/styles/light.json
     - assets/maps/styles/dark.json
-    # - assets/symbols/2.0x/custom-icon.png
+    - assets/maps/markers/pin01.png
+    - assets/maps/markers/pin03.png
+    - assets/maps/markers/pin03_small.png
+    - assets/maps/markers/pin05.png
+    - assets/maps/markers/pin07.png
+    - assets/maps/markers/temp.png
     # - assets/symbols/3.0x/custom-icon.png
 
   # The following line ensures that the Material Icons font is

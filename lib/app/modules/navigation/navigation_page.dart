@@ -41,6 +41,9 @@ class _NavigationPageState
               onMapCreated: (GoogleMapController instanceMapsController) {
                 instanceMapsController.setMapStyle(controller.mapStyle);
                 controller.mapsController.complete(instanceMapsController);
+                setState(() {
+                  controller.initMarkers();
+                });
               },
             ),
           ),

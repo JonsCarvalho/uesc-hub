@@ -191,6 +191,13 @@ mixin _$NavigationController on _NavigationControllerBase, Store {
     return _$initAsyncAction.run(() => super.init());
   }
 
+  final _$setCustomMapPinAsyncAction = AsyncAction('setCustomMapPin');
+
+  @override
+  Future setCustomMapPin() {
+    return _$setCustomMapPinAsyncAction.run(() => super.setCustomMapPin());
+  }
+
   final _$setMapStyleAsyncAction = AsyncAction('setMapStyle');
 
   @override

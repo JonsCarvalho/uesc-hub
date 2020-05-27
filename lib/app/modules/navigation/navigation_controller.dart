@@ -12,7 +12,10 @@ class NavigationController = _NavigationControllerBase
 
 abstract class _NavigationControllerBase with Store {
   Completer<GoogleMapController> mapsController = Completer();
-  
+
+  @observable
+  BitmapDescriptor pinLocationIcon;
+
   @observable
   double cameraZoom;
 
@@ -49,19 +52,6 @@ abstract class _NavigationControllerBase with Store {
 
   @action
   init() async {
-    pavilionList.forEach(
-      (element) {
-        allMarkers.add(
-          Marker(
-            markerId: MarkerId(element.name),
-            draggable: false,
-            infoWindow:
-                InfoWindow(title: element.name, snippet: element.address),
-            position: element.locationCoords,
-          ),
-        );
-      },
-    );
     pageController = PageController(initialPage: 0, viewportFraction: 0.8)
       ..addListener(onScroll);
 
@@ -70,7 +60,35 @@ abstract class _NavigationControllerBase with Store {
     cameraBearing = 0;
     sourceLocation = LatLng(-14.797483, -39.172245);
     mapStyleSelected = 'light';
-    await setMapStyle();
+    setMapStyle();
+    setCustomMapPin();
+  }
+
+  @action
+  initMarkers() async {
+    pavilionList.forEach(
+      (element) async {
+        allMarkers.add(
+          Marker(
+            markerId: MarkerId(element.name),
+            draggable: false,
+            infoWindow:
+                InfoWindow(title: element.name, snippet: element.address),
+            position: element.locationCoords,
+            icon: await BitmapDescriptor.fromAssetImage(
+                ImageConfiguration(devicePixelRatio: 2.5, size: Size(.2, .2)),
+                'assets/maps/markers/pin03_small.png'),
+          ),
+        );
+      },
+    );
+  }
+
+  @action
+  setCustomMapPin() async {
+    pinLocationIcon = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(devicePixelRatio: 2.5),
+        'assets/maps/markers/pin05.png');
   }
 
   @action

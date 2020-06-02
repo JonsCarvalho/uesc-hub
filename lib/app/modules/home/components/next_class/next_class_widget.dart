@@ -130,7 +130,7 @@ class NextClassWidget extends StatelessWidget {
                         : Alignment.centerRight,
                     child: AnimatedContainer(
                       padding: controller.daySelected == 'Hoje'
-                          ? EdgeInsets.symmetric(vertical: 9.5, horizontal: 25)
+                          ? EdgeInsets.symmetric(vertical: 9.5, horizontal: 30)
                           : EdgeInsets.symmetric(vertical: 9.5, horizontal: 25),
                       duration: Duration(milliseconds: 200),
                       curve: Curves.easeInOut,

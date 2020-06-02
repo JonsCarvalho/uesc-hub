@@ -14,7 +14,7 @@ abstract class _ProfileControllerBase with Store {
 
   logoff() async {
     await Modular.get<AuthController>().logout();
-    Modular.to.pushReplacementNamed('/login');
+    Modular.to.pushNamedAndRemoveUntil('/login', ModalRoute.withName('/'));
   }
 
   @action

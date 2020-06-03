@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:uesc_hub/app/modules/schedule/models/timetable_model.dart';
+import 'package:uesc_hub/app/modules/schedule/schedule_controller.dart';
 import 'package:uesc_hub/app/shared/functions/generation_color.dart';
 
 class TimeSheetWidget extends StatelessWidget {
   final List list;
 
   TimeSheetWidget({Key key, @required this.list}) : super(key: key);
+
+  final scheduleController = Modular.get<ScheduleController>();
 
   @override
   Widget build(BuildContext context) {
@@ -59,36 +63,33 @@ class TimeSheetWidget extends StatelessWidget {
               )
             : Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 1),
-                child: Container(
-                  // onPressed: () {},
-                  // borderSide: BorderSide(
-                  //   color: color,
-                  // ),
-                  // shape: RoundedRectangleBorder(
-                  // ),
-                  //   side: BorderSide(
-                  //     color: color,
-                  //   ),
-                  padding: EdgeInsets.symmetric(vertical: 5),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                        color: GenerationColor(seed: subject).colorSubject()),
-                    color: GenerationColor(seed: subject)
-                        .colorSubject()
-                        .withOpacity(.2),
-                  ),
-                  child: Column(
-                    children: <Widget>[
-                      Text(
-                        subject.split('-')[0],
-                        style: TextStyle(fontSize: 12.0, color: Colors.black),
-                      ),
-                      Text(
-                        subject.split('-')[1],
-                        style: TextStyle(fontSize: 10.0, color: Colors.black),
-                      ),
-                    ],
+                child: GestureDetector(
+                  onTap: () {
+                    scheduleController
+                        .setSchedulePageIndex(subject.split('-')[0]);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 5),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(
+                          color: GenerationColor(seed: subject).colorSubject()),
+                      color: GenerationColor(seed: subject)
+                          .colorSubject()
+                          .withOpacity(.2),
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        Text(
+                          subject.split('-')[0],
+                          style: TextStyle(fontSize: 12.0, color: Colors.black),
+                        ),
+                        Text(
+                          subject.split('-')[1],
+                          style: TextStyle(fontSize: 10.0, color: Colors.black),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );

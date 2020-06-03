@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:uesc_hub/app/modules/schedule/components/timesheet_widget.dart';
+import 'package:uesc_hub/app/modules/schedule/models/subjects_model.dart';
 import 'package:uesc_hub/app/modules/schedule/models/timetable_model.dart';
+import 'package:uesc_hub/app/shared/functions/generation_color.dart';
 
 import '../schedule_controller.dart';
 
@@ -25,6 +27,8 @@ class ExpandableBottomBar extends StatelessWidget {
 
         List<TimetableModel> listTimetable;
         listTimetable = scheduleController.timetable.value.toList();
+        List<SubjectsModel> listSubjects;
+        listSubjects = scheduleController.subjects.value.toList();
 
         return BottomExpandableAppBar(
           controller: bottomBarController,
@@ -73,14 +77,29 @@ class ExpandableBottomBar extends StatelessWidget {
           ),
           expandedBody: Padding(
             padding: const EdgeInsets.only(
-              right: 16.0,
-              left: 16.0,
               top: 25.0,
             ),
             child: ListView(
               physics: BouncingScrollPhysics(),
               children: [
-                TimeSheetWidget(list: listTimetable),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal:16.0),
+                  child: TimeSheetWidget(list: listTimetable),
+                ),
+                Positioned(
+                  bottom: 50.0,
+                  child: Container(
+                    height: 130.0,
+                    width: MediaQuery.of(context).size.width,
+                    child: PageView.builder(
+                      controller: scheduleController.pageController,
+                      itemCount: listSubjects.length,
+                      itemBuilder: (_, int index) {
+                        return _subjectsCard(index, listSubjects);
+                      },
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
@@ -220,6 +239,141 @@ class ExpandableBottomBar extends StatelessWidget {
           ),
         );
       },
+    );
+  }
+
+  _subjectsCard(index, List<SubjectsModel> listSubjects) {
+    return AnimatedBuilder(
+      animation: scheduleController.pageController,
+      builder: (BuildContext context, Widget widget) {
+        double value = 1;
+        if (scheduleController.pageController.position.haveDimensions) {
+          value = scheduleController.pageController.page - index;
+          value = (1 - (value.abs() * 0.3) + 0.06).clamp(0.0, 1.0);
+        }
+        return Center(
+          child: SizedBox(
+            height: Curves.easeInOut.transform(value) * 125.0,
+            width: Curves.easeInOut.transform(value) * 350.0,
+            child: widget,
+          ),
+        );
+      },
+      child: InkWell(
+        onTap: () {},
+        child: Stack(
+          children: [
+            Center(
+              child: Container(
+                margin: EdgeInsets.symmetric(
+                  horizontal: 10.0,
+                  vertical: 20.0,
+                ),
+                height: 125.0,
+                width: 275.0,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.0),
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withAlpha(100),
+                      blurRadius: 6.0,
+                      spreadRadius: 0.0,
+                      offset: Offset(
+                        3.0,
+                        -1.0,
+                      ),
+                    ),
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      height: 90.0,
+                      width: 10.0,
+                      decoration: BoxDecoration(
+                        color: GenerationColor(seed: listSubjects[index].id)
+                            .colorSubject(),
+                        borderRadius: BorderRadius.only(
+                            bottomLeft: Radius.circular(10.0),
+                            topLeft: Radius.circular(10.0)),
+                      ),
+                    ),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 5.0,
+                          horizontal: 5.0,
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              listSubjects[index].subject,
+                              style: TextStyle(
+                                  fontSize: 12.5, fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              listSubjects[index].id,
+                              style: TextStyle(
+                                  color: GenerationColor(
+                                          seed: listSubjects[index].id)
+                                      .colorSubject(),
+                                  fontSize: 11.0,
+                                  fontWeight: FontWeight.w300),
+                            ),
+                            if (listSubjects[index].classTheoretical.isNotEmpty)
+                              Row(
+                                children: [
+                                  Text(
+                                    listSubjects[index].classTheoretical +
+                                        " - ",
+                                    style: TextStyle(
+                                        fontSize: 12.0,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      listSubjects[index]
+                                          .classTheoreticalLocation,
+                                      style: TextStyle(
+                                          fontSize: 8.0,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            if (listSubjects[index].classPractice.isNotEmpty)
+                              Row(
+                                children: [
+                                  Text(
+                                    listSubjects[index].classPractice + " - ",
+                                    style: TextStyle(
+                                        fontSize: 12.0,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      listSubjects[index].classPracticeLocation,
+                                      style: TextStyle(
+                                          fontSize: 8.0,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

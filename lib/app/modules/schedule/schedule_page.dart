@@ -30,8 +30,10 @@ class _SchedulePageState extends ModularState<SchedulePage, ScheduleController>
   @override
   void initState() {
     super.initState();
-    bottomBarController =
-        BottomBarController(vsync: this, dragLength: 300, snap: true);
+    bottomBarController = BottomBarController(
+        vsync: this,
+        dragLength: 330,
+        snap: true);
   }
 
   @override

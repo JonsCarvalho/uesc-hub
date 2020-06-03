@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
 import 'package:uesc_hub/app/modules/schedule/models/subjects_model.dart';
@@ -17,6 +18,12 @@ abstract class _ScheduleControllerBase with Store {
   int bottomBarMenuSelected = 0;
 
   @observable
+  PageController pageController;
+
+  @observable
+  int prevPage;
+
+  @observable
   ObservableFuture<List<SubjectsModel>> subjects;
 
   @observable
@@ -28,7 +35,32 @@ abstract class _ScheduleControllerBase with Store {
   _ScheduleControllerBase(this.repository) {
     // fetchSubjects();
     // fetchTimetable();
+    pageController = PageController(initialPage: 0, viewportFraction: 0.8)
+      ..addListener(onScroll);
     getTimetableAndSubjects();
+  }
+
+  @action
+  onScroll() {
+    if (pageController.page.toInt() != prevPage) {
+      prevPage = pageController.page.toInt();
+    }
+  }
+
+  @action
+  setSchedulePageIndex(String id) {
+    int index = 0;
+    for (var subjectsInstance in subjects.value) {
+      if (subjectsInstance.id == id) {
+        pageController.animateToPage(index,
+            duration: Duration(milliseconds: 200), curve: Curves.ease);
+      }
+      index++;
+    }
+
+    if (pageController.page.toInt() != prevPage) {
+      prevPage = pageController.page.toInt();
+    }
   }
 
   @action

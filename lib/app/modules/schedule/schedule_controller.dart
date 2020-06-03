@@ -53,7 +53,7 @@ abstract class _ScheduleControllerBase with Store {
     for (var subjectsInstance in subjects.value) {
       if (subjectsInstance.id == id) {
         pageController.animateToPage(index,
-            duration: Duration(milliseconds: 200), curve: Curves.ease);
+            duration: Duration(milliseconds: 300), curve: Curves.bounceIn);
       }
       index++;
     }

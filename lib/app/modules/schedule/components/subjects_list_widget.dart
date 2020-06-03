@@ -8,38 +8,30 @@ class SubjectsListWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: BouncingScrollPhysics(),
-      itemCount: list.length,
-      itemBuilder: (_, int index) {
-        return Column(
-          children: <Widget>[
-            ListTile(
-              title: Text(list[index].subject),
-              leading: Container(
-                width: 60,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Container(
-                      width: 5,
-                      color: GenerationColor(seed: list[index].id)
-                          .colorSubject(),
-                    ),
-                    Text(list[index].id),
-                  ],
+    return Column(
+      children: List.generate(list.length, (index) {
+        return ListTile(
+          title: Text(list[index].subject),
+          leading: Container(
+            width: 60,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  width: 5,
+                  color: GenerationColor(seed: list[index].id).colorSubject(),
                 ),
-              ),
-              subtitle: Text(list[index].classTheoreticalLocation +
-                  '\n' +
-                  list[index].classPracticeLocation),
-              trailing: Text(list[index].classTheoretical +
-                  '\n' +
-                  list[index].classPractice),
+                Text(list[index].id),
+              ],
             ),
-          ],
+          ),
+          subtitle: Text(list[index].classTheoreticalLocation +
+              '\n' +
+              list[index].classPracticeLocation),
+          trailing: Text(
+              list[index].classTheoretical + '\n' + list[index].classPractice),
         );
-      },
+      }).toList(),
     );
   }
 }

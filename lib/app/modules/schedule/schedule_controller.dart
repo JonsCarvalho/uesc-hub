@@ -14,6 +14,9 @@ abstract class _ScheduleControllerBase with Store {
   final ScheduleRepository repository;
 
   @observable
+  int bottomBarMenuSelected = 0;
+
+  @observable
   ObservableFuture<List<SubjectsModel>> subjects;
 
   @observable
@@ -26,6 +29,11 @@ abstract class _ScheduleControllerBase with Store {
     // fetchSubjects();
     // fetchTimetable();
     getTimetableAndSubjects();
+  }
+
+  @action
+  changeBottomBarMenuSelected(int value) {
+    bottomBarMenuSelected = value;
   }
 
   @action

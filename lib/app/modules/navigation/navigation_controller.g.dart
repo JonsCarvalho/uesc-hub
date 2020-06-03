@@ -9,6 +9,24 @@ part of 'navigation_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$NavigationController on _NavigationControllerBase, Store {
+  final _$pinLocationIconAtom =
+      Atom(name: '_NavigationControllerBase.pinLocationIcon');
+
+  @override
+  BitmapDescriptor get pinLocationIcon {
+    _$pinLocationIconAtom.context.enforceReadPolicy(_$pinLocationIconAtom);
+    _$pinLocationIconAtom.reportObserved();
+    return super.pinLocationIcon;
+  }
+
+  @override
+  set pinLocationIcon(BitmapDescriptor value) {
+    _$pinLocationIconAtom.context.conditionallyRunInAction(() {
+      super.pinLocationIcon = value;
+      _$pinLocationIconAtom.reportChanged();
+    }, _$pinLocationIconAtom, name: '${_$pinLocationIconAtom.name}_set');
+  }
+
   final _$cameraZoomAtom = Atom(name: '_NavigationControllerBase.cameraZoom');
 
   @override
@@ -191,6 +209,13 @@ mixin _$NavigationController on _NavigationControllerBase, Store {
     return _$initAsyncAction.run(() => super.init());
   }
 
+  final _$initMarkersAsyncAction = AsyncAction('initMarkers');
+
+  @override
+  Future initMarkers() {
+    return _$initMarkersAsyncAction.run(() => super.initMarkers());
+  }
+
   final _$setCustomMapPinAsyncAction = AsyncAction('setCustomMapPin');
 
   @override
@@ -233,7 +258,7 @@ mixin _$NavigationController on _NavigationControllerBase, Store {
   @override
   String toString() {
     final string =
-        'cameraZoom: ${cameraZoom.toString()},cameraTilt: ${cameraTilt.toString()},cameraBearing: ${cameraBearing.toString()},sourceLocation: ${sourceLocation.toString()},destLocation: ${destLocation.toString()},mapStyleSelected: ${mapStyleSelected.toString()},mapStyle: ${mapStyle.toString()},allMarkers: ${allMarkers.toString()},pageController: ${pageController.toString()},prevPage: ${prevPage.toString()}';
+        'pinLocationIcon: ${pinLocationIcon.toString()},cameraZoom: ${cameraZoom.toString()},cameraTilt: ${cameraTilt.toString()},cameraBearing: ${cameraBearing.toString()},sourceLocation: ${sourceLocation.toString()},destLocation: ${destLocation.toString()},mapStyleSelected: ${mapStyleSelected.toString()},mapStyle: ${mapStyle.toString()},allMarkers: ${allMarkers.toString()},pageController: ${pageController.toString()},prevPage: ${prevPage.toString()}';
     return '{$string}';
   }
 }

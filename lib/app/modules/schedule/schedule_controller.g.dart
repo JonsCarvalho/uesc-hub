@@ -9,6 +9,26 @@ part of 'schedule_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ScheduleController on _ScheduleControllerBase, Store {
+  final _$bottomBarMenuSelectedAtom =
+      Atom(name: '_ScheduleControllerBase.bottomBarMenuSelected');
+
+  @override
+  int get bottomBarMenuSelected {
+    _$bottomBarMenuSelectedAtom.context
+        .enforceReadPolicy(_$bottomBarMenuSelectedAtom);
+    _$bottomBarMenuSelectedAtom.reportObserved();
+    return super.bottomBarMenuSelected;
+  }
+
+  @override
+  set bottomBarMenuSelected(int value) {
+    _$bottomBarMenuSelectedAtom.context.conditionallyRunInAction(() {
+      super.bottomBarMenuSelected = value;
+      _$bottomBarMenuSelectedAtom.reportChanged();
+    }, _$bottomBarMenuSelectedAtom,
+        name: '${_$bottomBarMenuSelectedAtom.name}_set');
+  }
+
   final _$subjectsAtom = Atom(name: '_ScheduleControllerBase.subjects');
 
   @override
@@ -62,6 +82,17 @@ mixin _$ScheduleController on _ScheduleControllerBase, Store {
 
   final _$_ScheduleControllerBaseActionController =
       ActionController(name: '_ScheduleControllerBase');
+
+  @override
+  dynamic changeBottomBarMenuSelected(int value) {
+    final _$actionInfo =
+        _$_ScheduleControllerBaseActionController.startAction();
+    try {
+      return super.changeBottomBarMenuSelected(value);
+    } finally {
+      _$_ScheduleControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic fetchSubjects(dynamic credentials) {
@@ -143,7 +174,7 @@ mixin _$ScheduleController on _ScheduleControllerBase, Store {
   @override
   String toString() {
     final string =
-        'subjects: ${subjects.toString()},timetable: ${timetable.toString()},status: ${status.toString()}';
+        'bottomBarMenuSelected: ${bottomBarMenuSelected.toString()},subjects: ${subjects.toString()},timetable: ${timetable.toString()},status: ${status.toString()}';
     return '{$string}';
   }
 }

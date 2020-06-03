@@ -58,7 +58,7 @@ class TimeSheetWidget extends StatelessWidget {
                 ),
               )
             : Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 0),
+                padding: const EdgeInsets.symmetric(horizontal: 1, vertical: 1),
                 child: Container(
                   // onPressed: () {},
                   // borderSide: BorderSide(
@@ -69,6 +69,7 @@ class TimeSheetWidget extends StatelessWidget {
                   //   side: BorderSide(
                   //     color: color,
                   //   ),
+                  padding: EdgeInsets.symmetric(vertical: 5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
@@ -89,7 +90,6 @@ class TimeSheetWidget extends StatelessWidget {
                       ),
                     ],
                   ),
-                  padding: EdgeInsets.all(5.0),
                 ),
               );
   }
@@ -102,7 +102,6 @@ class TimeSheetWidget extends StatelessWidget {
             Expanded(
               flex: 3,
               child: Container(
-                padding: EdgeInsets.symmetric(vertical: 7),
                 alignment: Alignment.centerLeft,
                 child: Column(
                   children: <Widget>[

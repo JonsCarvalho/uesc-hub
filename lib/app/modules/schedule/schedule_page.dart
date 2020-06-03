@@ -4,6 +4,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:uesc_hub/app/modules/profile/components/sagres_login_widget.dart';
+import 'package:uesc_hub/app/modules/schedule/components/expandable_bottom_bar_widget.dart';
 import 'package:uesc_hub/app/modules/schedule/components/subjects_list_widget.dart';
 import 'package:uesc_hub/app/modules/schedule/components/timesheet_widget.dart';
 import 'package:uesc_hub/app/modules/schedule/models/subjects_model.dart';
@@ -30,7 +31,7 @@ class _SchedulePageState extends ModularState<SchedulePage, ScheduleController>
   void initState() {
     super.initState();
     bottomBarController =
-        BottomBarController(vsync: this, dragLength: 550, snap: true);
+        BottomBarController(vsync: this, dragLength: 300, snap: true);
   }
 
   @override
@@ -39,59 +40,36 @@ class _SchedulePageState extends ModularState<SchedulePage, ScheduleController>
       appBar: AppBar(
         title: Text(widget.title),
       ),
+      extendBody: true,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: GestureDetector(
-        // Set onVerticalDrag event to drag handlers of controller for swipe effect
         onVerticalDragUpdate: bottomBarController.onDrag,
         onVerticalDragEnd: bottomBarController.onDragEnd,
-        child: FloatingActionButton.extended(
-          label: Text("Pull up"),
-          elevation: 2,
-          backgroundColor: Colors.deepOrange,
-          foregroundColor: Colors.white,
-
-          //Set onPressed event to swap state of bottom bar
-          onPressed: () => bottomBarController.swap(),
-        ),
-      ),
-      bottomNavigationBar: BottomExpandableAppBar(
-        // Provide the bar controller in build method or default controller as ancestor in a tree
-        controller: bottomBarController,
-        expandedHeight: bottomBarController.dragLength,
-        horizontalMargin: 16,
-        attachSide: Side.Top,
-        expandedBackColor: Theme.of(context).backgroundColor,
-        // Your bottom sheet code here
-        expandedBody: Center(
-          child: Text("Hello world!"),
-        ),
-        // shape: AutomaticNotchedShape(
-        //     RoundedRectangleBorder(),
-        //     StadiumBorder(
-        //         side: BorderSide())), // Your bottom app bar code here
-        bottomAppBarBody: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Expanded(
-                child: Text(
-                  "Hello",
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              Spacer(
-                flex: 2,
-              ),
-              Expanded(
-                child: Text(
-                  "World",
-                  textAlign: TextAlign.center,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            boxShadow: [
+              BoxShadow(
+                color: Theme.of(context).primaryColor.withAlpha(100),
+                blurRadius: 6.0,
+                spreadRadius: 0.0,
+                offset: Offset(
+                  0.0,
+                  4.0,
                 ),
               ),
             ],
           ),
+          child: FloatingActionButton.extended(
+            label: Text("Tabela de Horários"),
+            elevation: 0.0,
+            backgroundColor: Theme.of(context).primaryColor,
+            onPressed: () => bottomBarController.swap(),
+          ),
         ),
       ),
+      bottomNavigationBar:
+          ExpandableBottomBar(bottomBarController: bottomBarController),
       body: Observer(
         builder: (_) {
           // if (sagresController.credentials.isEmpty &&
@@ -181,23 +159,34 @@ class _SchedulePageState extends ModularState<SchedulePage, ScheduleController>
           List<SubjectsModel> listSubjects;
           listTimetable = scheduleController.timetable.value.toList();
           listSubjects = scheduleController.subjects.value.toList();
-
-          return Column(
+          return ListView(
+            physics: BouncingScrollPhysics(),
             children: [
-              Container(
-                height: listTimetable.length == 1
-                    ? 90
-                    : (listTimetable.length * 50.0) + 32,
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: TimeSheetWidget(list: listTimetable),
-                ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                child: TimeSheetWidget(list: listTimetable),
               ),
-              Expanded(
-                child: SubjectsListWidget(list: listSubjects),
-              ),
+              SubjectsListWidget(list: listSubjects),
+              SubjectsListWidget(list: listSubjects),
             ],
           );
+          // Column(
+          //   children: [
+          // Container(
+          //   height: listTimetable.length == 1
+          //       ? 90
+          //       : (listTimetable.length * 50.0) + 32,
+          //   child: Padding(
+          //     padding: const EdgeInsets.symmetric(horizontal: 8),
+          //     child: TimeSheetWidget(list: listTimetable),
+          //   ),
+          // ),
+          //     Expanded(
+          //       child: SubjectsListWidget(list: listSubjects),
+          //     ),
+          //   ],
+          // );
         },
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:expandable_bottom_bar/expandable_bottom_bar.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -19,14 +20,17 @@ class SchedulePage extends StatefulWidget {
   _SchedulePageState createState() => _SchedulePageState();
 }
 
-class _SchedulePageState
-    extends ModularState<SchedulePage, ScheduleController> {
+class _SchedulePageState extends ModularState<SchedulePage, ScheduleController>
+    with SingleTickerProviderStateMixin {
   final scheduleController = Modular.get<ScheduleController>();
   final sagresController = Modular.get<AuthSagresController>();
+  BottomBarController bottomBarController;
 
   @override
   void initState() {
     super.initState();
+    bottomBarController =
+        BottomBarController(vsync: this, dragLength: 550, snap: true);
   }
 
   @override
@@ -34,6 +38,59 @@ class _SchedulePageState
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+      ),
+      floatingActionButton: GestureDetector(
+        // Set onVerticalDrag event to drag handlers of controller for swipe effect
+        onVerticalDragUpdate: bottomBarController.onDrag,
+        onVerticalDragEnd: bottomBarController.onDragEnd,
+        child: FloatingActionButton.extended(
+          label: Text("Pull up"),
+          elevation: 2,
+          backgroundColor: Colors.deepOrange,
+          foregroundColor: Colors.white,
+
+          //Set onPressed event to swap state of bottom bar
+          onPressed: () => bottomBarController.swap(),
+        ),
+      ),
+      bottomNavigationBar: BottomExpandableAppBar(
+        // Provide the bar controller in build method or default controller as ancestor in a tree
+        controller: bottomBarController,
+        expandedHeight: bottomBarController.dragLength,
+        horizontalMargin: 16,
+        attachSide: Side.Top,
+        expandedBackColor: Theme.of(context).backgroundColor,
+        // Your bottom sheet code here
+        expandedBody: Center(
+          child: Text("Hello world!"),
+        ),
+        // shape: AutomaticNotchedShape(
+        //     RoundedRectangleBorder(),
+        //     StadiumBorder(
+        //         side: BorderSide())), // Your bottom app bar code here
+        bottomAppBarBody: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Expanded(
+                child: Text(
+                  "Hello",
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Spacer(
+                flex: 2,
+              ),
+              Expanded(
+                child: Text(
+                  "World",
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
       body: Observer(
         builder: (_) {

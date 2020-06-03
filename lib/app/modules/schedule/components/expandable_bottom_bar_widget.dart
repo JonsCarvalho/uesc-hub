@@ -36,8 +36,22 @@ class ExpandableBottomBar extends StatelessWidget {
               side: BorderSide(),
             ),
           ),
-          // bottomAppBarColor: ThemeData.dark().backgroundColor,
+          bottomAppBarColor: Theme.of(_).appBarTheme.color,
+          bottomOffset: 15,
           horizontalMargin: 8.0,
+          appBarDecoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withAlpha(100),
+                blurRadius: 6.0,
+                spreadRadius: 0.0,
+                offset: Offset(
+                  4.0,
+                  0.0,
+                ),
+              ),
+            ],
+          ),
           expandedDecoration: BoxDecoration(
             borderRadius: BorderRadius.circular(30.0),
             color: ThemeData.dark().backgroundColor,
@@ -66,147 +80,118 @@ class ExpandableBottomBar extends StatelessWidget {
               ],
             ),
           ),
-          bottomAppBarBody: Padding(
-            padding: const EdgeInsets.all(0.0),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
-              children: <Widget>[
-                Expanded(
-                  child: FlatButton(
-                    onPressed: () {
-                      scheduleController.changeBottomBarMenuSelected(0);
-                    },
-                    child: AnimatedContainer(
-                      duration: Duration(milliseconds: 200),
-                      curve: Curves.easeIn,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 8.0),
-                              child: Text(
-                                "Tarefas",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                ),
+          bottomAppBarBody: Row(
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Expanded(
+                child: Stack(
+                  children: [
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: AnimatedContainer(
+                        duration: Duration(milliseconds: 400),
+                        curve: Curves.easeInCubic,
+                        decoration: BoxDecoration(
+                          color: scheduleController.bottomBarMenuSelected == 0
+                              ? Theme.of(_).primaryColor
+                              : Colors.transparent,
+                          boxShadow: [
+                            BoxShadow(
+                              color:
+                                  Theme.of(context).primaryColor.withAlpha(100),
+                              blurRadius: 6.0,
+                              spreadRadius: 0.5,
+                              offset: Offset(
+                                0.0,
+                                3.0,
                               ),
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 10.0),
-                              child: AnimatedContainer(
-                                duration: Duration(milliseconds: 400),
-                                curve: Curves.easeInCubic,
-                                decoration: BoxDecoration(
-                                  color: scheduleController
-                                              .bottomBarMenuSelected ==
-                                          0
-                                      ? Theme.of(_).primaryColor
-                                      : Colors.transparent,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Theme.of(context)
-                                          .primaryColor
-                                          .withAlpha(100),
-                                      blurRadius: 6.0,
-                                      spreadRadius: 0.5,
-                                      offset: Offset(
-                                        0.0,
-                                        3.0,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                height: 2,
-                                width:
-                                    scheduleController.bottomBarMenuSelected ==
-                                            0
-                                        ? 40.0
-                                        : .1,
-                              ),
-                            ),
-                          ),
-                        ],
+                            )
+                          ],
+                        ),
+                        height: 5,
+                        width: scheduleController.bottomBarMenuSelected == 0
+                            ? MediaQuery.of(context).size.width / 2
+                            : .1,
                       ),
                     ),
-                  ),
-                ),
-                Expanded(
-                  child: FlatButton(
-                    onPressed: () {
-                      scheduleController.changeBottomBarMenuSelected(1);
-                    },
-                    child: AnimatedContainer(
-                      duration: Duration(milliseconds: 200),
-                      curve: Curves.easeIn,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 8.0),
-                              child: Text(
-                                "Provas",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                ),
+                    FlatButton(
+                      onPressed: () {
+                        scheduleController.changeBottomBarMenuSelected(0);
+                      },
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Text(
+                              "Tarefas",
+                              style: TextStyle(
+                                fontSize: 14,
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 10.0),
-                              child: AnimatedContainer(
-                                duration: Duration(milliseconds: 400),
-                                curve: Curves.easeInCubic,
-                                decoration: BoxDecoration(
-                                  color: scheduleController
-                                              .bottomBarMenuSelected ==
-                                          1
-                                      ? Theme.of(_).primaryColor
-                                      : Colors.transparent,
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Theme.of(context)
-                                          .primaryColor
-                                          .withAlpha(100),
-                                      blurRadius: 6.0,
-                                      spreadRadius: 0.5,
-                                      offset: Offset(
-                                        0.0,
-                                        3.0,
-                                      ),
-                                    )
-                                  ],
-                                ),
-                                height: 2,
-                                width:
-                                    scheduleController.bottomBarMenuSelected ==
-                                            1
-                                        ? 35.0
-                                        : .1,
-                              ),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
                     ),
-                  ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              Expanded(
+                child: Stack(
+                  children: [
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: AnimatedContainer(
+                        duration: Duration(milliseconds: 400),
+                        curve: Curves.easeInCubic,
+                        decoration: BoxDecoration(
+                          color: scheduleController.bottomBarMenuSelected == 1
+                              ? Theme.of(_).primaryColor
+                              : Colors.transparent,
+                          boxShadow: [
+                            BoxShadow(
+                              color:
+                                  Theme.of(context).primaryColor.withAlpha(100),
+                              blurRadius: 6.0,
+                              spreadRadius: 0.5,
+                              offset: Offset(
+                                0.0,
+                                3.0,
+                              ),
+                            )
+                          ],
+                        ),
+                        height: 5,
+                        width: scheduleController.bottomBarMenuSelected == 1
+                            ? MediaQuery.of(context).size.width / 2
+                            : .1,
+                      ),
+                    ),
+                    FlatButton(
+                      onPressed: () {
+                        scheduleController.changeBottomBarMenuSelected(1);
+                      },
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: Text(
+                              "Provas",
+                              style: TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
         );
       },

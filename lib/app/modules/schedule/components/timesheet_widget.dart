@@ -9,10 +9,8 @@ class TimeSheetWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      physics: BouncingScrollPhysics(),
-      itemCount: list.length,
-      itemBuilder: (_, int index) {
+    return Column(
+      children: List.generate(list.length, (index) {
         if (index == 0) {
           return Column(
             children: [
@@ -35,7 +33,7 @@ class TimeSheetWidget extends StatelessWidget {
         } else {
           return Table(children: [_criarLinhaTable(list[index])]);
         }
-      },
+      }).toList(),
     );
   }
 

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
@@ -20,5 +21,11 @@ abstract class _ProfileControllerBase with Store {
   @action
   fetchTimetableAndSubjects(credentials) {
     repository.setPersistenceTimetableAndSubjects(credentials);
+  }
+
+  @action
+  FirebaseUser getCurrentUser() {
+    var user = Modular.get<AuthController>().user;
+    return user;
   }
 }

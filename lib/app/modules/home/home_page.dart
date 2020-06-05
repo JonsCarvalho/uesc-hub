@@ -77,10 +77,9 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       body: ListView(
         physics: BouncingScrollPhysics(),
         children: [
-          Padding(
-            padding: const EdgeInsets.only(top:8.0),
-            child: SalutationWidget(),
-          ),
+          SizedBox(height: 8.0),
+          SalutationWidget(),
+          SizedBox(height: 15.0),
           NextClassWidget(),
         ],
       ),

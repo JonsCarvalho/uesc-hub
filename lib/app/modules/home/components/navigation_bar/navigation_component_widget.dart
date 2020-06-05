@@ -36,98 +36,94 @@ class NavigationComponentWidget extends StatelessWidget {
                 //     ? Colors.amber
                 //     : Colors.transparent,
                 ),
-            padding: EdgeInsets.all(5),
+            // padding: EdgeInsets.all(5),
             child: Stack(
               fit: StackFit.expand,
               children: [
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: AnimatedContainer(
+                    duration: Duration(milliseconds: 400),
+                    curve: Curves.easeInCubic,
+                    decoration: BoxDecoration(
+                      color: navigationBarController.indexComponentSelected ==
+                              index
+                          ? Theme.of(_).primaryColor
+                          : Colors.transparent,
+                      boxShadow: [
+                        BoxShadow(
+                          color: Theme.of(context).primaryColor.withAlpha(100),
+                          blurRadius: 6.0,
+                          spreadRadius: 0.5,
+                          offset: Offset(
+                            0.0,
+                            3.0,
+                          ),
+                        )
+                      ],
+                    ),
+                    height: 2,
+                    width:
+                        navigationBarController.indexComponentSelected == index
+                            ? MediaQuery.of(context).size.width/5
+                            : .1,
+                  ),
+                ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Expanded(
-                      flex: 2,
-                      child: AnimatedContainer(
-                        duration: Duration(milliseconds: 200),
-                        curve: Curves.easeIn,
-                        margin:
+                    AnimatedContainer(
+                      duration: Duration(milliseconds: 200),
+                      curve: Curves.easeIn,
+                      margin:
+                          navigationBarController.indexComponentSelected ==
+                                  index
+                              ? EdgeInsets.only(top: 1)
+                              : EdgeInsets.only(top: 4),
+                      alignment: Alignment.center,
+                      child: Icon(
+                        icon,
+                        size:
                             navigationBarController.indexComponentSelected ==
                                     index
-                                ? EdgeInsets.only(top: 1)
-                                : EdgeInsets.only(top: 4),
-                        alignment: Alignment.center,
-                        child: Icon(
-                          icon,
-                          size:
-                              navigationBarController.indexComponentSelected ==
-                                      index
-                                  ? 20
-                                  : 16,
-                          color:
-                              navigationBarController.indexComponentSelected ==
-                                      index
-                                  ? Colors.black
-                                  : Colors.black.withAlpha(170),
-                        ),
+                                ? 20
+                                : 18,
+                        color:
+                            navigationBarController.indexComponentSelected ==
+                                    index
+                                ? Colors.black
+                                : Colors.black.withAlpha(170),
                       ),
                     ),
                     // SizedBox(height: 8),
-                    Expanded(
-                      flex: 2,
-                      child: AnimatedContainer(
-                        duration: Duration(milliseconds: 200),
-                        curve: Curves.easeIn,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              title,
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: navigationBarController
-                                            .indexComponentSelected ==
-                                        index
-                                    ? Colors.black
-                                    : Colors.black.withAlpha(170),
-                              ),
-                            ),
-                            AnimatedContainer(
-                              duration: Duration(milliseconds: 400),
-                              curve: Curves.easeInCubic,
-                              decoration: BoxDecoration(
-                                color: navigationBarController
-                                            .indexComponentSelected ==
-                                        index
-                                    ? Theme.of(_).primaryColor
-                                    : Colors.transparent,
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Theme.of(context)
-                                        .primaryColor
-                                        .withAlpha(100),
-                                    blurRadius: 6.0,
-                                    spreadRadius: 0.5,
-                                    offset: Offset(
-                                      0.0,
-                                      3.0,
-                                    ),
-                                  )
-                                ],
-                              ),
-                              height: 2,
-                              width: navigationBarController
-                                          .indexComponentSelected ==
-                                      index
-                                  ? title.length * 5.0
-                                  : .1,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+                    // Expanded(
+                    //   flex: 2,
+                    //   child: AnimatedContainer(
+                    //     duration: Duration(milliseconds: 200),
+                    //     curve: Curves.easeIn,
+                    //     child: Column(
+                    //       mainAxisAlignment: MainAxisAlignment.center,
+                    //       children: [
+                    //         Text(
+                    //           title,
+                    //           style: TextStyle(
+                    //             fontSize: 14,
+                    //             color: navigationBarController
+                    //                         .indexComponentSelected ==
+                    //                     index
+                    //                 ? Colors.black
+                    //                 : Colors.black.withAlpha(170),
+                    //           ),
+                    //         ),
+                    //       ],
+                    //     ),
+                    //   ),
+                    // ),
                   ],
                 ),
                 Positioned(
-                  top: 3,
-                  right: 12,
+                  top: 8,
+                  right: 8,
                   child: navigationBarController.notifications[index] is Color
                       ? AnimatedContainer(
                           duration: Duration(milliseconds: 200),

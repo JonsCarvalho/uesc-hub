@@ -1,40 +1,111 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:uesc_hub/app/modules/home/components/app_bar/app_bar_controller.dart';
 
 import '../../home_controller.dart';
 
 class ProfileWidget extends StatelessWidget {
-  final HomeController controller = Modular.get();
+  final HomeController homeController = Modular.get();
+  final AppBarController appBarController = Modular.get();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(right: 10),
-      child: CircleAvatar(
-        radius: 35,
-        backgroundColor: Colors.transparent,
-        child: InkWell(
-          focusColor: Colors.purple,
-          highlightColor: Colors.cyan,
-          hoverColor: Colors.green,
-          splashColor: Colors.red,
-          onTap: () {},
-          borderRadius: BorderRadius.circular(100),
-          child: Padding(
-            padding: const EdgeInsets.all(3),
-            child: CircleAvatar(
-              radius: 25,
-              backgroundColor: Colors.black,
-              child: Padding(
-                padding: const EdgeInsets.all(1),
-                child: ClipOval(
-                  child: Image.network(controller.getCurrentUser().photoUrl),
+    return Observer(
+      builder: (_) {
+        return GestureDetector(
+          onTap: () async {
+            appBarController.updateSizeProfileWidget();
+            await Future.delayed(Duration(milliseconds: 350));
+            appBarController.updateSizeProfileWidget();
+            await Future.delayed(Duration(milliseconds: 350));
+            Modular.to.pushNamed('/profile');
+          },
+          onLongPress: () async {
+            appBarController.updateSizeProfileWidget();
+            await Future.delayed(Duration(milliseconds: 350));
+            appBarController.updateSizeProfileWidget();
+          },
+          child: homeController.getCurrentUser().photoUrl != null
+              ? Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    AnimatedContainer(
+                      duration: Duration(milliseconds: 200),
+                      curve: Curves.easeIn,
+                      height: appBarController.sizeProfileWidget + 3,
+                      width: appBarController.sizeProfileWidget + 3,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: appBarController.sizeProfileWidget == 35
+                            ? Colors.black
+                            : Colors.greenAccent,
+                      ),
+                    ),
+                    AnimatedContainer(
+                      duration: Duration(milliseconds: 300),
+                      curve: Curves.elasticIn,
+                      height: appBarController.sizeProfileWidget,
+                      width: appBarController.sizeProfileWidget,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            homeController.getCurrentUser().photoUrl,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                )
+              : Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    AnimatedContainer(
+                      duration: Duration(milliseconds: 200),
+                      curve: Curves.easeIn,
+                      height: appBarController.sizeProfileWidget + 3,
+                      width: appBarController.sizeProfileWidget + 3,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: appBarController.sizeProfileWidget == 35
+                            ? Colors.black
+                            : Colors.teal,
+                      ),
+                    ),
+                    AnimatedContainer(
+                      duration: Duration(milliseconds: 300),
+                      curve: Curves.elasticIn,
+                      height: appBarController.sizeProfileWidget,
+                      width: appBarController.sizeProfileWidget,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.black,
+                      ),
+                      child: Center(
+                        child: Text(
+                          homeController
+                                  .getCurrentUser()
+                                  .displayName
+                                  .toString()
+                                  .substring(0, 1) +
+                              homeController
+                                  .getCurrentUser()
+                                  .displayName
+                                  .toString()
+                                  .split(" ")
+                                  .last
+                                  .substring(0, 1),
+                          style: TextStyle(
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ),
-          ),
-        ),
-      ),
+        );
+      },
     );
   }
 }

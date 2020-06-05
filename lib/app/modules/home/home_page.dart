@@ -43,6 +43,17 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: NavigationBarWidget(),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        flexibleSpace: Padding(
+          padding: MediaQuery.of(context).padding,
+          child: Padding(
+            padding: const EdgeInsets.only(right: 8.0, left: 16.0),
+            child: AppBarWidget(),
+          ),
+        ),
+      ),
       body: Observer(
         builder: (_) {
           return PageView(
@@ -63,24 +74,11 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
 
   body() {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            title: AppBarWidget(),
-            pinned: true,
-            expandedHeight: 210.0,
-            flexibleSpace: FlexibleSpaceBar(
-              background: FlexibleAppBarWidget(),
-            ),
-            backgroundColor: Colors.transparent,
-          ),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              [
-                NextClassWidget(),
-              ],
-            ),
-          ),
+      body: ListView(
+        physics: BouncingScrollPhysics(),
+        children: [
+          SalutationWidget(),
+          NextClassWidget(),
         ],
       ),
     );

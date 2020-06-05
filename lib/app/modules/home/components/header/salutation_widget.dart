@@ -9,41 +9,46 @@ class SalutationWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: <Widget>[
-        Text(
-          // getDisplayNameEmail() != null
-          // ? "${getSalutation()} ${getDisplayNameEmail().split(" ").first}!"
-          // : "${getSalutation()} ${getCurrentUser().displayName.split(" ").first}!",
-          "${GenerationDate(dateTime: DateTime.now()).getSalutation()}, ${controller.getCurrentUser().displayName.split(" ").first}!",
-          style: TextStyle(
-            // color: Color(0xff827daa).withGreen(200),
-            color: Colors.white,
-            fontSize: 20,
-            // fontWeight: FontWeight.bold,
+    return Padding(
+      padding: const EdgeInsets.only(
+        right: 15.0,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: <Widget>[
+          Text(
+            // getDisplayNameEmail() != null
+            // ? "${getSalutation()} ${getDisplayNameEmail().split(" ").first}!"
+            // : "${getSalutation()} ${getCurrentUser().displayName.split(" ").first}!",
+            "${GenerationDate(dateTime: DateTime.now()).getSalutation()}, ${controller.getCurrentUser().displayName.split(" ").first}!",
+            style: TextStyle(
+              // color: Color(0xff827daa).withGreen(200),
+              color: Colors.black,
+              fontSize: 20,
+              // fontWeight: FontWeight.bold,
+            ),
           ),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: <Widget>[
-            Text(
-              GenerationDate(dateTime: DateTime.now()).getDay(),
-              style: TextStyle(
-                color: Colors.white60,
-                fontSize: 15,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              Text(
+                GenerationDate(dateTime: DateTime.now()).getDay(),
+                style: TextStyle(
+                  color: Colors.white60,
+                  fontSize: 15,
+                ),
               ),
-            ),
-            Text(
-              ", ${DateTime.now().day.toString()} de ${GenerationDate(dateTime: DateTime.now()).getMonth()}",
-              style: TextStyle(
-                color: Colors.white60,
-                fontSize: 15,
+              Text(
+                ", ${DateTime.now().day.toString()} de ${GenerationDate(dateTime: DateTime.now()).getMonth()}",
+                style: TextStyle(
+                  color: Colors.white60,
+                  fontSize: 15,
+                ),
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

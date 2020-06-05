@@ -29,6 +29,41 @@ mixin _$ScheduleController on _ScheduleControllerBase, Store {
         name: '${_$bottomBarMenuSelectedAtom.name}_set');
   }
 
+  final _$pageControllerAtom =
+      Atom(name: '_ScheduleControllerBase.pageController');
+
+  @override
+  PageController get pageController {
+    _$pageControllerAtom.context.enforceReadPolicy(_$pageControllerAtom);
+    _$pageControllerAtom.reportObserved();
+    return super.pageController;
+  }
+
+  @override
+  set pageController(PageController value) {
+    _$pageControllerAtom.context.conditionallyRunInAction(() {
+      super.pageController = value;
+      _$pageControllerAtom.reportChanged();
+    }, _$pageControllerAtom, name: '${_$pageControllerAtom.name}_set');
+  }
+
+  final _$prevPageAtom = Atom(name: '_ScheduleControllerBase.prevPage');
+
+  @override
+  int get prevPage {
+    _$prevPageAtom.context.enforceReadPolicy(_$prevPageAtom);
+    _$prevPageAtom.reportObserved();
+    return super.prevPage;
+  }
+
+  @override
+  set prevPage(int value) {
+    _$prevPageAtom.context.conditionallyRunInAction(() {
+      super.prevPage = value;
+      _$prevPageAtom.reportChanged();
+    }, _$prevPageAtom, name: '${_$prevPageAtom.name}_set');
+  }
+
   final _$subjectsAtom = Atom(name: '_ScheduleControllerBase.subjects');
 
   @override
@@ -82,6 +117,28 @@ mixin _$ScheduleController on _ScheduleControllerBase, Store {
 
   final _$_ScheduleControllerBaseActionController =
       ActionController(name: '_ScheduleControllerBase');
+
+  @override
+  dynamic onScroll() {
+    final _$actionInfo =
+        _$_ScheduleControllerBaseActionController.startAction();
+    try {
+      return super.onScroll();
+    } finally {
+      _$_ScheduleControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setSchedulePageIndex(String id) {
+    final _$actionInfo =
+        _$_ScheduleControllerBaseActionController.startAction();
+    try {
+      return super.setSchedulePageIndex(id);
+    } finally {
+      _$_ScheduleControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic changeBottomBarMenuSelected(int value) {
@@ -174,7 +231,7 @@ mixin _$ScheduleController on _ScheduleControllerBase, Store {
   @override
   String toString() {
     final string =
-        'bottomBarMenuSelected: ${bottomBarMenuSelected.toString()},subjects: ${subjects.toString()},timetable: ${timetable.toString()},status: ${status.toString()}';
+        'bottomBarMenuSelected: ${bottomBarMenuSelected.toString()},pageController: ${pageController.toString()},prevPage: ${prevPage.toString()},subjects: ${subjects.toString()},timetable: ${timetable.toString()},status: ${status.toString()}';
     return '{$string}';
   }
 }

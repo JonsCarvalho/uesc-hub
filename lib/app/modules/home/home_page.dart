@@ -46,8 +46,8 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        flexibleSpace: Padding(
-          padding: MediaQuery.of(context).padding,
+        flexibleSpace: Align(
+          alignment: Alignment.bottomCenter,
           child: Padding(
             padding: const EdgeInsets.only(right: 8.0, left: 16.0),
             child: AppBarWidget(),
@@ -77,7 +77,10 @@ class _HomePageState extends ModularState<HomePage, HomeController> {
       body: ListView(
         physics: BouncingScrollPhysics(),
         children: [
-          SalutationWidget(),
+          Padding(
+            padding: const EdgeInsets.only(top:8.0),
+            child: SalutationWidget(),
+          ),
           NextClassWidget(),
         ],
       ),

@@ -8,13 +8,13 @@ class GenerationDate {
   getSalutation() {
     int hour = dateTime.hour;
     if ((hour >= 0) && (hour < 5)) {
-      return "Boa madrugada";
+      return "Tenha uma boa madrugada";
     } else if ((hour >= 5) && (hour < 12)) {
-      return "Bom dia";
+      return "Tenha um bom dia";
     } else if ((hour >= 12) && (hour < 18)) {
-      return "Boa tarde";
+      return "Tenha uma boa tarde";
     } else if (hour >= 18) {
-      return "Boa noite";
+      return "Tenha uma boa noite";
     }
   }
 

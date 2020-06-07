@@ -23,6 +23,16 @@ mixin _$ProfileController on _ProfileControllerBase, Store {
   }
 
   @override
+  FirebaseUser getCurrentUser() {
+    final _$actionInfo = _$_ProfileControllerBaseActionController.startAction();
+    try {
+      return super.getCurrentUser();
+    } finally {
+      _$_ProfileControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string = '';
     return '{$string}';

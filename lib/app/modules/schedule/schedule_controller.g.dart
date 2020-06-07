@@ -9,6 +9,94 @@ part of 'schedule_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ScheduleController on _ScheduleControllerBase, Store {
+  final _$daySelectedAtom = Atom(name: '_ScheduleControllerBase.daySelected');
+
+  @override
+  DateTime get daySelected {
+    _$daySelectedAtom.context.enforceReadPolicy(_$daySelectedAtom);
+    _$daySelectedAtom.reportObserved();
+    return super.daySelected;
+  }
+
+  @override
+  set daySelected(DateTime value) {
+    _$daySelectedAtom.context.conditionallyRunInAction(() {
+      super.daySelected = value;
+      _$daySelectedAtom.reportChanged();
+    }, _$daySelectedAtom, name: '${_$daySelectedAtom.name}_set');
+  }
+
+  final _$holidaysAtom = Atom(name: '_ScheduleControllerBase.holidays');
+
+  @override
+  ObservableMap<DateTime, List<dynamic>> get holidays {
+    _$holidaysAtom.context.enforceReadPolicy(_$holidaysAtom);
+    _$holidaysAtom.reportObserved();
+    return super.holidays;
+  }
+
+  @override
+  set holidays(ObservableMap<DateTime, List<dynamic>> value) {
+    _$holidaysAtom.context.conditionallyRunInAction(() {
+      super.holidays = value;
+      _$holidaysAtom.reportChanged();
+    }, _$holidaysAtom, name: '${_$holidaysAtom.name}_set');
+  }
+
+  final _$eventsAtom = Atom(name: '_ScheduleControllerBase.events');
+
+  @override
+  ObservableMap<DateTime, List<dynamic>> get events {
+    _$eventsAtom.context.enforceReadPolicy(_$eventsAtom);
+    _$eventsAtom.reportObserved();
+    return super.events;
+  }
+
+  @override
+  set events(ObservableMap<DateTime, List<dynamic>> value) {
+    _$eventsAtom.context.conditionallyRunInAction(() {
+      super.events = value;
+      _$eventsAtom.reportChanged();
+    }, _$eventsAtom, name: '${_$eventsAtom.name}_set');
+  }
+
+  final _$selectedEventsAtom =
+      Atom(name: '_ScheduleControllerBase.selectedEvents');
+
+  @override
+  ObservableList<dynamic> get selectedEvents {
+    _$selectedEventsAtom.context.enforceReadPolicy(_$selectedEventsAtom);
+    _$selectedEventsAtom.reportObserved();
+    return super.selectedEvents;
+  }
+
+  @override
+  set selectedEvents(ObservableList<dynamic> value) {
+    _$selectedEventsAtom.context.conditionallyRunInAction(() {
+      super.selectedEvents = value;
+      _$selectedEventsAtom.reportChanged();
+    }, _$selectedEventsAtom, name: '${_$selectedEventsAtom.name}_set');
+  }
+
+  final _$calendarControllerAtom =
+      Atom(name: '_ScheduleControllerBase.calendarController');
+
+  @override
+  CalendarController get calendarController {
+    _$calendarControllerAtom.context
+        .enforceReadPolicy(_$calendarControllerAtom);
+    _$calendarControllerAtom.reportObserved();
+    return super.calendarController;
+  }
+
+  @override
+  set calendarController(CalendarController value) {
+    _$calendarControllerAtom.context.conditionallyRunInAction(() {
+      super.calendarController = value;
+      _$calendarControllerAtom.reportChanged();
+    }, _$calendarControllerAtom, name: '${_$calendarControllerAtom.name}_set');
+  }
+
   final _$bottomBarMenuSelectedAtom =
       Atom(name: '_ScheduleControllerBase.bottomBarMenuSelected');
 
@@ -117,6 +205,17 @@ mixin _$ScheduleController on _ScheduleControllerBase, Store {
 
   final _$_ScheduleControllerBaseActionController =
       ActionController(name: '_ScheduleControllerBase');
+
+  @override
+  void onDaySelected(DateTime day, List<dynamic> events) {
+    final _$actionInfo =
+        _$_ScheduleControllerBaseActionController.startAction();
+    try {
+      return super.onDaySelected(day, events);
+    } finally {
+      _$_ScheduleControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   dynamic onScroll() {
@@ -231,7 +330,7 @@ mixin _$ScheduleController on _ScheduleControllerBase, Store {
   @override
   String toString() {
     final string =
-        'bottomBarMenuSelected: ${bottomBarMenuSelected.toString()},pageController: ${pageController.toString()},prevPage: ${prevPage.toString()},subjects: ${subjects.toString()},timetable: ${timetable.toString()},status: ${status.toString()}';
+        'daySelected: ${daySelected.toString()},holidays: ${holidays.toString()},events: ${events.toString()},selectedEvents: ${selectedEvents.toString()},calendarController: ${calendarController.toString()},bottomBarMenuSelected: ${bottomBarMenuSelected.toString()},pageController: ${pageController.toString()},prevPage: ${prevPage.toString()},subjects: ${subjects.toString()},timetable: ${timetable.toString()},status: ${status.toString()}';
     return '{$string}';
   }
 }

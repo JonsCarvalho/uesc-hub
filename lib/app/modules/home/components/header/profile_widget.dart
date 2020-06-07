@@ -38,8 +38,8 @@ class ProfileWidget extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
                         color: appBarController.sizeProfileWidget == 35
-                            ? Colors.black
-                            : Colors.greenAccent,
+                            ? Theme.of(context).primaryColorLight
+                            : Theme.of(context).accentColor,
                       ),
                     ),
                     AnimatedContainer(

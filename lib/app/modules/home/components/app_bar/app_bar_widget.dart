@@ -31,7 +31,7 @@ class AppBarWidget extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(child: notificationButton()),
+                    Expanded(child: notificationButton(context)),
                     Expanded(child: ProfileWidget()),
                   ],
                 ),
@@ -53,7 +53,7 @@ class AppBarWidget extends StatelessWidget {
         Text(
           'UESC Hub',
           style: TextStyle(
-            color: Colors.black,
+            color: Theme.of(context).primaryTextTheme.bodyText1.color,
             fontSize: 20.0,
           ),
         ),
@@ -61,10 +61,10 @@ class AppBarWidget extends StatelessWidget {
     );
   }
 
-  notificationButton() {
+  notificationButton(context) {
     return IconButton(
       icon: Icon(Icons.notifications_none),
-      color: Colors.black,
+      color: Theme.of(context).iconTheme.color,
       onPressed: () {},
     );
   }

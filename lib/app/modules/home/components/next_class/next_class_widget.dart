@@ -118,10 +118,10 @@ class NextClassWidget extends StatelessWidget {
                   AnimatedContainer(
                     duration: Duration(milliseconds: 200),
                     curve: Curves.easeInOut,
-                    height: 38,
+                    height: 30,
                     width: MediaQuery.of(_).size.width / 2,
                     decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
+                      border: Border.all(color: Theme.of(_).dividerColor),
                       borderRadius: BorderRadius.circular(30),
                       color: Colors.transparent,
                     ),
@@ -130,16 +130,16 @@ class NextClassWidget extends StatelessWidget {
                         : Alignment.centerRight,
                     child: AnimatedContainer(
                       padding: controller.daySelected == 'Hoje'
-                          ? EdgeInsets.symmetric(vertical: 9.5, horizontal: 30)
-                          : EdgeInsets.symmetric(vertical: 9.5, horizontal: 25),
+                          ? EdgeInsets.symmetric(vertical: 6, horizontal: 30)
+                          : EdgeInsets.symmetric(vertical: 6, horizontal: 25),
                       duration: Duration(milliseconds: 200),
                       curve: Curves.easeInOut,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
-                        color: Theme.of(_).primaryColor,
+                        color: Theme.of(_).accentColor,
                         boxShadow: [
                           BoxShadow(
-                            color: Theme.of(_).primaryColor.withAlpha(100),
+                            color: Theme.of(_).accentColor.withAlpha(100),
                             blurRadius: 6.0,
                             spreadRadius: 0.0,
                             offset: Offset(
@@ -173,7 +173,8 @@ class NextClassWidget extends StatelessWidget {
                                   ? 'Hoje'
                                   : 'Amanhã',
                               style: TextStyle(
-                                color: Colors.white,
+                                color:
+                                    Theme.of(_).primaryTextTheme.button.color,
                               ),
                             ),
                           ),
@@ -182,7 +183,7 @@ class NextClassWidget extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    height: 38,
+                    height: 30,
                     width: MediaQuery.of(_).size.width / 2,
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -195,7 +196,7 @@ class NextClassWidget extends StatelessWidget {
                           child: Text(
                             'Hoje',
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Theme.of(_).primaryTextTheme.bodyText1.color,
                             ),
                           ),
                         ),
@@ -206,7 +207,7 @@ class NextClassWidget extends StatelessWidget {
                           child: Text(
                             'Amanhã',
                             style: TextStyle(
-                              color: Colors.black,
+                              color: Theme.of(_).primaryTextTheme.bodyText1.color,
                             ),
                           ),
                         ),

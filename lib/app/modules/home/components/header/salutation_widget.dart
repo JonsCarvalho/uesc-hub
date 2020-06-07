@@ -23,17 +23,19 @@ class SalutationWidget extends StatelessWidget {
             "Bem-vindo, ${controller.getCurrentUser().displayName.split(" ").first}!",
             style: TextStyle(
               // color: Color(0xff827daa).withGreen(200),
-              color: Colors.black,
+              color: Theme.of(context).primaryTextTheme.bodyText1.color,
               fontSize: 20,
               // fontWeight: FontWeight.bold,
             ),
           ),
+          
           Text(
             "${GenerationDate(dateTime: DateTime.now()).getSalutation()}!",
             style: TextStyle(
               // color: Color(0xff827daa).withGreen(200),
-              color: Theme.of(context).primaryColor,
-              fontSize: 14,
+              color: Theme.of(context).primaryColorDark,
+              fontSize: 16,
+              // letterSpacing: 1,
               // fontWeight: FontWeight.bold,
             ),
           ),
@@ -43,15 +45,15 @@ class SalutationWidget extends StatelessWidget {
               Text(
                 GenerationDate(dateTime: DateTime.now()).getDay(),
                 style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 15,
+                  color: Theme.of(context).primaryTextTheme.bodyText2.color,
+                  fontSize: 14,
                 ),
               ),
               Text(
                 ", ${DateTime.now().day.toString()} de ${GenerationDate(dateTime: DateTime.now()).getMonth()}",
                 style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 15,
+                  color: Theme.of(context).primaryTextTheme.bodyText2.color,
+                  fontSize: 14,
                 ),
               ),
             ],

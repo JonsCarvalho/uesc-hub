@@ -22,11 +22,18 @@ class AppWidget extends StatelessWidget {
           primaryColorLight: Color.fromRGBO(178, 235, 242, 1),
           accentColor: Color.fromRGBO(255, 87, 34, 1),
           iconTheme: IconThemeData(color: Colors.black),
-          textTheme: TextTheme(
+          primaryTextTheme: TextTheme(
             button: TextStyle().copyWith(color: Colors.white),
-            headline1: TextStyle().copyWith(color: Color.fromRGBO(33, 33, 33,1)),
-            headline2: TextStyle().copyWith(color: Color.fromRGBO(117, 117, 117,1)),
-            
+            bodyText1:
+                TextStyle().copyWith(color: Color.fromRGBO(33, 33, 33, 1)),
+            bodyText2:
+                TextStyle().copyWith(color: Color.fromRGBO(117, 117, 117, 1)),
+            headline1:
+                TextStyle().copyWith(color: Color.fromRGBO(33, 33, 33, 1)),
+            headline2:
+                TextStyle().copyWith(color: Color.fromRGBO(117, 117, 117, 1)),
+            subtitle1:
+                TextStyle().copyWith(color: Color.fromRGBO(117, 117, 117, 1)),
           ),
           dividerColor: Color.fromRGBO(189, 189, 189, 1),
           fontFamily: "ProductSans"),

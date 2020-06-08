@@ -76,12 +76,13 @@ class _ProfilePageState extends ModularState<ProfilePage, ProfileController> {
                       color: Colors.blue,
                       icon: FontAwesomeIcons.userCircle,
                       function: () {
-                        showDialog(
-                          context: _,
-                          builder: (_) {
-                            return SagresLoginWidget();
-                          },
-                        );
+                        Modular.to.pushNamed('/sagres');
+                        // showDialog(
+                        //   context: _,
+                        //   builder: (_) {
+                        //     return SagresLoginWidget();
+                        //   },
+                        // );
                       },
                       widget: Container(
                         decoration: BoxDecoration(

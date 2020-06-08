@@ -18,6 +18,7 @@ import 'modules/navigation/navigation_module.dart';
 import 'modules/news/news_module.dart';
 import 'modules/profile/profile_module.dart';
 import 'modules/restaurant/restaurant_module.dart';
+import 'modules/sagres/sagres_module.dart';
 import 'modules/schedule/schedule_module.dart';
 import 'splash/splash_page.dart';
 
@@ -46,6 +47,7 @@ class AppModule extends MainModule {
         Router('/schedule', module: ScheduleModule()),
         Router('/navigation', module: NavigationModule()),
         Router('/profile', module: ProfileModule()),
+        Router('/sagres', module: SagresModule()),
       ];
 
   @override

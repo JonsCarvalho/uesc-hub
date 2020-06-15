@@ -8,11 +8,13 @@ import 'package:uesc_hub/app/modules/profile/components/sagres_login_widget.dart
 import 'package:uesc_hub/app/modules/schedule/components/calendar_widget.dart';
 import 'package:uesc_hub/app/modules/schedule/components/expandable_bottom_bar_widget.dart';
 import 'package:uesc_hub/app/modules/schedule/components/subjects_list_widget.dart';
+import 'package:uesc_hub/app/modules/schedule/components/timeline_widget.dart';
 import 'package:uesc_hub/app/modules/schedule/components/timesheet_widget.dart';
 import 'package:uesc_hub/app/modules/schedule/models/subjects_model.dart';
 import 'package:uesc_hub/app/modules/schedule/models/timetable_model.dart';
 import 'package:uesc_hub/app/shared/auth/sagres/auth_sagres_controller.dart';
 import 'package:uesc_hub/app/shared/functions/generation_color.dart';
+import 'components/events_widget.dart';
 import 'schedule_controller.dart';
 
 class SchedulePage extends StatefulWidget {
@@ -185,7 +187,9 @@ class _SchedulePageState extends ModularState<SchedulePage, ScheduleController>
               // Switch out 2 lines below to play with TableCalendar's settings
               //-----------------------
               // _buildTableCalendar(),
-              Calendar(animationController: animationController),
+              CalendarWidget(animationController: animationController),
+              TimelineWidget(),
+              EventsWidget(),
               SizedBox(height: 50),
             ],
           );

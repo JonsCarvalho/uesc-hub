@@ -5,10 +5,10 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../schedule_controller.dart';
 
-class Calendar extends StatelessWidget {
+class CalendarWidget extends StatelessWidget {
   final AnimationController animationController;
 
-  Calendar({Key key, @required this.animationController}) : super(key: key);
+  CalendarWidget({Key key, @required this.animationController}) : super(key: key);
   final scheduleController = Modular.get<ScheduleController>();
 
   @override
@@ -17,7 +17,6 @@ class Calendar extends StatelessWidget {
       return Column(
         children: [
           _buildTableCalendarWithBuilders(context),
-          // _buildCustomCalendar(),
           if (scheduleController.daySelected !=
               DateTime(DateTime.now().year, DateTime.now().month,
                   DateTime.now().day))
@@ -25,8 +24,6 @@ class Calendar extends StatelessWidget {
               padding: const EdgeInsets.only(top: 8.0),
               child: _buildButtons(context),
             ),
-          const SizedBox(height: 8.0),
-          _buildEventList(),
         ],
       );
     });
@@ -194,65 +191,17 @@ class Calendar extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
-        child: Text('Voltar para o dia atual', style: TextStyle().copyWith(color: Theme.of(context).primaryTextTheme.button.color),),
+        child: Text(
+          'Voltar para o dia atual',
+          style: TextStyle()
+              .copyWith(color: Theme.of(context).primaryTextTheme.button.color),
+        ),
         onPressed: () {
           scheduleController.calendarController.setSelectedDay(
             DateTime.now(),
             runCallback: true,
           );
         },
-      );
-    });
-  }
-
-  Widget _buildEventList() {
-    return Observer(builder: (_) {
-      return Column(
-        children: [
-          if (scheduleController.holidays[DateTime(
-                  scheduleController.daySelected.year,
-                  scheduleController.daySelected.month,
-                  scheduleController.daySelected.day)] !=
-              null)
-            Column(
-              children: scheduleController.holidays[DateTime(
-                      scheduleController.daySelected.year,
-                      scheduleController.daySelected.month,
-                      scheduleController.daySelected.day)]
-                  .map(
-                    (holiday) => Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(width: 0.8),
-                        borderRadius: BorderRadius.circular(12.0),
-                      ),
-                      margin: const EdgeInsets.symmetric(
-                          horizontal: 8.0, vertical: 4.0),
-                      child: ListTile(
-                        title: Text(holiday.toString()),
-                        onTap: () => print('$holiday tapped!'),
-                      ),
-                    ),
-                  )
-                  .toList(),
-            ),
-          if (scheduleController.selectedEvents != null)
-            Column(
-              children: scheduleController.selectedEvents
-                  .map((event) => Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(width: 0.8),
-                          borderRadius: BorderRadius.circular(12.0),
-                        ),
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 8.0, vertical: 4.0),
-                        child: ListTile(
-                          title: Text(event.toString()),
-                          onTap: () => print('$event tapped!'),
-                        ),
-                      ))
-                  .toList(),
-            ),
-        ],
       );
     });
   }

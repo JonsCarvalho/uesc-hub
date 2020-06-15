@@ -117,6 +117,26 @@ mixin _$ScheduleController on _ScheduleControllerBase, Store {
         name: '${_$bottomBarMenuSelectedAtom.name}_set');
   }
 
+  final _$subjectsPageControllerAtom =
+      Atom(name: '_ScheduleControllerBase.subjectsPageController');
+
+  @override
+  PageController get subjectsPageController {
+    _$subjectsPageControllerAtom.context
+        .enforceReadPolicy(_$subjectsPageControllerAtom);
+    _$subjectsPageControllerAtom.reportObserved();
+    return super.subjectsPageController;
+  }
+
+  @override
+  set subjectsPageController(PageController value) {
+    _$subjectsPageControllerAtom.context.conditionallyRunInAction(() {
+      super.subjectsPageController = value;
+      _$subjectsPageControllerAtom.reportChanged();
+    }, _$subjectsPageControllerAtom,
+        name: '${_$subjectsPageControllerAtom.name}_set');
+  }
+
   final _$pageControllerAtom =
       Atom(name: '_ScheduleControllerBase.pageController');
 
@@ -205,6 +225,17 @@ mixin _$ScheduleController on _ScheduleControllerBase, Store {
 
   final _$_ScheduleControllerBaseActionController =
       ActionController(name: '_ScheduleControllerBase');
+
+  @override
+  dynamic changePage(int index) {
+    final _$actionInfo =
+        _$_ScheduleControllerBaseActionController.startAction();
+    try {
+      return super.changePage(index);
+    } finally {
+      _$_ScheduleControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
 
   @override
   void onDaySelected(DateTime day, List<dynamic> events) {
@@ -330,7 +361,7 @@ mixin _$ScheduleController on _ScheduleControllerBase, Store {
   @override
   String toString() {
     final string =
-        'daySelected: ${daySelected.toString()},holidays: ${holidays.toString()},events: ${events.toString()},selectedEvents: ${selectedEvents.toString()},calendarController: ${calendarController.toString()},bottomBarMenuSelected: ${bottomBarMenuSelected.toString()},pageController: ${pageController.toString()},prevPage: ${prevPage.toString()},subjects: ${subjects.toString()},timetable: ${timetable.toString()},status: ${status.toString()}';
+        'daySelected: ${daySelected.toString()},holidays: ${holidays.toString()},events: ${events.toString()},selectedEvents: ${selectedEvents.toString()},calendarController: ${calendarController.toString()},bottomBarMenuSelected: ${bottomBarMenuSelected.toString()},subjectsPageController: ${subjectsPageController.toString()},pageController: ${pageController.toString()},prevPage: ${prevPage.toString()},subjects: ${subjects.toString()},timetable: ${timetable.toString()},status: ${status.toString()}';
     return '{$string}';
   }
 }

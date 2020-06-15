@@ -40,7 +40,10 @@ abstract class _ScheduleControllerBase with Store {
   int bottomBarMenuSelected = 0;
 
   @observable
-  PageController pageController;
+  PageController subjectsPageController;
+
+  @observable
+  PageController pageController = PageController(initialPage: 0);
 
   @observable
   int prevPage;
@@ -57,8 +60,9 @@ abstract class _ScheduleControllerBase with Store {
   _ScheduleControllerBase(this.repository) {
     // fetchSubjects();
     // fetchTimetable();
-    pageController = PageController(initialPage: 0, viewportFraction: 0.8)
-      ..addListener(onScroll);
+    subjectsPageController =
+        PageController(initialPage: 0, viewportFraction: 0.8)
+          ..addListener(onScroll);
 
     // Calendar start
     final _selectedDay = DateTime.now();
@@ -128,6 +132,13 @@ abstract class _ScheduleControllerBase with Store {
   }
 
   @action
+  changePage(int index) {
+    pageController.animateToPage(index,
+        duration: Duration(milliseconds: 300), curve: Curves.bounceIn);
+    bottomBarMenuSelected = index;
+  }
+
+  @action
   void onDaySelected(DateTime day, List events) {
     selectedEvents = events.asObservable();
     daySelected = DateTime(day.year, day.month, day.day);
@@ -135,8 +146,8 @@ abstract class _ScheduleControllerBase with Store {
 
   @action
   onScroll() {
-    if (pageController.page.toInt() != prevPage) {
-      prevPage = pageController.page.toInt();
+    if (subjectsPageController.page.toInt() != prevPage) {
+      prevPage = subjectsPageController.page.toInt();
     }
   }
 
@@ -145,14 +156,14 @@ abstract class _ScheduleControllerBase with Store {
     int index = 0;
     for (var subjectsInstance in subjects.value) {
       if (subjectsInstance.id == id) {
-        pageController.animateToPage(index,
+        subjectsPageController.animateToPage(index,
             duration: Duration(milliseconds: 300), curve: Curves.bounceIn);
       }
       index++;
     }
 
-    if (pageController.page.toInt() != prevPage) {
-      prevPage = pageController.page.toInt();
+    if (subjectsPageController.page.toInt() != prevPage) {
+      prevPage = subjectsPageController.page.toInt();
     }
   }
 

@@ -92,7 +92,7 @@ class ExpandableBottomBar extends StatelessWidget {
                     height: 130.0,
                     width: MediaQuery.of(context).size.width,
                     child: PageView.builder(
-                      controller: scheduleController.pageController,
+                      controller: scheduleController.subjectsPageController,
                       itemCount: listSubjects.length,
                       itemBuilder: (_, int index) {
                         return _subjectsCard(index, listSubjects);
@@ -244,11 +244,11 @@ class ExpandableBottomBar extends StatelessWidget {
 
   _subjectsCard(index, List<SubjectsModel> listSubjects) {
     return AnimatedBuilder(
-      animation: scheduleController.pageController,
+      animation: scheduleController.subjectsPageController,
       builder: (BuildContext context, Widget widget) {
         double value = 1;
-        if (scheduleController.pageController.position.haveDimensions) {
-          value = scheduleController.pageController.page - index;
+        if (scheduleController.subjectsPageController.position.haveDimensions) {
+          value = scheduleController.subjectsPageController.page - index;
           value = (1 - (value.abs() * 0.3) + 0.06).clamp(0.0, 1.0);
         }
         return Center(

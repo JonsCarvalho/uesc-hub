@@ -61,6 +61,129 @@ class _SchedulePageState extends ModularState<SchedulePage, ScheduleController>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: Colors.transparent,
+        title: Observer(
+          builder: (_) {
+            return Row(
+              mainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                Expanded(
+                  child: Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: AnimatedContainer(
+                          duration: Duration(milliseconds: 400),
+                          curve: Curves.easeInCubic,
+                          decoration: BoxDecoration(
+                            color: scheduleController.bottomBarMenuSelected == 0
+                                ? Theme.of(_).primaryColor
+                                : Colors.transparent,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Theme.of(context)
+                                    .primaryColor
+                                    .withAlpha(100),
+                                blurRadius: 6.0,
+                                spreadRadius: 0.0,
+                                offset: Offset(
+                                  0.0,
+                                  3.0,
+                                ),
+                              )
+                            ],
+                          ),
+                          height: 7,
+                          width: scheduleController.bottomBarMenuSelected == 0
+                              ? MediaQuery.of(context).size.width / 2
+                              : .1,
+                        ),
+                      ),
+                      FlatButton(
+                        onPressed: () {
+                          scheduleController.changePage(0);
+                        },
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Align(
+                            alignment: Alignment.centerLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.only(left: 8.0),
+                              child: Text(
+                                "Horários",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  child: Stack(
+                    children: [
+                      Align(
+                        alignment: Alignment.topRight,
+                        child: AnimatedContainer(
+                          duration: Duration(milliseconds: 400),
+                          curve: Curves.easeInCubic,
+                          decoration: BoxDecoration(
+                            color: scheduleController.bottomBarMenuSelected == 1
+                                ? Theme.of(_).primaryColor
+                                : Colors.transparent,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Theme.of(context)
+                                    .primaryColor
+                                    .withAlpha(100),
+                                blurRadius: 6.0,
+                                spreadRadius: 0.0,
+                                offset: Offset(
+                                  0.0,
+                                  3.0,
+                                ),
+                              )
+                            ],
+                          ),
+                          height: 7,
+                          width: scheduleController.bottomBarMenuSelected == 1
+                              ? MediaQuery.of(context).size.width / 2
+                              : .1,
+                        ),
+                      ),
+                      FlatButton(
+                        onPressed: () {
+                          scheduleController.changePage(1);
+                        },
+                        child: Align(
+                          alignment: Alignment.centerRight,
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: Text(
+                                "Calendário",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          },
+        ),
+      ),
       extendBody: true,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: GestureDetector(
@@ -93,137 +216,145 @@ class _SchedulePageState extends ModularState<SchedulePage, ScheduleController>
           ExpandableBottomBar(bottomBarController: bottomBarController),
       body: Observer(
         builder: (_) {
-          // if (sagresController.credentials.isEmpty &&
-          //     scheduleController.timetable.value == null) {
-          //   return Container(
-          //     padding: EdgeInsets.all(8),
-          //     child: Column(
-          //       crossAxisAlignment: CrossAxisAlignment.stretch,
-          //       children: [
-          //         Text(
-          //           'Entre com o seu login do Sagres para ter acesso ao quadro de horários.',
-          //           textAlign: TextAlign.justify,
-          //         ),
-          //         SizedBox(height: 8),
-          //         FlatButton(
-          //           color: Colors.teal,
-          //           onPressed: () {
-          //             showDialog(
-          //               context: _,
-          //               builder: (_) {
-          //                 return SagresLoginWidget();
-          //               },
-          //             );
-          //           },
-          //           child: Text(
-          //             'Login Sagres',
-          //             style: TextStyle(color: Colors.white),
-          //           ),
-          //         ),
-          //       ],
-          //     ),
-          //   );
-          // }
-
-          // if (scheduleController.status == DataStatus.loading) {
-          //   scheduleController.getTimetableAndSubjects();
-          //   return LinearProgressIndicator();
-          // }
-          // if (scheduleController.status == DataStatus.none &&
-          //     scheduleController.timetable.value == null) {
-          //   return Padding(
-          //     padding: const EdgeInsets.all(8.0),
-          //     child: Container(
-          //       width: double.infinity,
-          //       height: 150,
-          //       decoration: BoxDecoration(
-          //         borderRadius: BorderRadius.circular(5),
-          //         border: Border.all(),
-          //       ),
-          //       child: Column(
-          //         mainAxisAlignment: MainAxisAlignment.spaceAround,
-          //         children: [
-          //           Column(
-          //             mainAxisAlignment: MainAxisAlignment.center,
-          //             crossAxisAlignment: CrossAxisAlignment.stretch,
-          //             children: [
-          //               Icon(FontAwesomeIcons.exclamationCircle),
-          //               SizedBox(height: 15),
-          //               Text(
-          //                 "Quadro de horários não encontrado!",
-          //                 textAlign: TextAlign.center,
-          //               ),
-          //             ],
-          //           ),
-          //           FlatButton(
-          //             color: Theme.of(_).primaryColor,
-          //             onPressed: () {
-          //               // scheduleController.fetchTimetableAndSubjects(
-          //               //   {
-          //               //     "username": sagresController.credentials[0],
-          //               //     "password": sagresController.credentials[1]
-          //               //   },
-          //               // );
-          //               scheduleController.getTimetableAndSubjects();
-          //             },
-          //             child: Text(
-          //               "Buscar novamente!",
-          //               style: TextStyle(color: Colors.white),
-          //             ),
-          //           ),
-          //         ],
-          //       ),
-          //     ),
-          //   );
-          // }
-          // List<TimetableModel> listTimetable;
-          // List<SubjectsModel> listSubjects;
-          // listTimetable = scheduleController.timetable.value.toList();
-          // listSubjects = scheduleController.subjects.value.toList();
-          return ListView(
-            // mainAxisSize: MainAxisSize.max,
-            physics: BouncingScrollPhysics(),
-            children: <Widget>[
-              // Switch out 2 lines below to play with TableCalendar's settings
-              //-----------------------
-              // _buildTableCalendar(),
-              CalendarWidget(animationController: animationController),
+          return PageView(
+            physics: NeverScrollableScrollPhysics(),
+            controller: scheduleController.pageController,
+            children: [
               TimelineWidget(),
-              EventsWidget(),
-              SizedBox(height: 50),
+              calendar(),
             ],
           );
-          // return ListView(
-          //   physics: BouncingScrollPhysics(),
-          //   children: [
-          // Padding(
-          //   padding:
-          //       const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-          //   child: TimeSheetWidget(list: listTimetable),
-          // ),
-          // SubjectsListWidget(list: listSubjects),
-          // SubjectsListWidget(list: listSubjects),
-
-          //   ],
-          // );
-          // Column(
-          //   children: [
-          // Container(
-          //   height: listTimetable.length == 1
-          //       ? 90
-          //       : (listTimetable.length * 50.0) + 32,
-          //   child: Padding(
-          //     padding: const EdgeInsets.symmetric(horizontal: 8),
-          //     child: TimeSheetWidget(list: listTimetable),
-          //   ),
-          // ),
-          //     Expanded(
-          //       child: SubjectsListWidget(list: listSubjects),
-          //     ),
-          //   ],
-          // );
         },
       ),
     );
+  }
+
+  calendar() {
+    // if (sagresController.credentials.isEmpty &&
+    //     scheduleController.timetable.value == null) {
+    //   return Container(
+    //     padding: EdgeInsets.all(8),
+    //     child: Column(
+    //       crossAxisAlignment: CrossAxisAlignment.stretch,
+    //       children: [
+    //         Text(
+    //           'Entre com o seu login do Sagres para ter acesso ao quadro de horários.',
+    //           textAlign: TextAlign.justify,
+    //         ),
+    //         SizedBox(height: 8),
+    //         FlatButton(
+    //           color: Colors.teal,
+    //           onPressed: () {
+    //             showDialog(
+    //               context: _,
+    //               builder: (_) {
+    //                 return SagresLoginWidget();
+    //               },
+    //             );
+    //           },
+    //           child: Text(
+    //             'Login Sagres',
+    //             style: TextStyle(color: Colors.white),
+    //           ),
+    //         ),
+    //       ],
+    //     ),
+    //   );
+    // }
+
+    // if (scheduleController.status == DataStatus.loading) {
+    //   scheduleController.getTimetableAndSubjects();
+    //   return LinearProgressIndicator();
+    // }
+    // if (scheduleController.status == DataStatus.none &&
+    //     scheduleController.timetable.value == null) {
+    //   return Padding(
+    //     padding: const EdgeInsets.all(8.0),
+    //     child: Container(
+    //       width: double.infinity,
+    //       height: 150,
+    //       decoration: BoxDecoration(
+    //         borderRadius: BorderRadius.circular(5),
+    //         border: Border.all(),
+    //       ),
+    //       child: Column(
+    //         mainAxisAlignment: MainAxisAlignment.spaceAround,
+    //         children: [
+    //           Column(
+    //             mainAxisAlignment: MainAxisAlignment.center,
+    //             crossAxisAlignment: CrossAxisAlignment.stretch,
+    //             children: [
+    //               Icon(FontAwesomeIcons.exclamationCircle),
+    //               SizedBox(height: 15),
+    //               Text(
+    //                 "Quadro de horários não encontrado!",
+    //                 textAlign: TextAlign.center,
+    //               ),
+    //             ],
+    //           ),
+    //           FlatButton(
+    //             color: Theme.of(_).primaryColor,
+    //             onPressed: () {
+    //               // scheduleController.fetchTimetableAndSubjects(
+    //               //   {
+    //               //     "username": sagresController.credentials[0],
+    //               //     "password": sagresController.credentials[1]
+    //               //   },
+    //               // );
+    //               scheduleController.getTimetableAndSubjects();
+    //             },
+    //             child: Text(
+    //               "Buscar novamente!",
+    //               style: TextStyle(color: Colors.white),
+    //             ),
+    //           ),
+    //         ],
+    //       ),
+    //     ),
+    //   );
+    // }
+    // List<TimetableModel> listTimetable;
+    // List<SubjectsModel> listSubjects;
+    // listTimetable = scheduleController.timetable.value.toList();
+    // listSubjects = scheduleController.subjects.value.toList();
+    return ListView(
+      // mainAxisSize: MainAxisSize.max,
+      physics: BouncingScrollPhysics(),
+      children: <Widget>[
+        CalendarWidget(animationController: animationController),
+        // TimelineWidget(),
+        EventsWidget(),
+        SizedBox(height: 50),
+      ],
+    );
+    // return ListView(
+    //   physics: BouncingScrollPhysics(),
+    //   children: [
+    // Padding(
+    //   padding:
+    //       const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+    //   child: TimeSheetWidget(list: listTimetable),
+    // ),
+    // SubjectsListWidget(list: listSubjects),
+    // SubjectsListWidget(list: listSubjects),
+
+    //   ],
+    // );
+    // Column(
+    //   children: [
+    // Container(
+    //   height: listTimetable.length == 1
+    //       ? 90
+    //       : (listTimetable.length * 50.0) + 32,
+    //   child: Padding(
+    //     padding: const EdgeInsets.symmetric(horizontal: 8),
+    //     child: TimeSheetWidget(list: listTimetable),
+    //   ),
+    // ),
+    //     Expanded(
+    //       child: SubjectsListWidget(list: listSubjects),
+    //     ),
+    //   ],
+    // );
   }
 }

@@ -220,8 +220,21 @@ class _SchedulePageState extends ModularState<SchedulePage, ScheduleController>
             physics: NeverScrollableScrollPhysics(),
             controller: scheduleController.pageController,
             children: [
-              TimelineWidget(),
-              calendar(),
+              ListView(
+                physics: BouncingScrollPhysics(),
+                children: <Widget>[
+                  TimelineWidget(),
+                ],
+              ),
+              ListView(
+                physics: BouncingScrollPhysics(),
+                children: <Widget>[
+                  CalendarWidget(animationController: animationController),
+                  // TimelineWidget(),
+                  EventsWidget(),
+                  SizedBox(height: 50),
+                ],
+              ),
             ],
           );
         },

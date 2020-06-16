@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart';
 import 'package:timeline_tile/timeline_tile.dart';
+import 'package:uesc_hub/app/modules/schedule/components/realtime_widget.dart';
+import 'package:uesc_hub/app/shared/functions/generation_date.dart';
 
 import '../schedule_controller.dart';
 
@@ -12,71 +14,80 @@ class TimelineWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Observer(builder: (_) {
-      return Container(
-        color: Colors.black,
-        child: Column(
-          children: [
-            TimelineTile(
-              alignment: TimelineAlign.manual,
-              lineX: 0.3,
-              isFirst: true,
-              indicatorStyle: IndicatorStyle(
-                width: 70,
-                height: 70,
-                indicator: _Sun(),
-              ),
-              topLineStyle: LineStyle(color: Colors.white.withOpacity(0.7)),
-              rightChild: _ContainerHeader(),
+      return Column(
+        children: [
+          TimelineTile(
+            alignment: TimelineAlign.manual,
+            lineX: 0.3,
+            isFirst: true,
+            indicatorStyle: IndicatorStyle(
+                width: 15,
+                height: 15,
+                indicator: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Theme.of(context).primaryColorLight,
+                  ),
+                ) //_Sun(),
+                ),
+            topLineStyle: LineStyle(
+              color: Theme.of(context).primaryColorLight,
             ),
-            _buildTimelineTile(
-              indicator: const _IconIndicator(
-                iconData: Icons.cloud,
-                size: 20,
-              ),
-              hour: '18:00',
-              weather: 'Cloudy',
-              temperature: '26°C',
-              phrase: 'A beautiful afternoon to take a walk into the park.'
-                  " Don't forget to take your water.",
+            rightChild: _ContainerHeader(),
+          ),
+          _buildTimelineTile(
+            context: context,
+            indicator: const _IconIndicator(
+              iconData: Icons.cloud,
+              size: 20,
             ),
-            _buildTimelineTile(
-              indicator: const _IconIndicator(
-                iconData: Icons.wb_sunny,
-                size: 20,
-              ),
-              hour: '20:00',
-              weather: 'Sunset',
-              temperature: '24°C',
-              phrase: 'Enjoy the view, the sun will be back tomorrow.',
+            hour: '18:00',
+            weather: 'Cloudy',
+            temperature: '26°C',
+            phrase: 'A beautiful afternoon to take a walk into the park.'
+                " Don't forget to take your water.",
+          ),
+          _buildTimelineTile(
+            context: context,
+            indicator: const _IconIndicator(
+              iconData: Icons.wb_sunny,
+              size: 20,
             ),
-            _buildTimelineTile(
-              indicator: const _IconIndicator(
-                iconData: Icons.navigation,
-                size: 20,
-              ),
-              hour: '22:00',
-              weather: 'Fall of rain',
-              temperature: '18°C',
-              phrase: 'Temperature is decreasing...',
+            hour: '20:00',
+            weather: 'Sunset',
+            temperature: '24°C',
+            phrase: 'Enjoy the view, the sun will be back tomorrow.',
+          ),
+          _buildTimelineTile(
+            context: context,
+            indicator: const _IconIndicator(
+              iconData: Icons.navigation,
+              size: 20,
             ),
-            _buildTimelineTile(
-              indicator: const _IconIndicator(
-                iconData: Icons.cloud_download,
-                size: 20,
-              ),
-              hour: '00:00',
-              weather: 'Chilly',
-              temperature: '16°C',
-              phrase: "Have a good night, don't forget your blanket.",
-              isLast: true,
+            hour: '22:00',
+            weather: 'Fall of rain',
+            temperature: '18°C',
+            phrase: 'Temperature is decreasing...',
+          ),
+          _buildTimelineTile(
+            context: context,
+            indicator: const _IconIndicator(
+              iconData: Icons.cloud_download,
+              size: 20,
             ),
-          ],
-        ),
+            hour: '00:00',
+            weather: 'Chilly',
+            temperature: '16°C',
+            phrase: "Have a good night, don't forget your blanket.",
+            isLast: true,
+          ),
+        ],
       );
     });
   }
 
   TimelineTile _buildTimelineTile({
+    @required BuildContext context,
     _IconIndicator indicator,
     String hour,
     String weather,
@@ -87,7 +98,9 @@ class TimelineWidget extends StatelessWidget {
     return TimelineTile(
       alignment: TimelineAlign.manual,
       lineX: 0.3,
-      topLineStyle: LineStyle(color: Colors.white.withOpacity(0.7)),
+      topLineStyle: LineStyle(
+        color: Theme.of(context).primaryColorLight,
+      ),
       indicatorStyle: IndicatorStyle(
         indicatorY: 0.3,
         drawGap: true,
@@ -101,10 +114,10 @@ class TimelineWidget extends StatelessWidget {
           alignment: const Alignment(0.0, -0.50),
           child: Text(
             hour,
-            style: GoogleFonts.lato(
+            style: TextStyle(
               fontSize: 18,
-              color: Colors.white.withOpacity(0.6),
-              fontWeight: FontWeight.w800,
+              color: Theme.of(context).primaryTextTheme.bodyText2.color,
+              // fontWeight: FontWeight.w800,
             ),
           ),
         ),
@@ -117,27 +130,27 @@ class TimelineWidget extends StatelessWidget {
           children: <Widget>[
             Text(
               weather,
-              style: GoogleFonts.lato(
+              style: TextStyle(
                 fontSize: 18,
-                color: Colors.white.withOpacity(0.8),
-                fontWeight: FontWeight.bold,
+                color: Theme.of(context).primaryTextTheme.bodyText1.color,
+                // fontWeight: FontWeight.w500,
               ),
             ),
             const SizedBox(height: 4),
             Text(
               temperature,
-              style: GoogleFonts.lato(
+              style: TextStyle(
                 fontSize: 16,
-                color: Colors.white.withOpacity(0.8),
+                color: Theme.of(context).primaryTextTheme.bodyText1.color,
                 fontWeight: FontWeight.normal,
               ),
             ),
             const SizedBox(height: 4),
             Text(
               phrase,
-              style: GoogleFonts.lato(
+              style: TextStyle(
                 fontSize: 14,
-                color: Colors.white.withOpacity(0.6),
+                color: Theme.of(context).primaryTextTheme.bodyText2.color,
                 fontWeight: FontWeight.normal,
               ),
             )
@@ -165,7 +178,11 @@ class _IconIndicator extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.white.withOpacity(0.7),
+            // border: Border.all(
+            //   color: Theme.of(context).accentColor,
+            //   width: 2,
+            // ),
+            color: Theme.of(context).primaryColorLight,
           ),
         ),
         Positioned.fill(
@@ -177,7 +194,7 @@ class _IconIndicator extends StatelessWidget {
               child: Icon(
                 iconData,
                 size: size,
-                color: const Color(0xFF9E3773).withOpacity(0.7),
+                color: Theme.of(context).primaryColorDark,
               ),
             ),
           ),
@@ -194,13 +211,13 @@ class _Sun extends StatelessWidget {
       decoration: const BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Colors.white,
+            color: Colors.yellow,
             blurRadius: 25,
             spreadRadius: 20,
           ),
         ],
         shape: BoxShape.circle,
-        color: Colors.white,
+        color: Colors.amber,
       ),
     );
   }
@@ -217,19 +234,15 @@ class _ContainerHeader extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
+            Observer(builder: (_) {
+              return RealTime();
+            }),
             Text(
-              'now - 17:30',
-              style: GoogleFonts.lato(
-                fontSize: 18,
-                color: const Color(0xFFF4A5CD),
-              ),
-            ),
-            Text(
-              'Sunny',
-              style: GoogleFonts.lato(
+              GenerationDate(dateTime: DateTime.now()).getDay(),
+              style: TextStyle(
                 fontSize: 30,
-                color: Colors.white.withOpacity(0.8),
-                fontWeight: FontWeight.w800,
+                color: Theme.of(context).primaryTextTheme.bodyText1.color,
+                // fontWeight: FontWeight.w800,
               ),
             ),
             Row(
@@ -240,20 +253,20 @@ class _ContainerHeader extends StatelessWidget {
                     'Humidity 40%',
                     overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.right,
-                    style: GoogleFonts.lato(
+                    style: TextStyle(
                       fontSize: 14,
-                      color: const Color(0xFF4A448F).withOpacity(0.8),
-                      fontWeight: FontWeight.w800,
+                      color: Theme.of(context).primaryColor,
+                      // fontWeight: FontWeight.w800,
                     ),
                   ),
                 ),
                 const SizedBox(width: 20),
                 Text(
                   '30°C',
-                  style: GoogleFonts.lato(
+                  style: TextStyle(
                     fontSize: 14,
                     color: const Color(0xFF4A448F).withOpacity(0.8),
-                    fontWeight: FontWeight.w800,
+                    // fontWeight: FontWeight.w800,
                   ),
                 )
               ],

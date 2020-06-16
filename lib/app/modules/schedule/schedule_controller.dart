@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:intl/intl.dart';
 import 'package:mobx/mobx.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:uesc_hub/app/modules/schedule/models/subjects_model.dart';
@@ -14,6 +17,9 @@ class ScheduleController = _ScheduleControllerBase with _$ScheduleController;
 
 abstract class _ScheduleControllerBase with Store {
   final ScheduleRepository repository;
+
+  @observable
+  String realTime;
 
   @observable
   DateTime daySelected;
@@ -129,6 +135,8 @@ abstract class _ScheduleControllerBase with Store {
     // Calendar end
 
     getTimetableAndSubjects();
+
+    realTime = _formatDateTime(DateTime.now());
   }
 
   @action
@@ -224,6 +232,19 @@ abstract class _ScheduleControllerBase with Store {
     repository.deletePersistenceTimetable();
 
     status = DataStatus.none;
+  }
+
+  @action
+  getTime() {
+    final DateTime now = DateTime.now();
+    final String formattedDateTime = _formatDateTime(now);
+
+    realTime = formattedDateTime;
+  }
+
+  // @action
+  String _formatDateTime(DateTime dateTime) {
+    return DateFormat('HH:mm:ss').format(dateTime);
   }
 }
 

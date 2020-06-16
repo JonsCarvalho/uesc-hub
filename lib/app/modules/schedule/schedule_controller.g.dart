@@ -9,6 +9,23 @@ part of 'schedule_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ScheduleController on _ScheduleControllerBase, Store {
+  final _$realTimeAtom = Atom(name: '_ScheduleControllerBase.realTime');
+
+  @override
+  String get realTime {
+    _$realTimeAtom.context.enforceReadPolicy(_$realTimeAtom);
+    _$realTimeAtom.reportObserved();
+    return super.realTime;
+  }
+
+  @override
+  set realTime(String value) {
+    _$realTimeAtom.context.conditionallyRunInAction(() {
+      super.realTime = value;
+      _$realTimeAtom.reportChanged();
+    }, _$realTimeAtom, name: '${_$realTimeAtom.name}_set');
+  }
+
   final _$daySelectedAtom = Atom(name: '_ScheduleControllerBase.daySelected');
 
   @override
@@ -359,9 +376,20 @@ mixin _$ScheduleController on _ScheduleControllerBase, Store {
   }
 
   @override
+  dynamic getTime() {
+    final _$actionInfo =
+        _$_ScheduleControllerBaseActionController.startAction();
+    try {
+      return super.getTime();
+    } finally {
+      _$_ScheduleControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     final string =
-        'daySelected: ${daySelected.toString()},holidays: ${holidays.toString()},events: ${events.toString()},selectedEvents: ${selectedEvents.toString()},calendarController: ${calendarController.toString()},bottomBarMenuSelected: ${bottomBarMenuSelected.toString()},subjectsPageController: ${subjectsPageController.toString()},pageController: ${pageController.toString()},prevPage: ${prevPage.toString()},subjects: ${subjects.toString()},timetable: ${timetable.toString()},status: ${status.toString()}';
+        'realTime: ${realTime.toString()},daySelected: ${daySelected.toString()},holidays: ${holidays.toString()},events: ${events.toString()},selectedEvents: ${selectedEvents.toString()},calendarController: ${calendarController.toString()},bottomBarMenuSelected: ${bottomBarMenuSelected.toString()},subjectsPageController: ${subjectsPageController.toString()},pageController: ${pageController.toString()},prevPage: ${prevPage.toString()},subjects: ${subjects.toString()},timetable: ${timetable.toString()},status: ${status.toString()}';
     return '{$string}';
   }
 }
